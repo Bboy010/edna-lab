@@ -1,0 +1,1368 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>eDNA Laboratory — Séquençage & Bioinformatique · UNA Abidjan</title>
+<meta name="description" content="eDNA Laboratory de l'Université Nangui-Abrogoua. Services de séquençage NGS, barcoding, metabarcoding et bioinformatique en Côte d'Ivoire.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<style>
+/* ── RESET & BASE ──────────────────────────────────── */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --navy:   #0D1B2A;
+  --navy2:  #0E2D40;
+  --teal:   #0E7C7B;
+  --teal2:  #0AAFA0;
+  --teal3:  #00D4C8;
+  --gold:   #F0A500;
+  --gold2:  #FFD166;
+  --light:  #F4F9FC;
+  --white:  #FFFFFF;
+  --grey:   #6B7280;
+  --dark:   #1F2937;
+  --glass:  rgba(255,255,255,0.05);
+  --border: rgba(255,255,255,0.1);
+  --radius: 16px;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Space Grotesk', sans-serif;
+  background: var(--navy);
+  color: var(--white);
+  overflow-x: hidden;
+  line-height: 1.6;
+}
+
+a { text-decoration: none; color: inherit; }
+img { max-width: 100%; height: auto; display: block; }
+
+/* ── NAV ───────────────────────────────────────────── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 5%;
+  height: 72px;
+  background: rgba(13,27,42,0.92);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+  transition: background 0.3s;
+}
+
+.nav-logo {
+  display: flex; align-items: center; gap: 12px;
+}
+.nav-logo img { height: 40px; width: auto; object-fit: contain; }
+.nav-logo-text { font-size: 16px; font-weight: 700; line-height: 1.2; }
+.nav-logo-text span { display: block; font-size: 11px; font-weight: 400; color: var(--teal2); letter-spacing: 0.05em; }
+
+.nav-links {
+  display: flex; align-items: center; gap: 32px;
+  list-style: none;
+}
+.nav-links a {
+  font-size: 14px; font-weight: 500; color: rgba(255,255,255,0.7);
+  transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--teal2); }
+
+.nav-cta {
+  background: var(--teal);
+  color: var(--white) !important;
+  padding: 9px 20px;
+  border-radius: 8px;
+  font-weight: 600 !important;
+  transition: background 0.2s !important;
+}
+.nav-cta:hover { background: var(--teal2) !important; color: var(--white) !important; }
+
+.nav-burger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
+.nav-burger span { display: block; width: 24px; height: 2px; background: var(--white); border-radius: 2px; transition: all 0.3s; }
+
+/* ── HERO ──────────────────────────────────────────── */
+.hero {
+  min-height: 100vh;
+  display: flex; align-items: center;
+  padding: 120px 5% 80px;
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, var(--navy) 0%, #0B2235 40%, #0C3030 100%);
+}
+
+.hero-bg-dna {
+  position: absolute; inset: 0; pointer-events: none;
+  background:
+    radial-gradient(ellipse 60% 50% at 70% 30%, rgba(10,175,160,0.12) 0%, transparent 60%),
+    radial-gradient(ellipse 40% 60% at 20% 80%, rgba(240,165,0,0.06) 0%, transparent 60%);
+}
+
+.hero-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center;
+  max-width: 1200px; margin: 0 auto; width: 100%;
+}
+
+.hero-label {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(10,175,160,0.15);
+  border: 1px solid rgba(10,175,160,0.35);
+  border-radius: 100px; padding: 6px 16px;
+  font-size: 12px; font-weight: 600; color: var(--teal2);
+  letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 24px;
+}
+.hero-label-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--teal2); animation: pulse 2s infinite; }
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(0.8); }
+}
+
+.hero h1 {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(38px, 5vw, 62px);
+  line-height: 1.1; margin-bottom: 20px;
+  color: var(--white);
+}
+.hero h1 .accent { color: var(--teal3); }
+.hero h1 .gold { color: var(--gold); font-style: italic; }
+
+.hero-desc {
+  font-size: 17px; color: rgba(255,255,255,0.65);
+  max-width: 520px; margin-bottom: 40px; line-height: 1.7;
+}
+
+.hero-actions { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 48px; }
+
+.btn-primary {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--teal); color: var(--white);
+  padding: 14px 28px; border-radius: 10px;
+  font-size: 15px; font-weight: 600;
+  transition: all 0.25s; border: none; cursor: pointer;
+}
+.btn-primary:hover { background: var(--teal2); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(10,175,160,0.3); }
+
+.btn-secondary {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: transparent; color: var(--white);
+  padding: 14px 28px; border-radius: 10px;
+  font-size: 15px; font-weight: 600;
+  border: 1px solid var(--border); transition: all 0.25s;
+}
+.btn-secondary:hover { border-color: rgba(10,175,160,0.5); color: var(--teal2); }
+
+.hero-stats {
+  display: flex; gap: 32px;
+  padding-top: 32px;
+  border-top: 1px solid var(--border);
+}
+.stat-item {}
+.stat-number { font-size: 28px; font-weight: 700; color: var(--teal2); line-height: 1; }
+.stat-label { font-size: 12px; color: rgba(255,255,255,0.45); margin-top: 4px; }
+
+.hero-visual {
+  display: flex; flex-direction: column; gap: 16px;
+}
+
+.hero-logo-main {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--border);
+  border-radius: 20px; padding: 32px;
+  display: flex; align-items: center; justify-content: center;
+  min-height: 200px;
+}
+.hero-logo-main img { max-height: 140px; width: auto; }
+
+.hero-tech-row {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px;
+}
+.tech-chip {
+  background: var(--glass); border: 1px solid var(--border);
+  border-radius: 12px; padding: 14px 12px; text-align: center;
+}
+.tech-chip-icon { font-size: 20px; margin-bottom: 6px; }
+.tech-chip-label { font-size: 11px; color: rgba(255,255,255,0.6); font-weight: 500; line-height: 1.3; }
+
+/* ── SECTION BASE ──────────────────────────────────── */
+section { padding: 96px 5%; }
+.container { max-width: 1200px; margin: 0 auto; }
+
+.section-tag {
+  display: inline-block;
+  font-size: 11px; font-weight: 700; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--teal2);
+  margin-bottom: 12px;
+}
+.section-title {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(28px, 3.5vw, 42px);
+  line-height: 1.15; margin-bottom: 16px; color: var(--white);
+}
+.section-sub {
+  font-size: 16px; color: rgba(255,255,255,0.55);
+  max-width: 580px; line-height: 1.7; margin-bottom: 56px;
+}
+
+/* ── ABOUT ─────────────────────────────────────────── */
+#about { background: rgba(255,255,255,0.01); border-top: 1px solid var(--border); }
+
+.about-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: start;
+}
+.about-text p { font-size: 15px; color: rgba(255,255,255,0.65); line-height: 1.8; margin-bottom: 20px; }
+.about-text p strong { color: var(--white); font-weight: 600; }
+
+.about-org {
+  background: var(--glass); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 32px;
+}
+.org-title { font-size: 13px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--teal2); margin-bottom: 24px; }
+
+.org-head {
+  display: flex; align-items: center; gap: 14px;
+  padding: 16px; background: rgba(10,175,160,0.1);
+  border: 1px solid rgba(10,175,160,0.25); border-radius: 12px; margin-bottom: 24px;
+}
+.org-head-avatar {
+  width: 48px; height: 48px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--teal), var(--teal2));
+  display: flex; align-items: center; justify-content: center;
+  font-size: 20px; flex-shrink: 0;
+}
+.org-head-name { font-size: 15px; font-weight: 700; color: var(--white); }
+.org-head-role { font-size: 12px; color: var(--teal2); margin-top: 2px; }
+
+.org-poles { display: flex; flex-direction: column; gap: 12px; }
+.org-pole {
+  display: flex; align-items: flex-start; gap: 14px;
+  padding: 14px; border: 1px solid var(--border); border-radius: 12px;
+  background: rgba(255,255,255,0.02);
+}
+.org-pole-icon {
+  width: 36px; height: 36px; border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 16px; flex-shrink: 0;
+}
+.pole-field { background: rgba(240,165,0,0.15); }
+.pole-dry   { background: rgba(10,175,160,0.15); }
+.pole-wet   { background: rgba(124,58,237,0.15); }
+.org-pole-name { font-size: 13px; font-weight: 700; color: var(--white); margin-bottom: 3px; }
+.org-pole-members { font-size: 12px; color: rgba(255,255,255,0.5); }
+
+/* ── SERVICES ──────────────────────────────────────── */
+#services {
+  background: linear-gradient(180deg, rgba(14,124,123,0.04) 0%, transparent 100%);
+  border-top: 1px solid var(--border);
+}
+
+.services-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-bottom: 48px;
+}
+
+.service-card {
+  background: var(--glass); border: 1px solid var(--border);
+  border-radius: var(--radius); overflow: hidden;
+  transition: border-color 0.25s, transform 0.25s;
+}
+.service-card:hover { border-color: rgba(10,175,160,0.4); transform: translateY(-4px); }
+
+.service-card-top {
+  padding: 28px 28px 20px;
+  border-bottom: 1px solid var(--border);
+}
+.service-icon {
+  width: 52px; height: 52px; border-radius: 14px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 24px; margin-bottom: 18px;
+}
+.si-teal   { background: rgba(10,175,160,0.15); }
+.si-amber  { background: rgba(240,165,0,0.15); }
+.si-purple { background: rgba(124,58,237,0.15); }
+
+.service-card-top h3 { font-size: 19px; font-weight: 700; margin-bottom: 6px; }
+.service-card-top p { font-size: 13px; color: rgba(255,255,255,0.55); line-height: 1.6; }
+
+.service-card-body { padding: 20px 28px 24px; }
+.service-tag {
+  display: inline-block; font-size: 10px; font-weight: 700; letter-spacing: 0.08em;
+  text-transform: uppercase; padding: 4px 10px; border-radius: 6px; margin-bottom: 14px;
+}
+.st-teal   { background: rgba(10,175,160,0.2); color: var(--teal2); }
+.st-amber  { background: rgba(240,165,0,0.2); color: var(--gold2); }
+.st-purple { background: rgba(124,58,237,0.2); color: #C4B5FD; }
+
+.service-list { list-style: none; }
+.service-list li {
+  font-size: 13px; color: rgba(255,255,255,0.65); padding: 6px 0 6px 18px;
+  position: relative; border-bottom: 1px solid rgba(255,255,255,0.04);
+  line-height: 1.4;
+}
+.service-list li:last-child { border-bottom: none; }
+.service-list li::before { content: '→'; position: absolute; left: 0; color: var(--teal2); font-size: 12px; }
+
+.service-outcome {
+  margin-top: 16px; padding: 12px 14px;
+  background: rgba(10,175,160,0.07); border-radius: 8px;
+  font-size: 12px; color: rgba(255,255,255,0.55); line-height: 1.5;
+}
+.service-outcome strong { color: var(--teal2); }
+
+/* Consulting row */
+.consulting-row {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 24px;
+}
+.consulting-card {
+  background: var(--glass); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 28px;
+  display: flex; gap: 20px; align-items: flex-start;
+  transition: border-color 0.25s;
+}
+.consulting-card:hover { border-color: rgba(240,165,0,0.35); }
+.consulting-icon {
+  width: 48px; height: 48px; border-radius: 12px;
+  background: rgba(240,165,0,0.12); display: flex; align-items: center;
+  justify-content: center; font-size: 22px; flex-shrink: 0;
+}
+.consulting-card h4 { font-size: 16px; font-weight: 700; margin-bottom: 6px; }
+.consulting-card p { font-size: 13px; color: rgba(255,255,255,0.55); line-height: 1.6; }
+
+/* ── ÉQUIPEMENTS ───────────────────────────────────── */
+#equipment {
+  background: rgba(255,255,255,0.01); border-top: 1px solid var(--border);
+}
+
+.equipment-grid {
+  display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px;
+}
+
+.equipment-card {
+  background: var(--glass); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 32px;
+  transition: border-color 0.25s;
+}
+.equipment-card:hover { border-color: rgba(10,175,160,0.35); }
+.equipment-card:first-child { grid-column: span 2; display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+
+.equip-header { margin-bottom: 20px; }
+.equip-badge {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: rgba(10,175,160,0.15); border: 1px solid rgba(10,175,160,0.3);
+  border-radius: 100px; padding: 4px 12px;
+  font-size: 10px; font-weight: 700; letter-spacing: 0.08em;
+  text-transform: uppercase; color: var(--teal2); margin-bottom: 14px;
+}
+.equip-name { font-size: 22px; font-weight: 700; color: var(--white); margin-bottom: 6px; }
+.equip-sub { font-size: 13px; color: rgba(255,255,255,0.45); }
+.equip-desc { font-size: 14px; color: rgba(255,255,255,0.6); line-height: 1.7; margin-bottom: 20px; }
+.equip-specs { display: flex; flex-direction: column; gap: 8px; }
+.spec-row {
+  display: flex; align-items: center; gap: 10px;
+  font-size: 13px; color: rgba(255,255,255,0.6);
+}
+.spec-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--teal2); flex-shrink: 0; }
+.spec-row strong { color: var(--white); font-weight: 600; }
+
+/* ── ÉQUIPE ────────────────────────────────────────── */
+#team { border-top: 1px solid var(--border); }
+
+.team-head-card {
+  background: linear-gradient(135deg, rgba(10,175,160,0.12), rgba(10,175,160,0.04));
+  border: 1px solid rgba(10,175,160,0.3);
+  border-radius: var(--radius); padding: 40px;
+  display: grid; grid-template-columns: auto 1fr auto; gap: 32px; align-items: center;
+  margin-bottom: 40px;
+}
+.team-head-avatar {
+  width: 80px; height: 80px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--teal), var(--teal2));
+  display: flex; align-items: center; justify-content: center;
+  font-size: 32px; font-weight: 700; color: var(--white);
+}
+.team-head-info h3 { font-size: 22px; font-weight: 700; margin-bottom: 4px; }
+.team-head-info .role { color: var(--teal2); font-size: 14px; font-weight: 600; }
+.team-head-info .inst { color: rgba(255,255,255,0.45); font-size: 13px; margin-top: 4px; }
+.team-head-badge {
+  background: rgba(10,175,160,0.15); border: 1px solid rgba(10,175,160,0.3);
+  border-radius: 100px; padding: 8px 20px;
+  font-size: 12px; font-weight: 700; color: var(--teal2);
+  text-transform: uppercase; letter-spacing: 0.08em; white-space: nowrap;
+}
+
+.team-poles-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+}
+.team-pole-card {
+  background: var(--glass); border: 1px solid var(--border);
+  border-radius: var(--radius); overflow: hidden;
+}
+.team-pole-header {
+  padding: 18px 20px;
+  border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; gap: 12px;
+}
+.team-pole-icon {
+  width: 36px; height: 36px; border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 16px;
+}
+.team-pole-header h4 { font-size: 14px; font-weight: 700; color: var(--white); margin-bottom: 2px; }
+.team-pole-header p { font-size: 11px; color: rgba(255,255,255,0.4); }
+.team-members { padding: 16px 20px; display: flex; flex-direction: column; gap: 12px; }
+.member-row {
+  display: flex; align-items: center; gap: 12px;
+}
+.member-avatar {
+  width: 36px; height: 36px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 13px; font-weight: 700; color: var(--white); flex-shrink: 0;
+}
+.av-field  { background: linear-gradient(135deg, #F0A500, #FFD166); color: var(--navy); }
+.av-dry    { background: linear-gradient(135deg, var(--teal), var(--teal2)); }
+.av-wet    { background: linear-gradient(135deg, #7C3AED, #A78BFA); }
+.member-name { font-size: 13px; font-weight: 600; color: var(--white); line-height: 1.2; }
+.member-sub { font-size: 11px; color: rgba(255,255,255,0.4); margin-top: 1px; }
+
+.team-pole-tasks { padding: 0 20px 16px; }
+.task-item {
+  display: flex; align-items: flex-start; gap: 8px;
+  font-size: 12px; color: rgba(255,255,255,0.5); padding: 5px 0;
+  line-height: 1.4;
+}
+.task-item::before { content: '▸'; color: var(--teal2); flex-shrink: 0; margin-top: 1px; }
+
+/* ── PARTENAIRES ───────────────────────────────────── */
+#partners {
+  background: rgba(255,255,255,0.01); border-top: 1px solid var(--border);
+}
+
+.partners-intro { max-width: 600px; margin-bottom: 48px; }
+
+.partners-logo-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 32px;
+}
+.partner-logo-card {
+  background: var(--glass); border: 1px solid var(--border);
+  border-radius: 14px; padding: 24px 20px;
+  display: flex; align-items: center; justify-content: center;
+  min-height: 100px; transition: border-color 0.25s;
+}
+.partner-logo-card:hover { border-color: rgba(10,175,160,0.35); }
+.partner-logo-card img { max-height: 60px; width: auto; filter: brightness(0.9); transition: filter 0.25s; }
+.partner-logo-card:hover img { filter: brightness(1); }
+.partner-logo-card .partner-text {
+  font-size: 13px; font-weight: 600; color: rgba(255,255,255,0.5);
+  text-align: center; line-height: 1.4;
+}
+
+.partners-text-row {
+  display: flex; flex-wrap: wrap; gap: 10px;
+}
+.partner-chip {
+  background: var(--glass); border: 1px solid var(--border);
+  border-radius: 8px; padding: 8px 16px;
+  font-size: 12px; font-weight: 500; color: rgba(255,255,255,0.55);
+}
+
+/* ── FORMATIONS ────────────────────────────────────── */
+#training { border-top: 1px solid var(--border); }
+
+.training-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 32px; align-items: start;
+}
+.training-card {
+  background: linear-gradient(135deg, rgba(14,124,123,0.12), rgba(14,124,123,0.04));
+  border: 1px solid rgba(10,175,160,0.25); border-radius: var(--radius); padding: 36px;
+}
+.training-card h3 { font-family: 'DM Serif Display', serif; font-size: 26px; margin-bottom: 12px; }
+.training-card p { font-size: 14px; color: rgba(255,255,255,0.6); line-height: 1.7; margin-bottom: 24px; }
+.training-workshops { display: flex; flex-direction: column; gap: 14px; }
+.workshop-row {
+  display: grid; grid-template-columns: auto 1fr auto; gap: 14px; align-items: center;
+  padding: 14px; background: rgba(255,255,255,0.04); border-radius: 10px;
+  border: 1px solid var(--border);
+}
+.workshop-num { font-size: 11px; font-weight: 700; color: var(--teal2); letter-spacing: 0.06em; }
+.workshop-title { font-size: 14px; font-weight: 600; color: var(--white); }
+.workshop-date { font-size: 12px; color: rgba(255,255,255,0.4); text-align: right; white-space: nowrap; }
+
+.training-side { display: flex; flex-direction: column; gap: 20px; }
+.certif-card {
+  border-radius: var(--radius); padding: 24px;
+  display: flex; gap: 16px; align-items: flex-start;
+}
+.certif-card.nextflow { background: rgba(10,175,160,0.1); border: 1px solid rgba(10,175,160,0.25); }
+.certif-card.fdfp    { background: rgba(240,165,0,0.1); border: 1px solid rgba(240,165,0,0.25); }
+.certif-icon { font-size: 28px; }
+.certif-name { font-size: 15px; font-weight: 700; margin-bottom: 6px; }
+.certif-desc { font-size: 13px; color: rgba(255,255,255,0.55); line-height: 1.6; }
+
+.training-cta {
+  background: var(--glass); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 24px;
+  text-align: center;
+}
+.training-cta p { font-size: 14px; color: rgba(255,255,255,0.55); margin-bottom: 16px; }
+.training-cta a {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--gold); color: var(--navy);
+  padding: 12px 24px; border-radius: 10px;
+  font-size: 14px; font-weight: 700;
+  transition: background 0.2s;
+}
+.training-cta a:hover { background: var(--gold2); }
+
+/* ── CONTACT ───────────────────────────────────────── */
+#contact {
+  background: linear-gradient(135deg, rgba(10,175,160,0.06), transparent 50%);
+  border-top: 1px solid var(--border);
+}
+
+.contact-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start;
+}
+.contact-info { display: flex; flex-direction: column; gap: 20px; }
+.contact-block {
+  display: flex; gap: 16px; align-items: flex-start;
+}
+.contact-block-icon {
+  width: 44px; height: 44px; border-radius: 12px;
+  background: rgba(10,175,160,0.15); display: flex; align-items: center;
+  justify-content: center; font-size: 20px; flex-shrink: 0;
+}
+.contact-block h4 { font-size: 13px; font-weight: 700; color: var(--white); margin-bottom: 4px; }
+.contact-block p, .contact-block a { font-size: 14px; color: rgba(255,255,255,0.55); }
+.contact-block a:hover { color: var(--teal2); }
+
+.contact-form { display: flex; flex-direction: column; gap: 16px; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.form-group { display: flex; flex-direction: column; gap: 6px; }
+.form-group label { font-size: 12px; font-weight: 600; color: rgba(255,255,255,0.5); text-transform: uppercase; letter-spacing: 0.05em; }
+.form-group input,
+.form-group textarea,
+.form-group select {
+  background: rgba(255,255,255,0.05); border: 1px solid var(--border);
+  border-radius: 10px; padding: 12px 14px; color: var(--white);
+  font-size: 14px; font-family: 'Space Grotesk', sans-serif;
+  outline: none; transition: border-color 0.2s;
+  width: 100%;
+}
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus { border-color: rgba(10,175,160,0.5); }
+.form-group textarea { resize: vertical; min-height: 120px; }
+.form-group select option { background: var(--navy); }
+.form-submit {
+  background: var(--teal); color: var(--white);
+  padding: 14px 28px; border-radius: 10px;
+  font-size: 15px; font-weight: 700; border: none; cursor: pointer;
+  transition: all 0.25s; font-family: 'Space Grotesk', sans-serif;
+}
+.form-submit:hover { background: var(--teal2); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(10,175,160,0.3); }
+
+/* ── FOOTER ────────────────────────────────────────── */
+footer {
+  background: rgba(0,0,0,0.4); border-top: 1px solid var(--border);
+  padding: 48px 5% 32px;
+}
+.footer-inner {
+  max-width: 1200px; margin: 0 auto;
+}
+.footer-top {
+  display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px;
+  padding-bottom: 40px; border-bottom: 1px solid var(--border); margin-bottom: 32px;
+}
+.footer-brand {}
+.footer-logo {
+  display: flex; align-items: center; gap: 12px; margin-bottom: 14px;
+}
+.footer-logo img { height: 36px; }
+.footer-logo-name { font-size: 16px; font-weight: 700; }
+.footer-brand p { font-size: 13px; color: rgba(255,255,255,0.4); line-height: 1.7; max-width: 260px; }
+.footer-col h5 { font-size: 13px; font-weight: 700; color: var(--white); margin-bottom: 16px; letter-spacing: 0.04em; }
+.footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+.footer-col ul li a { font-size: 13px; color: rgba(255,255,255,0.45); transition: color 0.2s; }
+.footer-col ul li a:hover { color: var(--teal2); }
+.footer-bottom {
+  display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;
+}
+.footer-bottom p { font-size: 12px; color: rgba(255,255,255,0.25); }
+.social-links { display: flex; gap: 10px; }
+.social-link {
+  width: 36px; height: 36px; border-radius: 8px;
+  background: var(--glass); border: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 15px; transition: all 0.2s;
+}
+.social-link:hover { border-color: rgba(10,175,160,0.4); background: rgba(10,175,160,0.1); }
+
+/* ── MOBILE NAV ────────────────────────────────────── */
+.mobile-menu {
+  display: none; position: fixed; inset: 0; z-index: 99;
+  background: rgba(13,27,42,0.98); backdrop-filter: blur(20px);
+  flex-direction: column; align-items: center; justify-content: center; gap: 28px;
+}
+.mobile-menu.open { display: flex; }
+.mobile-menu a { font-size: 22px; font-weight: 600; color: var(--white); }
+.mobile-menu a:hover { color: var(--teal2); }
+
+/* ── RESPONSIVE ────────────────────────────────────── */
+@media (max-width: 1024px) {
+  .services-grid { grid-template-columns: 1fr 1fr; }
+  .footer-top { grid-template-columns: 1fr 1fr; }
+}
+
+@media (max-width: 768px) {
+  nav { padding: 0 4%; }
+  .nav-links { display: none; }
+  .nav-burger { display: flex; }
+
+  .hero { padding: 100px 5% 60px; }
+  .hero-grid { grid-template-columns: 1fr; gap: 40px; }
+  .hero-visual { display: none; }
+
+  .about-grid { grid-template-columns: 1fr; gap: 40px; }
+  .services-grid { grid-template-columns: 1fr; }
+  .consulting-row { grid-template-columns: 1fr; }
+  .equipment-grid { grid-template-columns: 1fr; }
+  .equipment-card:first-child { grid-column: span 1; grid-template-columns: 1fr; }
+  .team-head-card { grid-template-columns: 1fr; text-align: center; justify-items: center; }
+  .team-poles-grid { grid-template-columns: 1fr; }
+  .partners-logo-grid { grid-template-columns: repeat(2, 1fr); }
+  .training-grid { grid-template-columns: 1fr; }
+  .contact-grid { grid-template-columns: 1fr; gap: 40px; }
+  .form-row { grid-template-columns: 1fr; }
+  .footer-top { grid-template-columns: 1fr; gap: 32px; }
+  .footer-bottom { flex-direction: column; text-align: center; }
+
+  section { padding: 64px 5%; }
+}
+</style>
+</head>
+<body>
+
+<!-- ── NAVIGATION ─────────────────────────────────── -->
+<nav>
+  <div class="nav-logo">
+    <img src="logo-bio-info/eDNA-lab.jpg" alt="eDNA Laboratory Logo" onerror="this.style.display='none'">
+    <div class="nav-logo-text">
+      eDNA Laboratory
+      <span>Université Nangui-Abrogoua</span>
+    </div>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#about">À propos</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#equipment">Équipements</a></li>
+    <li><a href="#team">Équipe</a></li>
+    <li><a href="#partners">Partenaires</a></li>
+    <li><a href="#training">Formations</a></li>
+    <li><a href="#contact" class="nav-cta">Contact</a></li>
+  </ul>
+  <div class="nav-burger" onclick="toggleMenu()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- Mobile menu -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#about"      onclick="toggleMenu()">À propos</a>
+  <a href="#services"   onclick="toggleMenu()">Services</a>
+  <a href="#equipment"  onclick="toggleMenu()">Équipements</a>
+  <a href="#team"       onclick="toggleMenu()">Équipe</a>
+  <a href="#partners"   onclick="toggleMenu()">Partenaires</a>
+  <a href="#training"   onclick="toggleMenu()">Formations</a>
+  <a href="#contact"    onclick="toggleMenu()">Contact</a>
+</div>
+
+<!-- ── HERO ──────────────────────────────────────────── -->
+<section class="hero" id="home">
+  <div class="hero-bg-dna"></div>
+  <div class="hero-grid container">
+    <div class="hero-content">
+      <div class="hero-label">
+        <span class="hero-label-dot"></span>
+        eDNA Research · UNA Abidjan
+      </div>
+      <h1>
+        Séquençage &<br>
+        <span class="accent">Bioinformatique</span><br>
+        <span class="gold">de pointe</span>
+      </h1>
+      <p class="hero-desc">
+        Le eDNA Laboratory de l'Université Nangui-Abrogoua met à votre disposition des services de séquençage NGS, barcoding moléculaire, metabarcoding et analyse bioinformatique pour la recherche et l'écologie en Afrique de l'Ouest.
+      </p>
+      <div class="hero-actions">
+        <a href="#services" class="btn-primary">Découvrir nos services →</a>
+        <a href="#contact" class="btn-secondary">Nous contacter</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat-item">
+          <div class="stat-number">3</div>
+          <div class="stat-label">Axes de recherche</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">NGS</div>
+          <div class="stat-label">3ème génération</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">10+</div>
+          <div class="stat-label">Partenaires internationaux</div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-logo-main">
+        <img src="logo-bio-info/eDNA-lab.jpg" alt="eDNA Laboratory" onerror="this.outerHTML='<div style=\'font-size:48px;opacity:0.3\'>🧬</div>'">
+      </div>
+      <div class="hero-tech-row">
+        <div class="tech-chip">
+          <div class="tech-chip-icon">🔬</div>
+          <div class="tech-chip-label">MinION Nanopore</div>
+        </div>
+        <div class="tech-chip">
+          <div class="tech-chip-icon">🧬</div>
+          <div class="tech-chip-label">Amplicon 16S</div>
+        </div>
+        <div class="tech-chip">
+          <div class="tech-chip-icon">💻</div>
+          <div class="tech-chip-label">nf-core Pipelines</div>
+        </div>
+        <div class="tech-chip">
+          <div class="tech-chip-icon">🌊</div>
+          <div class="tech-chip-label">eDNA Aquatique</div>
+        </div>
+        <div class="tech-chip">
+          <div class="tech-chip-icon">🌿</div>
+          <div class="tech-chip-label">Biodiversité</div>
+        </div>
+        <div class="tech-chip">
+          <div class="tech-chip-icon">📊</div>
+          <div class="tech-chip-label">Métagénomique</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── À PROPOS ────────────────────────────────────── -->
+<section id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-text">
+        <p class="section-tag">À propos du laboratoire</p>
+        <h2 class="section-title">eDNA Laboratory<br>à l'Université Nangui-Abrogoua</h2>
+        <p>Le <strong>eDNA Laboratory</strong> est une unité de recherche spécialisée de l'Université Nangui-Abrogoua (UNA) à Abidjan, Côte d'Ivoire. Nous combinons les approches de biologie moléculaire et de bioinformatique pour l'étude de la biodiversité, de l'écologie et de la santé en Afrique de l'Ouest.</p>
+        <p>Notre laboratoire couvre l'ensemble du flux de travail scientifique : de l'<strong>échantillonnage terrain</strong> à l'<strong>analyse bioinformatique avancée</strong>, en passant par le séquençage moléculaire de dernière génération. Nous disposons d'équipements NGS portables permettant des analyses directement sur le terrain.</p>
+        <p>Nous croyons en la <strong>science ouverte et la formation</strong> comme leviers de développement scientifique en Afrique francophone. Nos protocoles sont partagés sur GitHub et Protocol.io pour maximiser l'impact de notre recherche.</p>
+      </div>
+      <div>
+        <div class="about-org">
+          <div class="org-title">Structure de l'équipe</div>
+          <div class="org-head">
+            <div class="org-head-avatar">👨‍🔬</div>
+            <div>
+              <div class="org-head-name">Dr. Ouattara Koffi Nouho</div>
+              <div class="org-head-role">Head — eDNA Laboratory</div>
+            </div>
+          </div>
+          <div class="org-poles">
+            <div class="org-pole">
+              <div class="org-pole-icon pole-field">🌿</div>
+              <div>
+                <div class="org-pole-name">Activités de terrain</div>
+                <div class="org-pole-members">Owo Nicolas · Yao Koffi Olivier</div>
+              </div>
+            </div>
+            <div class="org-pole">
+              <div class="org-pole-icon pole-dry">💻</div>
+              <div>
+                <div class="org-pole-name">Dry Lab — Bioinformatique</div>
+                <div class="org-pole-members">Hongo Koffi Anderson · Kouadio Ines</div>
+              </div>
+            </div>
+            <div class="org-pole">
+              <div class="org-pole-icon pole-wet">🧪</div>
+              <div>
+                <div class="org-pole-name">Wet Lab — Séquençage</div>
+                <div class="org-pole-members">Kouame N'Guessan · Adous Carine</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── SERVICES ───────────────────────────────────── -->
+<section id="services">
+  <div class="container">
+    <p class="section-tag">Ce que nous offrons</p>
+    <h2 class="section-title">Services de séquençage<br>et bioinformatique</h2>
+    <p class="section-sub">Du terrain au rapport d'analyse — nous couvrons l'ensemble du flux de travail pour votre projet de recherche en biodiversité, écologie ou santé.</p>
+
+    <div class="services-grid">
+
+      <!-- Barcoding -->
+      <div class="service-card">
+        <div class="service-card-top">
+          <div class="service-icon si-teal">🔖</div>
+          <h3>Barcoding Moléculaire</h3>
+          <p>Identification et phylogénie d'espèces par séquençage de gènes marqueurs (COI, ITS, 16S…)</p>
+        </div>
+        <div class="service-card-body">
+          <span class="service-tag st-teal">Barcoding</span>
+          <ul class="service-list">
+            <li>Espèce unique (Single Species Barcoding)</li>
+            <li>Multiplexage d'échantillons</li>
+            <li>Phylogénétique & Phylogénomique</li>
+            <li>Analyses BLAST & comparaisons bases de données</li>
+          </ul>
+          <div class="service-outcome">
+            <strong>Application :</strong> Écologie, Conservation et Biodiversité
+          </div>
+        </div>
+      </div>
+
+      <!-- Metabarcoding -->
+      <div class="service-card">
+        <div class="service-card-top">
+          <div class="service-icon si-amber">🌊</div>
+          <h3>Metabarcoding eDNA</h3>
+          <p>Analyse des communautés biologiques par séquençage d'ADN environnemental et de bulk DNA</p>
+        </div>
+        <div class="service-card-body">
+          <span class="service-tag st-amber">Metabarcoding</span>
+          <ul class="service-list">
+            <li>ADN environnemental (eau, sol, sédiments)</li>
+            <li>Bulk DNA (pooling d'invertébrés)</li>
+            <li>Amplicon 16S ARNr, ITS, COI</li>
+            <li>Diversité alpha & bêta, ordination</li>
+          </ul>
+          <div class="service-outcome">
+            <strong>Application :</strong> Inventaires biodiversité, surveillance écologique
+          </div>
+        </div>
+      </div>
+
+      <!-- Métagénomique -->
+      <div class="service-card">
+        <div class="service-card-top">
+          <div class="service-icon si-purple">🧫</div>
+          <h3>Métagénomique</h3>
+          <p>Séquençage et analyse de métagénomes complexes pour la taxonomie et la génomique fonctionnelle</p>
+        </div>
+        <div class="service-card-body">
+          <span class="service-tag st-purple">Métagénomique</span>
+          <ul class="service-list">
+            <li>WGS (Whole Genome Sequencing)</li>
+            <li>Shotgun métagénomique</li>
+            <li>Assemblage de génomes (MAGs)</li>
+            <li>Classification GTDB-Tk · Annotation Prokka</li>
+          </ul>
+          <div class="service-outcome">
+            <strong>Application :</strong> Biotechnologie, découverte de gènes d'intérêt
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Consulting & Formation -->
+    <div class="consulting-row">
+      <div class="consulting-card">
+        <div class="consulting-icon">🎓</div>
+        <div>
+          <h4>Formation & Capacity Building</h4>
+          <p>Ateliers intensifs Nextflow/nf-core, formation à la bioinformatique NGS en présentiel à Abidjan. Double certification FDFP + Nextflow Community.</p>
+        </div>
+      </div>
+      <div class="consulting-card">
+        <div class="consulting-icon">📋</div>
+        <div>
+          <h4>Consulting & Analyse de données</h4>
+          <p>Accompagnement personnalisé pour vos projets de recherche : conception d'étude, analyse bioinformatique, interprétation des résultats et rédaction scientifique.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── ÉQUIPEMENTS ────────────────────────────────── -->
+<section id="equipment">
+  <div class="container">
+    <p class="section-tag">Notre plateau technique</p>
+    <h2 class="section-title">Équipements de pointe</h2>
+    <p class="section-sub">Des technologies NGS portables et modulaires permettant le séquençage de terrain et l'analyse en laboratoire.</p>
+
+    <div class="equipment-grid">
+
+      <!-- MinION — featured -->
+      <div class="equipment-card">
+        <div>
+          <div class="equip-header">
+            <div class="equip-badge">🔬 NGS 3ème génération</div>
+            <div class="equip-name">MinION mk1b</div>
+            <div class="equip-sub">Oxford Nanopore Technology</div>
+          </div>
+          <div class="equip-desc">
+            Séquenceur portable de 3ème génération utilisant la technologie nanopore pour des lectures ultra-longues (Long Read). Idéal pour l'assemblage de génomes, la détection de variants structuraux et le séquençage en temps réel directement sur le terrain.
+          </div>
+          <div class="equip-specs">
+            <div class="spec-row"><span class="spec-dot"></span><strong>Technologie :</strong> Nanopore (lecture directe ADN/ARN)</div>
+            <div class="spec-row"><span class="spec-dot"></span><strong>Lectures :</strong> Long Read — jusqu'à >100 kb</div>
+            <div class="spec-row"><span class="spec-dot"></span><strong>Format :</strong> Portable — terrain et laboratoire</div>
+            <div class="spec-row"><span class="spec-dot"></span><strong>Usage :</strong> WGS, métagénomique, assemblage MAG</div>
+          </div>
+        </div>
+        <div style="display:flex; align-items:center; justify-content:center; background:rgba(10,175,160,0.06); border:1px solid rgba(10,175,160,0.15); border-radius:12px; padding:32px; font-size:80px; opacity:0.6;">
+          🧬
+        </div>
+      </div>
+
+      <!-- BENTOLAB -->
+      <div class="equipment-card">
+        <div class="equip-header">
+          <div class="equip-badge">🔧 Wet Lab Portable</div>
+          <div class="equip-name">BENTOLAB</div>
+          <div class="equip-sub">3 équipements en 1 bloc</div>
+        </div>
+        <div class="equip-desc">
+          Station de biologie moléculaire portable intégrant gel électrophorèse, transilluminateur, centrifugeuse et thermocycleur PCR dans un seul appareil compact.
+        </div>
+        <div class="equip-specs">
+          <div class="spec-row"><span class="spec-dot"></span>Gel électrophorèse intégré</div>
+          <div class="spec-row"><span class="spec-dot"></span>Transilluminateur UV</div>
+          <div class="spec-row"><span class="spec-dot"></span>Centrifugeuse</div>
+          <div class="spec-row"><span class="spec-dot"></span>Thermocycleur PCR</div>
+        </div>
+      </div>
+
+      <!-- miniPCR BIO -->
+      <div class="equipment-card">
+        <div class="equip-header">
+          <div class="equip-badge">⚡ PCR Terrain</div>
+          <div class="equip-name">miniPCR BIO</div>
+          <div class="equip-sub">2 équipements en 1 bloc</div>
+        </div>
+        <div class="equip-desc">
+          Système PCR miniaturisé conçu pour le terrain, permettant l'amplification rapide d'ADN avec détection intégrée.
+        </div>
+        <div class="equip-specs">
+          <div class="spec-row"><span class="spec-dot"></span>PCR rapide sur le terrain</div>
+          <div class="spec-row"><span class="spec-dot"></span>Détection intégrée</div>
+          <div class="spec-row"><span class="spec-dot"></span>Alimentation USB</div>
+          <div class="spec-row"><span class="spec-dot"></span>Compatible protocoles standard</div>
+        </div>
+      </div>
+
+      <!-- Curiosty -->
+      <div class="equipment-card">
+        <div class="equip-header">
+          <div class="equip-badge">🔭 Microscope Terrain</div>
+          <div class="equip-name">Curiosty</div>
+          <div class="equip-sub">Microscope portable 4K</div>
+        </div>
+        <div class="equip-desc">
+          Microscope modulaire portable équipé d'une caméra 4K pour observations de terrain, avec objectifs multiples et connexion USB.
+        </div>
+        <div class="equip-specs">
+          <div class="spec-row"><span class="spec-dot"></span><strong>Caméra :</strong> 4K USB</div>
+          <div class="spec-row"><span class="spec-dot"></span><strong>Grossissements :</strong> ×2, ×5, ×10, ×20</div>
+          <div class="spec-row"><span class="spec-dot"></span>Connexion tablette / téléphone</div>
+          <div class="spec-row"><span class="spec-dot"></span>Idéal inventaires terrain</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── ÉQUIPE ─────────────────────────────────────── -->
+<section id="team">
+  <div class="container">
+    <p class="section-tag">Les chercheurs</p>
+    <h2 class="section-title">Notre équipe</h2>
+    <p class="section-sub">Une équipe pluridisciplinaire couvrant le terrain, le laboratoire et la bioinformatique.</p>
+
+    <div class="team-head-card">
+      <div class="team-head-avatar">OK</div>
+      <div class="team-head-info">
+        <h3>Dr. Ouattara Koffi Nouho</h3>
+        <div class="role">Head — eDNA Laboratory</div>
+        <div class="inst">Université Nangui-Abrogoua (UNA) · Abidjan, Côte d'Ivoire</div>
+      </div>
+      <div class="team-head-badge">Directeur du laboratoire</div>
+    </div>
+
+    <div class="team-poles-grid">
+
+      <!-- Field -->
+      <div class="team-pole-card">
+        <div class="team-pole-header">
+          <div class="team-pole-icon pole-field">🌿</div>
+          <div>
+            <h4>Activités de terrain</h4>
+            <p>Field Activities</p>
+          </div>
+        </div>
+        <div class="team-members">
+          <div class="member-row">
+            <div class="member-avatar av-field">ON</div>
+            <div>
+              <div class="member-name">Owo Nicolas</div>
+              <div class="member-sub">Chargé d'échantillonnage</div>
+            </div>
+          </div>
+          <div class="member-row">
+            <div class="member-avatar av-field">YO</div>
+            <div>
+              <div class="member-name">Yao Koffi Olivier</div>
+              <div class="member-sub">Stratégie de terrain</div>
+            </div>
+          </div>
+        </div>
+        <div class="team-pole-tasks">
+          <div class="task-item">Stratégie d'échantillonnage</div>
+          <div class="task-item">Développement protocoles terrain</div>
+        </div>
+      </div>
+
+      <!-- Dry Lab -->
+      <div class="team-pole-card">
+        <div class="team-pole-header">
+          <div class="team-pole-icon pole-dry">💻</div>
+          <div>
+            <h4>Dry Lab</h4>
+            <p>Bioinformatique</p>
+          </div>
+        </div>
+        <div class="team-members">
+          <div class="member-row">
+            <div class="member-avatar av-dry">HA</div>
+            <div>
+              <div class="member-name">Hongo Koffi Anderson</div>
+              <div class="member-sub">Bioinformaticien</div>
+            </div>
+          </div>
+          <div class="member-row">
+            <div class="member-avatar av-dry">KI</div>
+            <div>
+              <div class="member-name">Kouadio Ines</div>
+              <div class="member-sub">Bioinformatique & Data</div>
+            </div>
+          </div>
+        </div>
+        <div class="team-pole-tasks">
+          <div class="task-item">Formations & opportunités</div>
+          <div class="task-item">Bourses & gestion des données</div>
+        </div>
+      </div>
+
+      <!-- Wet Lab -->
+      <div class="team-pole-card">
+        <div class="team-pole-header">
+          <div class="team-pole-icon pole-wet">🧪</div>
+          <div>
+            <h4>Wet Lab</h4>
+            <p>Extraction · Amplification · Séquençage</p>
+          </div>
+        </div>
+        <div class="team-members">
+          <div class="member-row">
+            <div class="member-avatar av-wet">KN</div>
+            <div>
+              <div class="member-name">Kouame N'Guessan</div>
+              <div class="member-sub">Biologiste moléculaire</div>
+            </div>
+          </div>
+          <div class="member-row">
+            <div class="member-avatar av-wet">AC</div>
+            <div>
+              <div class="member-name">Adous Carine</div>
+              <div class="member-sub">Technicienne de laboratoire</div>
+            </div>
+          </div>
+        </div>
+        <div class="team-pole-tasks">
+          <div class="task-item">Réactifs & équipements</div>
+          <div class="task-item">Mise en place protocoles</div>
+        </div>
+      </div>
+
+    </div>
+
+    <div style="margin-top:32px; padding:20px 24px; background:rgba(10,175,160,0.08); border:1px solid rgba(10,175,160,0.2); border-radius:12px; font-size:14px; color:rgba(255,255,255,0.65);">
+      🤝 <strong style="color:var(--white);">Nous recrutons</strong> — Nous sommes ouverts à la collaboration et accueillons les étudiants à fort potentiel (EDI, STA, INPH, UNA…). <a href="#contact" style="color:var(--teal2);">Contactez-nous →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ── PARTENAIRES ─────────────────────────────────── -->
+<section id="partners">
+  <div class="container">
+    <div class="partners-intro">
+      <p class="section-tag">Réseau international</p>
+      <h2 class="section-title">Nos partenaires</h2>
+      <p class="section-sub">Un réseau de partenaires académiques et industriels pour renforcer nos capacités de recherche et de formation.</p>
+    </div>
+
+    <div class="partners-logo-grid">
+      <!-- LearnerWorld — partenaire principal formations -->
+      <div class="partner-logo-card">
+        <img src="logo-bio-info/Logo Lw.png" alt="LearnerWorld" onerror="this.outerHTML='<span class=\'partner-text\'>LearnerWorld</span>'">
+      </div>
+      <div class="partner-logo-card">
+        <img src="logo-bio-info/nf-core.png" alt="nf-core" onerror="this.outerHTML='<span class=\'partner-text\'>nf-core</span>'">
+      </div>
+      <div class="partner-logo-card">
+        <img src="logo-bio-info/nextflow.jpg" alt="Nextflow" onerror="this.outerHTML='<span class=\'partner-text\'>Nextflow</span>'">
+      </div>
+      <div class="partner-logo-card">
+        <img src="logo-bio-info/cabinet-lewis.jpg" alt="Cabinet Lewis" onerror="this.outerHTML='<span class=\'partner-text\'>Cabinet Lewis</span>'">
+      </div>
+    </div>
+
+    <div class="partners-text-row">
+      <span class="partner-chip">Public Health Alliance for Genomic Epidemiology</span>
+      <span class="partner-chip">Zymo Research</span>
+      <span class="partner-chip">ZMT Academy</span>
+      <span class="partner-chip">Critical Ecosystem Partnership Fund</span>
+      <span class="partner-chip">Wellcome Connecting Science</span>
+      <span class="partner-chip">VALIDATE</span>
+      <span class="partner-chip">WAMBA.net</span>
+      <span class="partner-chip">POGO — Partnership for Observation of the Global Ocean</span>
+      <span class="partner-chip">eDNA Collaborative</span>
+      <span class="partner-chip">Oxford Nanopore</span>
+      <span class="partner-chip">PacBio</span>
+      <span class="partner-chip">WCS</span>
+      <span class="partner-chip">Anvi'O</span>
+      <span class="partner-chip">Université d'Umeå</span>
+    </div>
+  </div>
+</section>
+
+<!-- ── FORMATIONS ──────────────────────────────────── -->
+<section id="training">
+  <div class="container">
+    <p class="section-tag">Capacity Building</p>
+    <h2 class="section-title">Formations NGS & Bioinformatique</h2>
+    <p class="section-sub">En partenariat avec LearnerWorld — Ateliers intensifs certifiants à Abidjan sur données réelles.</p>
+
+    <div class="training-grid">
+      <div class="training-card">
+        <h3>Ateliers NGS 2026</h3>
+        <p>3 modules intensifs (2 jours en présentiel + 15 jours de projet) utilisant Nextflow et les pipelines nf-core sur des données réelles d'articles publiés.</p>
+        <div class="training-workshops">
+          <div class="workshop-row">
+            <span class="workshop-num">Atelier 1</span>
+            <div>
+              <div class="workshop-title">Amplicon 16S ARNr — Microbiome cacao CI</div>
+              <div style="font-size:12px;color:rgba(255,255,255,0.35);margin-top:2px;">nf-core/ampliseq · DADA2 · SILVA 138</div>
+            </div>
+            <span class="workshop-date">25–26 Juin</span>
+          </div>
+          <div class="workshop-row">
+            <span class="workshop-num">Atelier 2</span>
+            <div>
+              <div class="workshop-title">ARN-seq — Réponse immunitaire & Paludisme</div>
+              <div style="font-size:12px;color:rgba(255,255,255,0.35);margin-top:2px;">nf-core/rnaseq · DESeq2 · GO/KEGG</div>
+            </div>
+            <span class="workshop-date">30–31 Juil.</span>
+          </div>
+          <div class="workshop-row">
+            <span class="workshop-num">Atelier 3</span>
+            <div>
+              <div class="workshop-title">Métagénomique MAG — Lagune Ébrié</div>
+              <div style="font-size:12px;color:rgba(255,255,255,0.35);margin-top:2px;">nf-core/mag · GTDB-Tk · CheckM</div>
+            </div>
+            <span class="workshop-date">27–28 Août</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="training-side">
+        <div class="certif-card nextflow">
+          <div class="certif-icon">🌐</div>
+          <div>
+            <div class="certif-name">Certification Nextflow Community</div>
+            <div class="certif-desc">Reconnue à l'international · Badge numérique LinkedIn · Forte valeur ajoutée pour les postes bioinformatique.</div>
+          </div>
+        </div>
+        <div class="certif-card fdfp">
+          <div class="certif-icon">🏛️</div>
+          <div>
+            <div class="certif-name">Certification FDFP — Côte d'Ivoire</div>
+            <div class="certif-desc">Via cabinet partenaire agréé · Prise en charge employeur possible · Reconnaissance nationale.</div>
+          </div>
+        </div>
+        <div class="training-cta">
+          <p>Consultez le programme complet des formations 2026 avec tarifs et objectifs détaillés.</p>
+          <a href="brochure_v3.html" target="_blank">Voir la brochure complète →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CONTACT ────────────────────────────────────── -->
+<section id="contact">
+  <div class="container">
+    <p class="section-tag">Travaillons ensemble</p>
+    <h2 class="section-title">Contactez-nous</h2>
+    <p class="section-sub">Vous avez un projet de recherche, une demande de service ou souhaitez rejoindre notre réseau ?</p>
+
+    <div class="contact-grid">
+      <div class="contact-info">
+        <div class="contact-block">
+          <div class="contact-block-icon">📧</div>
+          <div>
+            <h4>Email</h4>
+            <a href="mailto:learnerworld22@gmail.com">learnerworld22@gmail.com</a>
+          </div>
+        </div>
+        <div class="contact-block">
+          <div class="contact-block-icon">📍</div>
+          <div>
+            <h4>Localisation</h4>
+            <p>Université Nangui-Abrogoua (UNA)<br>Abidjan, Côte d'Ivoire</p>
+          </div>
+        </div>
+        <div class="contact-block">
+          <div class="contact-block-icon">🌍</div>
+          <div>
+            <h4>Partenaire formations</h4>
+            <a href="https://www.learner-world.com" target="_blank">www.learner-world.com</a>
+          </div>
+        </div>
+        <div class="contact-block">
+          <div class="contact-block-icon">💻</div>
+          <div>
+            <h4>Protocoles & Ressources</h4>
+            <p>GitHub · Protocol.io · Science ouverte</p>
+          </div>
+        </div>
+      </div>
+
+      <form class="contact-form" onsubmit="handleSubmit(event)">
+        <div class="form-row">
+          <div class="form-group">
+            <label>Nom</label>
+            <input type="text" placeholder="Votre nom" required>
+          </div>
+          <div class="form-group">
+            <label>Email</label>
+            <input type="email" placeholder="votre@email.com" required>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Objet de la demande</label>
+          <select>
+            <option value="">Sélectionner...</option>
+            <option>Service de séquençage</option>
+            <option>Analyse bioinformatique</option>
+            <option>Formation / Atelier</option>
+            <option>Collaboration scientifique</option>
+            <option>Stage / Doctorat</option>
+            <option>Autre</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Message</label>
+          <textarea placeholder="Décrivez votre projet ou votre demande..."></textarea>
+        </div>
+        <button type="submit" class="form-submit">Envoyer le message →</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ──────────────────────────────────────── -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="footer-logo">
+          <img src="logo-bio-info/eDNA-lab.jpg" alt="eDNA Laboratory" onerror="this.style.display='none'">
+          <span class="footer-logo-name">eDNA Laboratory</span>
+        </div>
+        <p>Séquençage & bioinformatique à l'Université Nangui-Abrogoua. Science ouverte pour l'Afrique de l'Ouest.</p>
+      </div>
+      <div class="footer-col">
+        <h5>Services</h5>
+        <ul>
+          <li><a href="#services">Barcoding moléculaire</a></li>
+          <li><a href="#services">Metabarcoding eDNA</a></li>
+          <li><a href="#services">Métagénomique</a></li>
+          <li><a href="#services">Consulting</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Laboratoire</h5>
+        <ul>
+          <li><a href="#about">À propos</a></li>
+          <li><a href="#equipment">Équipements</a></li>
+          <li><a href="#team">Équipe</a></li>
+          <li><a href="#partners">Partenaires</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Formations</h5>
+        <ul>
+          <li><a href="#training">Ateliers NGS 2026</a></li>
+          <li><a href="brochure_v3.html" target="_blank">Brochure formations</a></li>
+          <li><a href="#contact">Inscription</a></li>
+          <li><a href="https://www.learner-world.com" target="_blank">LearnerWorld</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 eDNA Laboratory — Université Nangui-Abrogoua · Abidjan, Côte d'Ivoire</p>
+      <div class="social-links">
+        <a class="social-link" href="#" title="LinkedIn">in</a>
+        <a class="social-link" href="#" title="GitHub">⌥</a>
+        <a class="social-link" href="#" title="Twitter/X">𝕏</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+function toggleMenu() {
+  document.getElementById('mobileMenu').classList.toggle('open');
+}
+
+function handleSubmit(e) {
+  e.preventDefault();
+  const btn = e.target.querySelector('.form-submit');
+  btn.textContent = 'Message envoyé ✓';
+  btn.style.background = 'var(--teal2)';
+  setTimeout(() => {
+    btn.textContent = 'Envoyer le message →';
+    btn.style.background = '';
+    e.target.reset();
+  }, 3000);
+}
+
+// Highlight active nav link on scroll
+const sections = document.querySelectorAll('section[id], .hero[id]');
+const navLinks = document.querySelectorAll('.nav-links a');
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(s => {
+    if (window.scrollY >= s.offsetTop - 100) current = s.id;
+  });
+  navLinks.forEach(a => {
+    a.style.color = a.getAttribute('href') === '#' + current
+      ? 'var(--teal2)'
+      : '';
+  });
+});
+</script>
+
+</body>
+</html>

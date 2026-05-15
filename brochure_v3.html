@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LearnerWorld — Formations Bioinformatique Certifiantes 2026</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=DM+Serif+Display:ital@0;1&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --navy: #0D1B2A;
+    --teal: #0E7C7B;
+    --teal2: #0AAFA0;
+    --gold: #F0A500;
+    --gold2: #FFD166;
+    --light: #F4F9FC;
+    --white: #FFFFFF;
+    --grey: #6B7280;
+    --dark: #1F2937;
+  }
+
+  body {
+    font-family: 'Space Grotesk', sans-serif;
+    background: var(--navy);
+    color: var(--white);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ── HERO ─────────────────────────────────────── */
+  .hero {
+    background: linear-gradient(135deg, #0D1B2A 0%, #0E2D40 50%, #0E3D3C 100%);
+    padding: 60px 40px 50px;
+    position: relative;
+    overflow: hidden;
+    border-bottom: 3px solid var(--gold);
+  }
+  .hero::before {
+    content: '';
+    position: absolute; top: -80px; right: -80px;
+    width: 300px; height: 300px; border-radius: 50%;
+    background: rgba(14,124,123,0.15);
+  }
+  .hero::after {
+    content: '';
+    position: absolute; bottom: -60px; left: 10%;
+    width: 200px; height: 200px; border-radius: 50%;
+    background: rgba(240,165,0,0.08);
+  }
+  .logo-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(14,124,123,0.3);
+    border: 1px solid rgba(14,175,160,0.4);
+    border-radius: 100px; padding: 6px 16px;
+    font-size: 13px; font-weight: 600; color: var(--teal2);
+    letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 20px;
+  }
+  .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--teal2); display: inline-block; }
+  h1 { font-family: 'DM Serif Display', serif; font-size: 48px; line-height: 1.1; margin-bottom: 12px; color: var(--white); }
+  h1 span { color: var(--gold); font-style: italic; }
+  .hero-sub { font-size: 17px; color: rgba(255,255,255,0.65); margin-bottom: 32px; max-width: 620px; line-height: 1.6; }
+  .badges-row { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 36px; }
+  .badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 8px; padding: 8px 14px; font-size: 13px; font-weight: 500; color: rgba(255,255,255,0.9);
+  }
+  .price-row { display: flex; gap: 16px; flex-wrap: wrap; }
+  .price-card {
+    background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 12px; padding: 16px 24px; text-align: center; min-width: 155px;
+  }
+  .plabel { font-size: 11px; color: rgba(255,255,255,0.45); letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 6px; }
+  .amount { font-size: 26px; font-weight: 700; color: var(--gold); line-height: 1; }
+  .sub { font-size: 11px; color: rgba(255,255,255,0.4); margin-top: 4px; }
+  .pack-card { background: rgba(14,124,123,0.2); border-color: rgba(14,175,160,0.45); }
+  .pack-card .amount { color: var(--teal2); }
+
+  /* ── SECTIONS ─────────────────────────────────── */
+  .section { padding: 50px 40px; }
+  .section-label { font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--teal2); font-weight: 600; margin-bottom: 8px; }
+  .section-heading { font-family: 'DM Serif Display', serif; font-size: 32px; color: var(--white); margin-bottom: 30px; line-height: 1.2; }
+
+  /* ── FORMATION CARDS ──────────────────────────── */
+  .formations-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+  .fcard { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); border-radius: 16px; overflow: hidden; transition: border-color 0.2s; }
+  .fcard:hover { border-color: rgba(14,175,160,0.35); }
+  .fcard-head { padding: 22px 22px 14px; border-bottom: 1px solid rgba(255,255,255,0.06); position: relative; }
+  .fcard-num { position: absolute; top: 12px; right: 18px; font-size: 56px; font-weight: 700; opacity: 0.06; color: var(--white); line-height: 1; }
+  .ftag { display: inline-block; font-size: 10px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; border-radius: 6px; padding: 4px 10px; margin-bottom: 10px; }
+  .tag-amp  { background: rgba(14,175,160,0.2);  color: var(--teal2); }
+  .tag-rna  { background: rgba(217,119,6,0.2);   color: #FCD34D; }
+  .tag-mag  { background: rgba(124,58,237,0.2);  color: #C4B5FD; }
+  .fcard-title { font-size: 19px; font-weight: 700; color: var(--white); margin-bottom: 5px; line-height: 1.2; }
+  .fcard-pipe  { font-size: 12px; color: rgba(255,255,255,0.35); font-family: monospace; }
+  .fcard-body  { padding: 18px 22px; }
+  .info-row { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 12px; }
+  .iicon { width: 30px; height: 30px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 15px; flex-shrink: 0; }
+  .ic-teal   { background: rgba(14,175,160,0.15); }
+  .ic-amber  { background: rgba(217,119,6,0.15); }
+  .ic-purple { background: rgba(124,58,237,0.15); }
+  .ilabel { font-size: 10px; color: rgba(255,255,255,0.38); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 2px; }
+  .ivalue { font-size: 13px; color: rgba(255,255,255,0.82); font-weight: 500; line-height: 1.4; }
+  .obj-list { list-style: none; }
+  .obj-list li { font-size: 13px; color: rgba(255,255,255,0.65); padding: 5px 0 5px 16px; position: relative; line-height: 1.4; border-bottom: 1px solid rgba(255,255,255,0.04); }
+  .obj-list li::before { content: '→'; position: absolute; left: 0; color: var(--teal2); font-size: 12px; }
+
+  /* ── CALENDRIER ───────────────────────────────── */
+  .cal-bg { background: rgba(255,255,255,0.02); border-top: 1px solid rgba(255,255,255,0.06); border-bottom: 1px solid rgba(255,255,255,0.06); }
+  .cal-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
+  .cal-card { border-radius: 12px; padding: 20px; border: 1px solid rgba(255,255,255,0.08); }
+  .cal-amp  { background: rgba(14,124,123,0.12); border-color: rgba(14,175,160,0.25); }
+  .cal-rna  { background: rgba(217,119,6,0.12);  border-color: rgba(217,119,6,0.3); }
+  .cal-mag  { background: rgba(124,58,237,0.12); border-color: rgba(124,58,237,0.3); }
+  .cal-num   { font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 6px; }
+  .cal-num-t { color: var(--teal2); }
+  .cal-num-a { color: #FCD34D; }
+  .cal-num-p { color: #C4B5FD; }
+  .cal-title { font-size: 16px; font-weight: 700; color: var(--white); margin-bottom: 4px; }
+  .cal-date  { font-size: 13px; color: rgba(255,255,255,0.5); margin-bottom: 10px; }
+  .cal-info  { font-size: 12px; color: rgba(255,255,255,0.55); line-height: 1.5; }
+  .cal-pipe  { font-family: monospace; color: rgba(255,255,255,0.35); font-size: 11px; }
+
+  /* ── PROJETS ──────────────────────────────────── */
+  .proj-row { display: grid; grid-template-columns: 64px 1fr auto; gap: 18px; align-items: center; padding: 18px 0; border-bottom: 1px solid rgba(255,255,255,0.06); }
+  .proj-row:last-child { border-bottom: none; }
+  .proj-n     { font-size: 32px; font-weight: 700; color: rgba(255,255,255,0.07); text-align: center; }
+  .proj-title { font-size: 14px; font-weight: 600; color: var(--white); margin-bottom: 3px; line-height: 1.3; }
+  .proj-acc   { font-size: 12px; color: var(--teal2); font-family: monospace; }
+  .proj-ctx   { font-size: 12px; color: rgba(255,255,255,0.5); margin-top: 3px; line-height: 1.4; }
+
+  /* ── MODELE PEDA ──────────────────────────────── */
+  .modele-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .modele-card { border-radius: 14px; padding: 24px; }
+  .modele-presentiel { background: rgba(14,124,123,0.1); border: 1px solid rgba(14,175,160,0.25); }
+  .modele-devoir     { background: rgba(240,165,0,0.08); border: 1px solid rgba(240,165,0,0.2); }
+  .modele-icon  { font-size: 28px; margin-bottom: 10px; }
+  .modele-titre { font-size: 15px; font-weight: 700; color: var(--white); margin-bottom: 8px; }
+  .modele-desc  { font-size: 13px; color: rgba(255,255,255,0.62); line-height: 1.6; }
+
+  /* ── TARIFS ───────────────────────────────────── */
+  .tarif-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 14px; margin-bottom: 20px; }
+  .tcard { border-radius: 14px; padding: 22px; text-align: center; }
+  .tcard.std  { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); }
+  .tcard.pack { background: rgba(14,124,123,0.18); border: 2px solid rgba(14,175,160,0.45); position: relative; }
+  .pack-ribbon { position: absolute; top: -10px; left: 50%; transform: translateX(-50%); background: var(--gold); color: var(--navy); font-size: 10px; font-weight: 700; letter-spacing: 0.07em; text-transform: uppercase; padding: 4px 12px; border-radius: 100px; white-space: nowrap; }
+  .tprof   { font-size: 11px; color: rgba(255,255,255,0.45); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 6px; }
+  .tamount { font-size: 30px; font-weight: 700; color: var(--white); margin-bottom: 3px; }
+  .tpack   { color: var(--teal2); }
+  .tper    { font-size: 11px; color: rgba(255,255,255,0.38); margin-bottom: 10px; }
+  .teco    { display: inline-block; font-size: 12px; font-weight: 600; color: var(--gold2); background: rgba(240,165,0,0.1); padding: 4px 10px; border-radius: 6px; }
+  .inclus-box { background: rgba(14,124,123,0.1); border: 1px solid rgba(14,175,160,0.2); border-radius: 12px; padding: 16px 20px; }
+  .inclus-box p { font-size: 13px; color: rgba(255,255,255,0.68); line-height: 1.7; }
+  .inclus-box strong { color: var(--teal2); }
+
+  /* ── CERTIFICATIONS ───────────────────────────── */
+  .certif-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .ccard { border-radius: 14px; padding: 24px; border: 1px solid rgba(255,255,255,0.1); }
+  .ccard.nextflow { background: linear-gradient(135deg, rgba(14,124,123,0.2), rgba(14,124,123,0.04)); border-color: rgba(14,175,160,0.3); }
+  .ccard.fdfp     { background: linear-gradient(135deg, rgba(240,165,0,0.18), rgba(240,165,0,0.04)); border-color: rgba(240,165,0,0.3); }
+  .cicon { font-size: 32px; margin-bottom: 10px; }
+  .cname { font-size: 15px; font-weight: 700; color: var(--white); margin-bottom: 8px; }
+  .cdesc { font-size: 13px; color: rgba(255,255,255,0.58); line-height: 1.55; }
+
+  /* ── FOOTER ───────────────────────────────────── */
+  .footer { background: rgba(0,0,0,0.3); border-top: 1px solid rgba(255,255,255,0.08); padding: 40px 40px 30px; text-align: center; }
+  .footer-logo    { font-size: 22px; font-weight: 700; color: var(--gold); margin-bottom: 6px; }
+  .footer-tagline { font-size: 14px; color: rgba(255,255,255,0.4); margin-bottom: 18px; }
+  .footer-contact { display: flex; justify-content: center; gap: 22px; flex-wrap: wrap; font-size: 13px; color: rgba(255,255,255,0.5); margin-bottom: 16px; }
+  .footer-contact a { color: var(--teal2); text-decoration: none; }
+  .social-row { display: flex; justify-content: center; gap: 10px; margin-bottom: 18px; flex-wrap: wrap; }
+  .spill { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; padding: 6px 15px; font-size: 12px; font-weight: 600; color: rgba(255,255,255,0.65); text-decoration: none; transition: all 0.2s; }
+  .spill:hover { border-color: rgba(14,175,160,0.4); color: var(--teal2); }
+  .footer-note { font-size: 11px; color: rgba(255,255,255,0.2); }
+
+  @media(max-width:640px) {
+    h1 { font-size: 32px; }
+    .section, .hero { padding: 36px 20px; }
+    .certif-grid, .modele-grid { grid-template-columns: 1fr; }
+    .proj-row { grid-template-columns: 1fr; }
+    .proj-n { display: none; }
+    .footer { padding: 28px 20px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ── HERO ──────────────────────────────────────────────────────── -->
+<header class="hero">
+  <div class="logo-badge">
+    <span class="dot"></span>
+    <img src="eDNA-Lsb.jpg" alt="eDNA Logo" style="width: 50px; height: auto;">
+  </div>
+  <h1>Formations<br>Bioinformatique<br><span>Certifiantes 2026</span></h1>
+  <p class="hero-sub">Maîtrisez Nextflow & nf-core en présentiel à Abidjan. 3 ateliers intensifs sur des données réelles, double certification FDFP + Nextflow Community.</p>
+  <div class="badges-row">
+    <span class="badge">📅 2 jours en présentiel + 15 jours de projet</span>
+    <span class="badge">👥 Maximum 15 participants</span>
+    <span class="badge">🐋 Singularity (reproductibilité garantie)</span>
+    <span class="badge">🏆 Double certification</span>
+    <span class="badge">📊 Données réelles d'articles publiés</span>
+  </div>
+  <div class="price-row">
+    <div class="price-card">
+      <div class="plabel">Étudiant · par atelier</div>
+      <div class="amount">50 000</div>
+      <div class="sub">FCFA</div>
+    </div>
+    <div class="price-card">
+      <div class="plabel">Professionnel · par atelier</div>
+      <div class="amount">100 000</div>
+      <div class="sub">FCFA</div>
+    </div>
+    <div class="price-card pack-card">
+      <div class="plabel">Pack 3 ateliers (−20%)</div>
+      <div class="amount">120 000</div>
+      <div class="sub">FCFA étudiant · 240 000 professionnel</div>
+    </div>
+  </div>
+</header>
+
+<!-- ── CALENDRIER ────────────────────────────────────────────────── -->
+<section class="section cal-bg">
+  <p class="section-label">Session 2026</p>
+  <h2 class="section-heading">Calendrier des ateliers</h2>
+  <div class="cal-grid">
+    <div class="cal-card cal-amp">
+      <div class="cal-num cal-num-t">Atelier 1</div>
+      <div class="cal-title">Amplicon 16S ARNr</div>
+      <div class="cal-date">📅 25–26 Juin 2026</div>
+      <div class="cal-info">Microbiome bactérien du cacao fermenté en Côte d'Ivoire<br><span class="cal-pipe">nf-core/ampliseq · Base SILVA 138</span></div>
+    </div>
+    <div class="cal-card cal-rna">
+      <div class="cal-num cal-num-a">Atelier 2</div>
+      <div class="cal-title">ARN-seq Transcriptomique</div>
+      <div class="cal-date">📅 30–31 Juillet 2026</div>
+      <div class="cal-info">Réponse immunitaire humaine au paludisme sévère<br><span class="cal-pipe">nf-core/rnaseq · DESeq2</span></div>
+    </div>
+    <div class="cal-card cal-mag">
+      <div class="cal-num cal-num-p">Atelier 3</div>
+      <div class="cal-title">Métagénomique MAG</div>
+      <div class="cal-date">📅 27–28 Août 2026</div>
+      <div class="cal-info">Génomes assemblés & dégradeurs de plastique · Lagune Ébrié<br><span class="cal-pipe">nf-core/mag · GTDB-Tk</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FORMATIONS ────────────────────────────────────────────────── -->
+<section class="section">
+  <p class="section-label">3 modules spécialisés</p>
+  <h2 class="section-heading">Les formations en détail</h2>
+  <div class="formations-grid">
+
+    <!-- Formation 1 -->
+    <div class="fcard">
+      <div class="fcard-head">
+        <div class="fcard-num">1</div>
+        <span class="ftag tag-amp">Amplicon 16S ARNr</span>
+        <div class="fcard-title">Microbiome du Cacao</div>
+        <div class="fcard-pipe">nf-core/ampliseq</div>
+      </div>
+      <div class="fcard-body">
+        <div class="info-row">
+          <div class="iicon ic-teal">🧬</div>
+          <div>
+            <div class="ilabel">Article de référence</div>
+            <div class="ivalue">Dynamique des communautés bactériennes durant la fermentation du cacao</div>
+          </div>
+        </div>
+        <div class="info-row">
+          <div class="iicon ic-teal">🗄️</div>
+          <div>
+            <div class="ilabel">Données libres · NCBI SRA</div>
+            <div class="ivalue">SRP126069 · Illumina 16S ARNr</div>
+          </div>
+        </div>
+        <ul class="obj-list">
+          <li>Pipeline ampliseq · DADA2 · Tables ASV</li>
+          <li>Taxonomie SILVA 138 (bactéries)</li>
+          <li>Diversité alpha & bêta · Ordination PCoA</li>
+          <li>Visualisation & interprétation contexte cacao CI</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Formation 2 -->
+    <div class="fcard">
+      <div class="fcard-head">
+        <div class="fcard-num">2</div>
+        <span class="ftag tag-rna">Transcriptomique</span>
+        <div class="fcard-title">ARN-seq & Paludisme</div>
+        <div class="fcard-pipe">nf-core/rnaseq</div>
+      </div>
+      <div class="fcard-body">
+        <div class="info-row">
+          <div class="iicon ic-amber">🦟</div>
+          <div>
+            <div class="ilabel">Article de référence</div>
+            <div class="ivalue">Modulation de la réponse inflammatoire lors du paludisme à P. falciparum</div>
+          </div>
+        </div>
+        <div class="info-row">
+          <div class="iicon ic-amber">🗄️</div>
+          <div>
+            <div class="ilabel">Données libres · NCBI</div>
+            <div class="ivalue">PRJNA308455 · ARN-seq cellules sanguines humaines</div>
+          </div>
+        </div>
+        <ul class="obj-list">
+          <li>Alignement STAR + quantification Salmon</li>
+          <li>Contrôle qualité : FastQC · MultiQC</li>
+          <li>Expression différentielle DESeq2 · FDR</li>
+          <li>Graphique volcanique · Carte thermique · ACP</li>
+          <li>Enrichissement fonctionnel GO/KEGG (R)</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Formation 3 -->
+    <div class="fcard">
+      <div class="fcard-head">
+        <div class="fcard-num">3</div>
+        <span class="ftag tag-mag">Métagénomique</span>
+        <div class="fcard-title">MAGs & Lagune Ébrié</div>
+        <div class="fcard-pipe">nf-core/mag</div>
+      </div>
+      <div class="fcard-body">
+        <div class="info-row">
+          <div class="iicon ic-purple">🌊</div>
+          <div>
+            <div class="ilabel">Article de référence</div>
+            <div class="ivalue">Hongo et al. (2026) · Candidats PETase · Lagune Ébrié, Côte d'Ivoire</div>
+          </div>
+        </div>
+        <div class="info-row">
+          <div class="iicon ic-purple">🗄️</div>
+          <div>
+            <div class="ilabel">Données libres · NCBI SRA</div>
+            <div class="ivalue">PRJNA1444035 · Métagénomique Illumina · 5 échantillons</div>
+          </div>
+        </div>
+        <ul class="obj-list">
+          <li>Assemblage MEGAHIT · Binning MetaBAT2</li>
+          <li>Évaluation qualité des génomes (CheckM)</li>
+          <li>Classification taxonomique GTDB-Tk</li>
+          <li>Croisement taxons vs dégradeurs de plastique référencés</li>
+          <li>Annotation fonctionnelle Prokka · EggNOG</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ── PROJETS ───────────────────────────────────────────────────── -->
+<section class="section" style="padding-top:0;">
+  <p class="section-label">Données libres d'accès · NCBI</p>
+  <h2 class="section-heading">3 projets basés sur des articles publiés</h2>
+
+  <div class="proj-row">
+    <div class="proj-n">01</div>
+    <div>
+      <div class="proj-title">Dynamique des communautés bactériennes et levuriennes lors de la fermentation du cacao</div>
+      <div class="proj-acc">SRP126069 (NCBI SRA)</div>
+      <div class="proj-ctx">Amplicon 16S ARNr · Bactéries · Microbiome du cacao · Afrique de l'Ouest</div>
+    </div>
+    <span class="ftag tag-amp" style="white-space:nowrap;align-self:center;">Amplicon</span>
+  </div>
+
+  <div class="proj-row">
+    <div class="proj-n">02</div>
+    <div>
+      <div class="proj-title">Modulation transcriptomique de la réponse inflammatoire de l'hôte lors du paludisme fébrile à P. falciparum</div>
+      <div class="proj-acc">PRJNA308455 (NCBI BioProjet)</div>
+      <div class="proj-ctx">ARN-seq · Cellules sanguines humaines · Paludisme sévère · Santé publique CI</div>
+    </div>
+    <span class="ftag tag-rna" style="white-space:nowrap;align-self:center;">ARN-seq</span>
+  </div>
+
+  <div class="proj-row">
+    <div class="proj-n">03</div>
+    <div>
+      <div class="proj-title">Hongo et al. (2026) · Candidats PETase putatives issus du minage métagénomique de la lagune Ébrié, Côte d'Ivoire</div>
+      <div class="proj-acc">PRJNA1444035 (NCBI SRA)</div>
+      <div class="proj-ctx">Métagénomique Illumina · Génomes assemblés (MAG) · Lagune Ébrié · Plastiques & bioremédiation</div>
+    </div>
+    <span class="ftag tag-mag" style="white-space:nowrap;align-self:center;">MAG</span>
+  </div>
+</section>
+
+<!-- ── MODELE PEDAGOGIQUE ─────────────────────────────────────────── -->
+<section class="section" style="padding-top:0;">
+  <p class="section-label">Approche pédagogique</p>
+  <h2 class="section-heading">Formation + Devoir : le modèle</h2>
+  <div class="modele-grid">
+    <div class="modele-card modele-presentiel">
+      <div class="modele-icon">🏫</div>
+      <div class="modele-titre">2 jours en présentiel · Abidjan</div>
+      <div class="modele-desc">Analyse guidée sur un sous-ensemble de données (2–3 échantillons). Tous les pipelines sont exécutés avec <strong style="color:var(--teal2);">Singularity</strong> pour garantir une reproductibilité totale sur toutes les machines.</div>
+    </div>
+    <div class="modele-card modele-devoir">
+      <div class="modele-icon">💻</div>
+      <div class="modele-titre">15 jours de projet à distance</div>
+      <div class="modele-desc">Reproduction autonome de l'analyse sur les données <strong style="color:var(--gold2);">non utilisées en formation</strong>. Rendu individuel ou en binôme. Encadrement assuré par forum et séances de questions-réponses en direct.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── TARIFS ─────────────────────────────────────────────────────── -->
+<section class="section" style="background:rgba(255,255,255,0.01);border-top:1px solid rgba(255,255,255,0.05);">
+  <p class="section-label">Tarification transparente</p>
+  <h2 class="section-heading">Coût de la formation</h2>
+  <div class="tarif-grid">
+    <div class="tcard std">
+      <div class="tprof">Étudiant (Master / Doctorat)</div>
+      <div class="tamount">50 000</div>
+      <div class="tper">FCFA · par atelier</div>
+    </div>
+    <div class="tcard std">
+      <div class="tprof">Professionnel / Enseignant</div>
+      <div class="tamount">100 000</div>
+      <div class="tper">FCFA · par atelier</div>
+    </div>
+    <div class="tcard pack">
+      <div class="pack-ribbon">⭐ Économisez 20%</div>
+      <div class="tprof" style="margin-top:12px;">Pack 3 ateliers · Étudiant</div>
+      <div class="tamount tpack">120 000</div>
+      <div class="tper">FCFA</div>
+      <div class="teco">Économie : 30 000 FCFA</div>
+    </div>
+    <div class="tcard pack">
+      <div class="pack-ribbon">⭐ Prise en charge FDFP</div>
+      <div class="tprof" style="margin-top:12px;">Pack 3 ateliers · Professionnel</div>
+      <div class="tamount tpack">240 000</div>
+      <div class="tper">FCFA</div>
+      <div class="teco">Économie : 60 000 FCFA</div>
+    </div>
+  </div>
+  <div class="inclus-box">
+    <p><strong>Inclus dans chaque atelier :</strong> Supports numériques complets (diaporamas + scripts + données) · Encadrement 15 jours (forum + séances de questions-réponses en direct) · Certificat double Nextflow + FDFP · Accès à la communauté LearnerWorld pendant 1 mois</p>
+  </div>
+</section>
+
+<!-- ── CERTIFICATIONS ─────────────────────────────────────────────── -->
+<section class="section" style="padding-top:0;">
+  <p class="section-label">Reconnaissance officielle</p>
+  <h2 class="section-heading">Double certification</h2>
+  <div class="certif-grid">
+    <div class="ccard nextflow">
+      <div class="cicon">🌐</div>
+      <div class="cname">Certification Nextflow Community</div>
+      <div class="cdesc">Reconnue à l'international · Badge numérique partageable sur LinkedIn · Valeur ajoutée forte pour les postes en bioinformatique à l'échelle mondiale</div>
+    </div>
+    <div class="ccard fdfp">
+      <div class="cicon">🏛️</div>
+      <div class="cname">Certification FDFP — Côte d'Ivoire</div>
+      <div class="cdesc">Délivrée via un cabinet partenaire agréé · Prise en charge employeur possible · Reconnaissance nationale en Côte d'Ivoire</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── PARTENAIRES ──────────────────────────────────────────────── -->
+<section class="partners-section">
+    <h2>Nos Partenaires</h2>
+    <div class="partners-grid">
+        <img src="Logo lw.jpg" alt="Logo LW" style="width: 100px; height: auto;">
+        <!-- Autres logos ici -->
+    </div>
+</section>
+
+<!-- ── FOOTER ─────────────────────────────────────────────────────── -->
+<footer class="footer">
+  <div class="footer-logo">LearnerWorld</div>
+  <div class="footer-tagline">La bioinformatique, accessible à l'Afrique francophone.</div>
+  <div class="footer-contact">
+    <span>📧 <a href="mailto:learnerworld22@gmail.com">learnerworld22@gmail.com</a></span>
+    <span>🌍 <a href="https://www.learner-world.com" target="_blank">www.learner-world.com</a></span>
+    <span>📍 Abidjan, Côte d'Ivoire</span>
+  </div>
+  <div class="social-row">
+    <a class="spill" href="#">LinkedIn</a>
+    <a class="spill" href="#">WhatsApp</a>
+    <a class="spill" href="#">Facebook</a>
+    <a class="spill" href="#">TikTok</a>
+    <a class="spill" href="#">YouTube</a>
+  </div>
+  <div class="footer-note">Formation certifiée FDFP · Organisme partenaire agréé · Nextflow Community Certified Partner · © LearnerWorld 2026</div>
+</footer>
+
+</body>
+</html>

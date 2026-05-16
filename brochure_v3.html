@@ -189,9 +189,10 @@
 
 <!-- ── HERO ──────────────────────────────────────────────────────── -->
 <header class="hero">
-  <div class="logo-badge">
-    <span class="dot"></span>
-    <img src="eDNA-Lsb.jpg" alt="eDNA Logo" style="width: 50px; height: auto;">
+  <div class="logo-badge" style="display:flex;align-items:center;gap:16px;background:none;border:none;padding:0;margin-bottom:20px;">
+    <img src="logo-bio-info/eDNA-lab_s.png" alt="eDNA Laboratory" style="height:52px;width:auto;object-fit:contain;" onerror="this.style.display='none'">
+    <span style="width:1px;height:40px;background:rgba(255,255,255,0.15);display:inline-block;"></span>
+    <img src="logo-bio-info/Logo Lw.png" alt="LearnerWorld" style="height:44px;width:auto;object-fit:contain;" onerror="this.style.display='none'">
   </div>
   <h1>Formations<br>Bioinformatique<br><span>Certifiantes 2026</span></h1>
   <p class="hero-sub">Maîtrisez Nextflow & nf-core en présentiel à Abidjan. 3 ateliers intensifs sur des données réelles, double certification FDFP + Nextflow Community.</p>
@@ -461,13 +462,49 @@
   </div>
 </section>
 
+<!-- ── INSCRIPTION ─────────────────────────────────────────────── -->
+<section class="section" style="text-align:center;padding:40px 40px 20px;">
+  <p class="section-label">Rejoindre une session</p>
+  <h2 class="section-heading" style="margin-bottom:12px;">Inscriptions ouvertes</h2>
+  <p style="color:rgba(255,255,255,0.6);font-size:15px;max-width:540px;margin:0 auto 28px;line-height:1.7;">Réservez votre place pour un ou plusieurs ateliers NGS 2026. Les inscriptions se font via le formulaire en ligne.</p>
+  <a href="https://forms.gle/kicBrsVH9sR7fkA17" target="_blank" rel="noopener"
+     style="display:inline-flex;align-items:center;gap:10px;background:#0E7C7B;color:#fff;padding:15px 32px;border-radius:12px;font-size:16px;font-weight:700;text-decoration:none;transition:background 0.2s;"
+     onmouseover="this.style.background='#0AAFA0'" onmouseout="this.style.background='#0E7C7B'">
+    ✍ S'inscrire à un atelier →
+  </a>
+  <p style="font-size:12px;color:rgba(255,255,255,0.35);margin-top:14px;">⚠ Maximum 15 places par atelier · Places limitées</p>
+</section>
+
 <!-- ── PARTENAIRES ──────────────────────────────────────────────── -->
-<section class="partners-section">
-    <h2>Nos Partenaires</h2>
-    <div class="partners-grid">
-        <img src="Logo lw.jpg" alt="Logo LW" style="width: 100px; height: auto;">
-        <!-- Autres logos ici -->
+<section class="section" style="padding-top:30px;">
+  <p class="section-label">Réseau partenaire</p>
+  <h2 class="section-heading" style="margin-bottom:28px;">Nos Partenaires</h2>
+  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:16px;">
+    <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);border-radius:12px;padding:16px;display:flex;align-items:center;justify-content:center;min-height:72px;">
+      <img src="logo-bio-info/Logo Lw.png" alt="LearnerWorld" style="max-height:44px;max-width:110px;width:auto;object-fit:contain;">
     </div>
+    <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);border-radius:12px;padding:16px;display:flex;align-items:center;justify-content:center;min-height:72px;">
+      <img src="collaborations/wellcome_connecting_science.png" alt="Wellcome Connecting Science" style="max-height:44px;max-width:110px;width:auto;object-fit:contain;">
+    </div>
+    <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);border-radius:12px;padding:16px;display:flex;align-items:center;justify-content:center;min-height:72px;">
+      <img src="collaborations/oxford_nanopore_technologie.png" alt="Oxford Nanopore" style="max-height:44px;max-width:110px;width:auto;object-fit:contain;">
+    </div>
+    <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);border-radius:12px;padding:16px;display:flex;align-items:center;justify-content:center;min-height:72px;">
+      <img src="collaborations/zymo_research.png" alt="Zymo Research" style="max-height:44px;max-width:110px;width:auto;object-fit:contain;">
+    </div>
+    <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);border-radius:12px;padding:16px;display:flex;align-items:center;justify-content:center;min-height:72px;">
+      <img src="collaborations/pacbio.jpg" alt="PacBio" style="max-height:44px;max-width:110px;width:auto;object-fit:contain;">
+    </div>
+    <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);border-radius:12px;padding:16px;display:flex;align-items:center;justify-content:center;min-height:72px;">
+      <img src="collaborations/nf-core.png" alt="nf-core" style="max-height:44px;max-width:110px;width:auto;object-fit:contain;">
+    </div>
+    <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);border-radius:12px;padding:16px;display:flex;align-items:center;justify-content:center;min-height:72px;">
+      <img src="collaborations/the_edna_collaborative.jpg" alt="eDNA Collaborative" style="max-height:44px;max-width:110px;width:auto;object-fit:contain;">
+    </div>
+    <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);border-radius:12px;padding:16px;display:flex;align-items:center;justify-content:center;min-height:72px;">
+      <img src="collaborations/cabinet-lewis.jpg" alt="Cabinet Lewis · FDFP" style="max-height:44px;max-width:110px;width:auto;object-fit:contain;">
+    </div>
+  </div>
 </section>
 
 <!-- ── FOOTER ─────────────────────────────────────────────────────── -->

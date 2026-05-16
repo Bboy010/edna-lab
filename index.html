@@ -381,21 +381,25 @@ nav {
 }
 .pricing-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:14px; margin-bottom:20px; }
 .price-card {
-  border-radius:12px; padding:22px; text-align:center;
+  border-radius:12px; padding:22px 22px 20px; text-align:center;
   border:1px solid var(--border);
+  display:flex; flex-direction:column; align-items:center;
 }
 .price-card.std  { background:var(--surface2); }
-.price-card.pack { background:rgba(10,175,160,0.08); border-color:rgba(10,175,160,0.3); position:relative; }
+.price-card.pack { background:rgba(10,175,160,0.08); border-color:rgba(10,175,160,0.3); position:relative; padding-top:38px; }
 .pack-ribbon {
-  position:absolute; top:-10px; left:50%; transform:translateX(-50%);
+  position:absolute; top:-1px; left:50%; transform:translateX(-50%);
   background:var(--gold); color:#0D1B2A;
   font-size:9px; font-weight:800; letter-spacing:0.07em; text-transform:uppercase;
-  padding:4px 10px; border-radius:100px; white-space:nowrap;
+  padding:4px 10px; border-radius:0 0 8px 8px; white-space:nowrap;
 }
-.pc-profile { font-size:10px; color:var(--text-dim); text-transform:uppercase; letter-spacing:0.06em; margin-bottom:8px; }
-.pc-amount  { font-size:26px; font-weight:700; color:var(--text); margin-bottom:2px; }
-.pack .pc-amount { color:var(--teal2); }
-.pc-unit   { font-size:10px; color:var(--text-dim); margin-bottom:8px; }
+.pc-profile {
+  font-size:13px; font-weight:600; color:var(--text-mid);
+  margin-bottom:10px; line-height:1.35;
+}
+.pc-amount  { font-size:28px; font-weight:700; color:var(--text); margin-bottom:2px; }
+.price-card.pack .pc-amount { color:var(--teal2); }
+.pc-unit   { font-size:11px; color:var(--text-muted); margin-bottom:8px; }
 .pc-eco    { font-size:11px; font-weight:600; color:var(--gold2); background:rgba(240,165,0,0.1); padding:3px 8px; border-radius:6px; display:inline-block; }
 .pricing-includes {
   padding:14px 18px; background:rgba(10,175,160,0.07);
@@ -811,9 +815,9 @@ footer {
       <img class="scroller-logo" src="collaborations/validate.png" alt="VALIDATE">
       <img class="scroller-logo" src="collaborations/zmt_academy.jpg" alt="ZMT Academy">
       <img class="scroller-logo" src="collaborations/minipcr_bio.png" alt="miniPCR BIO">
-      <img class="scroller-logo" src="logo-bio-info/nf-core.png" alt="nf-core">
-      <img class="scroller-logo" src="logo-bio-info/nextflow.jpg" alt="Nextflow">
-      <img class="scroller-logo" src="logo-bio-info/cabinet-lewis.jpg" alt="Cabinet Lewis">
+      <img class="scroller-logo" src="collaborations/nf-core.png" alt="nf-core">
+      <img class="scroller-logo" src="collaborations/nextflow.jpg" alt="Nextflow">
+      <img class="scroller-logo" src="collaborations/cabinet-lewis.jpg" alt="Cabinet Lewis">
       <!-- Set 2 (duplicate for infinite loop) -->
       <img class="scroller-logo" src="logo-bio-info/Logo Lw.png" alt="LearnerWorld">
       <img class="scroller-logo" src="collaborations/wellcome_connecting_science.png" alt="Wellcome Connecting Science">
@@ -828,9 +832,9 @@ footer {
       <img class="scroller-logo" src="collaborations/validate.png" alt="VALIDATE">
       <img class="scroller-logo" src="collaborations/zmt_academy.jpg" alt="ZMT Academy">
       <img class="scroller-logo" src="collaborations/minipcr_bio.png" alt="miniPCR BIO">
-      <img class="scroller-logo" src="logo-bio-info/nf-core.png" alt="nf-core">
-      <img class="scroller-logo" src="logo-bio-info/nextflow.jpg" alt="Nextflow">
-      <img class="scroller-logo" src="logo-bio-info/cabinet-lewis.jpg" alt="Cabinet Lewis">
+      <img class="scroller-logo" src="collaborations/nf-core.png" alt="nf-core">
+      <img class="scroller-logo" src="collaborations/nextflow.jpg" alt="Nextflow">
+      <img class="scroller-logo" src="collaborations/cabinet-lewis.jpg" alt="Cabinet Lewis">
     </div>
   </div>
 </div>
@@ -1000,14 +1004,14 @@ footer {
         </div>
         <div class="price-card pack">
           <div class="pack-ribbon">⭐ <span data-i18n="save20">Économisez 20%</span></div>
-          <div class="pc-profile" style="margin-top:12px" data-i18n="p3_prof">Pack 3 ateliers · Étudiant</div>
+          <div class="pc-profile" data-i18n="p3_prof">Pack 3 ateliers · Étudiant</div>
           <div class="pc-amount">120 000</div>
           <div class="pc-unit">FCFA</div>
           <div class="pc-eco" data-i18n="eco1">Économie : 30 000 FCFA</div>
         </div>
         <div class="price-card pack">
           <div class="pack-ribbon">🏛️ FDFP</div>
-          <div class="pc-profile" style="margin-top:12px" data-i18n="p4_prof">Pack 3 ateliers · Professionnel</div>
+          <div class="pc-profile" data-i18n="p4_prof">Pack 3 ateliers · Professionnel</div>
           <div class="pc-amount">240 000</div>
           <div class="pc-unit">FCFA</div>
           <div class="pc-eco" data-i18n="eco2">Économie : 60 000 FCFA</div>
@@ -1036,8 +1040,11 @@ footer {
       </div>
     </div>
 
-    <!-- CTA + urgency -->
+    <!-- CTA + inscription + urgency -->
     <div class="form-cta-row reveal">
+      <a href="https://forms.gle/kicBrsVH9sR7fkA17" target="_blank" rel="noopener" class="btn-primary" style="font-size:15px;padding:14px 28px;">
+        ✍ <span data-i18n="reg_cta">S'inscrire à un atelier</span>
+      </a>
       <a href="brochure_v3.html" target="_blank" class="btn-gold">
         <span data-i18n="form_cta">Voir le programme complet</span> →
       </a>
@@ -1200,7 +1207,7 @@ footer {
 
     <!-- Recruiting -->
     <div class="recruit-banner reveal">
-      <p>🤝 <strong data-i18n="recruit_strong">Nous recrutons !</strong> <span data-i18n="recruit_text">Ouverts à la collaboration et aux étudiants à fort potentiel (EDI, STA, INPH, UNA…)</span></p>
+      <p>🤝 <strong data-i18n="recruit_strong">Nous recrutons !</strong> <span data-i18n="recruit_text">Ouverts à la collaboration et aux étudiants à fort potentiel</span></p>
       <a href="#contact" data-i18n="recruit_cta">Contactez-nous →</a>
     </div>
   </div>
@@ -1301,7 +1308,7 @@ footer {
         <div class="partner-card"><img src="collaborations/validate.png" alt="VALIDATE" loading="lazy"></div>
         <div class="partner-card"><img src="collaborations/zmt_academy.jpg" alt="ZMT Academy" loading="lazy"></div>
         <div class="partner-card"><img src="collaborations/minipcr_bio.png" alt="miniPCR BIO" loading="lazy"></div>
-        <div class="partner-card"><img src="logo-bio-info/cabinet-lewis.jpg" alt="Cabinet Lewis" loading="lazy"></div>
+        <div class="partner-card"><img src="collaborations/cabinet-lewis.jpg" alt="Cabinet Lewis" loading="lazy"></div>
       </div>
     </div>
   </div>
@@ -1343,6 +1350,7 @@ footer {
         <ul>
           <li><a href="mailto:learnerworld22@gmail.com">learnerworld22@gmail.com</a></li>
           <li><a href="https://www.learner-world.com" target="_blank" rel="noopener">LearnerWorld</a></li>
+          <li><a href="https://forms.gle/kicBrsVH9sR7fkA17" target="_blank" rel="noopener" data-i18n="reg_cta">S'inscrire</a></li>
           <li><a href="#equipe" data-i18n="nav_team">Équipe</a></li>
         </ul>
       </div>
@@ -1350,9 +1358,9 @@ footer {
     <div class="footer-bottom">
       <p class="footer-copy">© 2026 eDNA Laboratory · Université Nangui-Abrogoua · Abidjan, Côte d'Ivoire</p>
       <div class="social-row">
-        <a class="social-btn" href="#" title="LinkedIn">in</a>
-        <a class="social-btn" href="https://canva.link/56vrowkomdjkwnj" target="_blank" title="Vidéo labo">▶</a>
-        <a class="social-btn" href="#" title="WhatsApp">💬</a>
+        <a class="social-btn" href="https://www.linkedin.com/in/koffi-nouho-ouattara-a4496619a/" target="_blank" rel="noopener" title="LinkedIn">in</a>
+        <a class="social-btn" href="https://canva.link/56vrowkomdjkwnj" target="_blank" rel="noopener" title="Vidéo labo">▶</a>
+        <a class="social-btn" href="https://forms.gle/kicBrsVH9sR7fkA17" target="_blank" rel="noopener" title="Inscription">✍</a>
       </div>
     </div>
   </div>
@@ -1415,6 +1423,7 @@ const T = {
     cert2_name:'Certification FDFP — Côte d\'Ivoire',
     cert2_desc:'Via cabinet partenaire agréé · Prise en charge employeur possible · Reconnaissance nationale.',
     form_cta:'Voir le programme complet',
+    reg_cta:'S\'inscrire à un atelier',
     urgency:'Maximum 15 places par atelier',
     gallery_label:'Nos ateliers en images',
     team_tag:'Les chercheurs', team_title:'Notre équipe',
@@ -1492,6 +1501,7 @@ const T = {
     cert2_name:'FDFP Certification — Côte d\'Ivoire',
     cert2_desc:'Through accredited partner organization · Employer reimbursement possible · National recognition.',
     form_cta:'View full program',
+    reg_cta:'Register for a workshop',
     urgency:'Maximum 15 seats per workshop',
     gallery_label:'Our workshops in pictures',
     team_tag:'Our researchers', team_title:'Our team',
@@ -1504,7 +1514,7 @@ const T = {
     pt2_1:'Training & opportunities', pt2_2:'Data management',
     pt3_1:'Reagents & equipment', pt3_2:'Protocol setup & training',
     recruit_strong:'We are hiring!',
-    recruit_text:'Open to collaboration and high-potential students (EDI, STA, INPH, UNA…)',
+    recruit_text:'Open to collaboration and high-potential students',
     recruit_cta:'Contact us →',
     contact_tag:'Let\'s work together', contact_title:'Contact us',
     contact_sub:'Do you have a research project, a service request or want to join our network?',

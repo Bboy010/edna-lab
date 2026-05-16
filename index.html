@@ -1249,6 +1249,16 @@ footer {
           </div>
         </div>
         <div class="contact-block">
+          <div class="cb-icon">📞</div>
+          <div>
+            <div class="cb-title" data-i18n="phone_title">Téléphone</div>
+            <div class="cb-text">
+              <a href="tel:+2250748915342">+225 07 48 91 53 42</a><br>
+              <a href="tel:+2250564330680">+225 05 64 33 06 80</a>
+            </div>
+          </div>
+        </div>
+        <div class="contact-block">
           <div class="cb-icon">💻</div>
           <div>
             <div class="cb-title" data-i18n="res_title">Ressources & Protocoles</div>
@@ -1262,16 +1272,16 @@ footer {
         <div class="form-row">
           <div class="form-group">
             <label data-i18n="f_name">Nom</label>
-            <input type="text" data-i18n-placeholder="f_name_ph" placeholder="Votre nom" required>
+            <input id="f-name" type="text" data-i18n-placeholder="f_name_ph" placeholder="Votre nom" required>
           </div>
           <div class="form-group">
             <label>Email</label>
-            <input type="email" data-i18n-placeholder="f_email_ph" placeholder="votre@email.com" required>
+            <input id="f-email" type="email" data-i18n-placeholder="f_email_ph" placeholder="votre@email.com" required>
           </div>
         </div>
         <div class="form-group">
           <label data-i18n="f_subject">Objet</label>
-          <select>
+          <select id="f-subject">
             <option value="" data-i18n="f_select">Sélectionner...</option>
             <option data-i18n="f_opt1">Service de séquençage</option>
             <option data-i18n="f_opt2">Analyse bioinformatique</option>
@@ -1282,7 +1292,7 @@ footer {
         </div>
         <div class="form-group">
           <label>Message</label>
-          <textarea data-i18n-placeholder="f_msg_ph" placeholder="Décrivez votre projet ou votre demande..."></textarea>
+          <textarea id="f-message" data-i18n-placeholder="f_msg_ph" placeholder="Décrivez votre projet ou votre demande..."></textarea>
         </div>
         <button type="submit" class="btn-submit" id="submit-btn">
           <span data-i18n="f_send">Envoyer</span> →
@@ -1440,7 +1450,7 @@ const T = {
     recruit_cta:'Contactez-nous →',
     contact_tag:'Travaillons ensemble', contact_title:'Contactez-nous',
     contact_sub:'Vous avez un projet de recherche, une demande de service ou souhaitez rejoindre notre réseau ?',
-    loc_title:'Localisation', partner_title:'Partenaire formations',
+    loc_title:'Localisation', partner_title:'Partenaire formations', phone_title:'Téléphone',
     res_title:'Ressources & Protocoles', res_text:'GitHub · Protocol.io · Science ouverte',
     f_name:'Nom', f_name_ph:'Votre nom', f_email_ph:'votre@email.com',
     f_subject:'Objet', f_select:'Sélectionner...',
@@ -1518,7 +1528,7 @@ const T = {
     recruit_cta:'Contact us →',
     contact_tag:'Let\'s work together', contact_title:'Contact us',
     contact_sub:'Do you have a research project, a service request or want to join our network?',
-    loc_title:'Location', partner_title:'Training partner',
+    loc_title:'Location', partner_title:'Training partner', phone_title:'Phone',
     res_title:'Resources & Protocols', res_text:'GitHub · Protocol.io · Open Science',
     f_name:'Name', f_name_ph:'Your name', f_email_ph:'your@email.com',
     f_subject:'Subject', f_select:'Select...',
@@ -1624,18 +1634,24 @@ document.querySelectorAll('[data-count]').forEach(el => counterObs.observe(el));
 /* ── FORM HANDLER ──────────────────────────────── */
 function handleForm(e) {
   e.preventDefault();
+  const name    = document.getElementById('f-name').value.trim();
+  const email   = document.getElementById('f-email').value.trim();
+  const subject = document.getElementById('f-subject').value || (currentLang === 'fr' ? 'Contact eDNA Laboratory' : 'Contact eDNA Laboratory');
+  const message = document.getElementById('f-message').value.trim();
+  const body    = (currentLang === 'fr'
+    ? `Nom : ${name}\nEmail : ${email}\n\n${message}`
+    : `Name: ${name}\nEmail: ${email}\n\n${message}`);
+  const mailto = `mailto:learnerworld22@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  window.location.href = mailto;
   const btn  = document.getElementById('submit-btn');
   const span = btn.querySelector('span');
-  const msg  = currentLang === 'fr' ? 'Message envoyé ✓' : 'Message sent ✓';
   btn.style.background = 'var(--teal2)';
-  span.textContent = msg;
-  btn.nextSibling && (btn.nextSibling.textContent = '');
+  span.textContent = currentLang === 'fr' ? 'Ouverture messagerie...' : 'Opening mail client...';
   setTimeout(() => {
     btn.style.background = '';
     span.dataset.i18n = 'f_send';
     span.textContent = T[currentLang].f_send;
-    e.target.reset();
-  }, 3500);
+  }, 3000);
 }
 
 /* ── INIT ──────────────────────────────────────── */

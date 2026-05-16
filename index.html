@@ -367,13 +367,18 @@ nav {
 .wc-body { padding:16px 22px 20px; }
 .wc-body p { font-size:13px; color:var(--text-muted); line-height:1.6; margin-bottom:12px; }
 .wc-price {
-  display:flex; align-items:center; justify-content:space-between;
-  padding:10px 12px; border-radius:8px;
-  background:var(--surface2); border:1px solid var(--border2);
+  display:flex; align-items:stretch; gap:1px;
+  border-radius:8px; overflow:hidden;
+  border:1px solid var(--border2);
 }
-.wp-label { font-size:11px; color:var(--text-dim); }
-.wp-amount { font-size:15px; font-weight:700; color:var(--teal2); }
-.wp-pro    { font-size:12px; color:var(--text-muted); }
+.wc-price-col {
+  flex:1; display:flex; flex-direction:column; align-items:center;
+  justify-content:center; gap:2px; padding:10px 8px;
+  background:var(--surface2); text-align:center;
+}
+.wc-price-col + .wc-price-col { border-left:1px solid var(--border2); }
+.wp-label  { font-size:10px; font-weight:600; text-transform:uppercase; letter-spacing:0.05em; color:var(--text-muted); }
+.wp-amount { font-size:14px; font-weight:700; color:var(--teal2); }
 /* Pricing table */
 .pricing-block {
   background:var(--surface); border:1px solid var(--border);
@@ -952,8 +957,14 @@ footer {
         <div class="wc-body">
           <p data-i18n="wk1_desc">Microbiome bactérien du cacao fermenté en Côte d'Ivoire. Diversité alpha & bêta, ordination PCoA.</p>
           <div class="wc-price">
-            <div><div class="wp-label" data-i18n="student">Étudiant</div><div class="wp-amount">50 000 FCFA</div></div>
-            <div class="wp-pro">100 000 <span data-i18n="pro">Pro</span></div>
+            <div class="wc-price-col">
+              <div class="wp-label" data-i18n="student">Étudiant</div>
+              <div class="wp-amount">50 000 FCFA</div>
+            </div>
+            <div class="wc-price-col">
+              <div class="wp-label" data-i18n="pro">Professionnel</div>
+              <div class="wp-amount">100 000 FCFA</div>
+            </div>
           </div>
         </div>
       </div>
@@ -967,8 +978,14 @@ footer {
         <div class="wc-body">
           <p data-i18n="wk2_desc">Réponse immunitaire humaine au paludisme sévère à P. falciparum. Expression différentielle DESeq2.</p>
           <div class="wc-price">
-            <div><div class="wp-label" data-i18n="student">Étudiant</div><div class="wp-amount">50 000 FCFA</div></div>
-            <div class="wp-pro">100 000 <span data-i18n="pro">Pro</span></div>
+            <div class="wc-price-col">
+              <div class="wp-label" data-i18n="student">Étudiant</div>
+              <div class="wp-amount">50 000 FCFA</div>
+            </div>
+            <div class="wc-price-col">
+              <div class="wp-label" data-i18n="pro">Professionnel</div>
+              <div class="wp-amount">100 000 FCFA</div>
+            </div>
           </div>
         </div>
       </div>
@@ -982,8 +999,14 @@ footer {
         <div class="wc-body">
           <p data-i18n="wk3_desc">Génomes assemblés & dégradeurs de plastique · Lagune Ébrié, Côte d'Ivoire.</p>
           <div class="wc-price">
-            <div><div class="wp-label" data-i18n="student">Étudiant</div><div class="wp-amount">50 000 FCFA</div></div>
-            <div class="wp-pro">100 000 <span data-i18n="pro">Pro</span></div>
+            <div class="wc-price-col">
+              <div class="wp-label" data-i18n="student">Étudiant</div>
+              <div class="wp-amount">50 000 FCFA</div>
+            </div>
+            <div class="wc-price-col">
+              <div class="wp-label" data-i18n="pro">Professionnel</div>
+              <div class="wp-amount">100 000 FCFA</div>
+            </div>
           </div>
         </div>
       </div>
@@ -1422,7 +1445,7 @@ const T = {
     wk3_num:'Atelier 3', wk3_title:'Métagénomique MAG',
     wk3_desc:'Génomes assemblés & dégradeurs de plastique · Lagune Ébrié, Côte d\'Ivoire.',
     june:'Juin', july:'Juillet', august:'Août',
-    student:'Étudiant', pro:'Pro',
+    student:'Étudiant', pro:'Professionnel',
     p1_prof:'Étudiant (Master / Doctorat)', p2_prof:'Professionnel / Enseignant',
     p3_prof:'Pack 3 ateliers · Étudiant', p4_prof:'Pack 3 ateliers · Professionnel',
     per_ws:'par atelier', save20:'Économisez 20%',
@@ -1500,7 +1523,7 @@ const T = {
     wk3_num:'Workshop 3', wk3_title:'Metagenomics MAG',
     wk3_desc:'Assembled genomes & plastic degraders · Ébrié Lagoon, Côte d\'Ivoire.',
     june:'June', july:'July', august:'August',
-    student:'Student', pro:'Pro',
+    student:'Student', pro:'Professional',
     p1_prof:'Student (Master / PhD)', p2_prof:'Professional / Lecturer',
     p3_prof:'3-workshop pack · Student', p4_prof:'3-workshop pack · Professional',
     per_ws:'per workshop', save20:'Save 20%',

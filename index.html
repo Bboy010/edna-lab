@@ -635,6 +635,15 @@ footer {
 }
 .social-btn:hover { border-color:rgba(10,175,160,0.4); color:var(--teal2); background:rgba(10,175,160,0.08); }
 
+/* Flaticon SVG icons */
+.ficon { width:22px; height:22px; display:inline-block; vertical-align:middle; transition:filter 0.3s; }
+.ficon-sm { width:18px; height:18px; }
+:root .ficon { filter:brightness(0) invert(1); }
+[data-theme="light"] .ficon { filter:brightness(0) saturate(100%) invert(38%) sepia(72%) saturate(600%) hue-rotate(155deg) brightness(92%); }
+.cb-icon .ficon { width:24px; height:24px; }
+.social-btn .ficon { width:18px; height:18px; filter:none; }
+[data-theme="light"] .social-btn .ficon { filter:brightness(0) saturate(100%) invert(38%) sepia(72%) saturate(600%) hue-rotate(155deg) brightness(92%); }
+
 /* ═══════════════════════════════════════════════════
    12. SCROLL REVEAL ANIMATIONS
 ═══════════════════════════════════════════════════ */
@@ -712,7 +721,7 @@ footer {
       <span id="lang-label">FR</span>
     </button>
     <button class="nav-btn" id="theme-btn" onclick="toggleTheme()" aria-label="Changer le thème">
-      <span id="theme-icon">🌙</span>
+      <img id="theme-icon" class="ficon ficon-sm" src="assets/icons/moon.svg" alt="toggle theme">
     </button>
     <a href="#contact" class="nav-cta-btn" data-i18n="nav_cta">Contact</a>
     <button class="nav-burger" id="burger" onclick="toggleMenu()" aria-label="Menu">
@@ -730,7 +739,7 @@ footer {
   <a href="#contact"    onclick="toggleMenu()" data-i18n="nav_contact">Contact</a>
   <div class="mobile-nav-controls">
     <button class="nav-btn" onclick="toggleLang()"><span id="lang-label-m">FR</span></button>
-    <button class="nav-btn" onclick="toggleTheme()"><span id="theme-icon-m">🌙</span></button>
+    <button class="nav-btn" onclick="toggleTheme()"><img id="theme-icon-m" class="ficon ficon-sm" src="assets/icons/moon.svg" alt="toggle theme"></button>
   </div>
 </div>
 
@@ -1251,28 +1260,28 @@ footer {
       <!-- Info -->
       <div class="contact-info reveal">
         <div class="contact-block">
-          <div class="cb-icon">📧</div>
+          <div class="cb-icon"><img class="ficon" src="assets/icons/gmail.svg" alt="email"></div>
           <div>
             <div class="cb-title">Email</div>
             <div class="cb-text"><a href="mailto:learnerworld22@gmail.com">learnerworld22@gmail.com</a></div>
           </div>
         </div>
         <div class="contact-block">
-          <div class="cb-icon">📍</div>
+          <div class="cb-icon"><img class="ficon" src="assets/icons/map-pin.svg" alt="localisation"></div>
           <div>
             <div class="cb-title" data-i18n="loc_title">Localisation</div>
             <div class="cb-text">Université Nangui-Abrogoua (UNA)<br>Abidjan, Côte d'Ivoire</div>
           </div>
         </div>
         <div class="contact-block">
-          <div class="cb-icon">🌍</div>
+          <div class="cb-icon"><img class="ficon" src="assets/icons/cooperation.svg" alt="partenaire"></div>
           <div>
             <div class="cb-title" data-i18n="partner_title">Partenaire formations</div>
             <div class="cb-text"><a href="https://www.learner-world.com" target="_blank" rel="noopener">www.learner-world.com</a></div>
           </div>
         </div>
         <div class="contact-block">
-          <div class="cb-icon">📞</div>
+          <div class="cb-icon"><img class="ficon" src="assets/icons/whatsapp.svg" alt="téléphone"></div>
           <div>
             <div class="cb-title" data-i18n="phone_title">Téléphone</div>
             <div class="cb-text">
@@ -1282,7 +1291,7 @@ footer {
           </div>
         </div>
         <div class="contact-block">
-          <div class="cb-icon">💻</div>
+          <div class="cb-icon"><img class="ficon" src="assets/icons/cloud-folder.svg" alt="ressources"></div>
           <div>
             <div class="cb-title" data-i18n="res_title">Ressources & Protocoles</div>
             <div class="cb-text" data-i18n="res_text">GitHub · Protocol.io · Science ouverte</div>
@@ -1391,10 +1400,19 @@ footer {
     <div class="footer-bottom">
       <p class="footer-copy">© 2026 eDNA Laboratory · Université Nangui-Abrogoua · Abidjan, Côte d'Ivoire</p>
       <div class="social-row">
-        <a class="social-btn" href="https://www.linkedin.com/in/koffi-nouho-ouattara-a4496619a/" target="_blank" rel="noopener" title="LinkedIn">in</a>
-        <a class="social-btn" href="https://canva.link/56vrowkomdjkwnj" target="_blank" rel="noopener" title="Vidéo labo">▶</a>
+        <a class="social-btn" href="https://www.linkedin.com/in/koffi-nouho-ouattara-a4496619a/" target="_blank" rel="noopener" title="LinkedIn"><img class="ficon" src="assets/icons/linkedin.svg" alt="LinkedIn"></a>
+        <a class="social-btn" href="https://canva.link/56vrowkomdjkwnj" target="_blank" rel="noopener" title="Vidéo labo"><img class="ficon" src="assets/icons/youtube.svg" alt="YouTube"></a>
         <a class="social-btn" href="https://forms.gle/kicBrsVH9sR7fkA17" target="_blank" rel="noopener" title="Inscription">✍</a>
       </div>
+    </div>
+    <div style="font-size:10px;opacity:0.35;text-align:center;margin-top:12px;line-height:1.8;">
+      Icons: <a href="https://www.flaticon.com/fr/icones-gratuites/ensoleille" style="color:inherit">Freepik</a> ·
+      <a href="https://www.flaticon.com/fr/icones-gratuites/pleine-lune" style="color:inherit">vectorsmarket15</a> ·
+      <a href="https://www.flaticon.com/fr/icones-gratuites/gmail" style="color:inherit">Tinti Nodarse</a> ·
+      <a href="https://www.flaticon.com/fr/icones-gratuites/la-cooperation" style="color:inherit">VectorPortal</a> ·
+      <a href="https://www.flaticon.com/fr/icones-gratuites/whatsapp" style="color:inherit">riajulislam</a> ·
+      <a href="https://www.flaticon.com/fr/icones-gratuites/dossier-cloud" style="color:inherit">Freepik</a> ·
+      <a href="https://www.flaticon.com/fr/icones-gratuites/youtube" style="color:inherit">Md Tanvirul Haque</a> — Flaticon
     </div>
   </div>
 </footer>
@@ -1569,9 +1587,9 @@ let currentTheme = localStorage.getItem('edna-theme') || 'dark';
 function applyTheme(t) {
   currentTheme = t;
   document.documentElement.setAttribute('data-theme', t);
-  const icon = t === 'dark' ? '🌙' : '☀️';
-  document.getElementById('theme-icon').textContent   = icon;
-  document.getElementById('theme-icon-m').textContent = icon;
+  const src = t === 'dark' ? 'assets/icons/moon.svg' : 'assets/icons/sun.svg';
+  document.getElementById('theme-icon').src   = src;
+  document.getElementById('theme-icon-m').src = src;
   localStorage.setItem('edna-theme', t);
 }
 

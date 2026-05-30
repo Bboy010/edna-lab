@@ -7,8 +7,12 @@
 <meta name="description" content="eDNA Laboratory de l'Université Nangui-Abrogoua. Services NGS, barcoding, metabarcoding et bioinformatique en Côte d'Ivoire.">
 <meta property="og:title" content="eDNA Laboratory — UNA Abidjan">
 <meta property="og:description" content="Services de séquençage NGS et bioinformatique pour la recherche en Afrique de l'Ouest.">
-<meta property="og:image" content="logo-bio-info/eDNA-lab_s.png">
+<meta property="og:image" content="https://edna-lab.netlify.app/logo-bio-info/eDNA-lab_s.png">
 <meta property="og:type" content="website">
+<meta property="og:url" content="https://edna-lab.netlify.app">
+<meta name="keywords" content="NGS Afrique, bioinformatique Côte d'Ivoire, formation Nextflow, barcoding moléculaire, metabarcoding, séquençage UNA Abidjan, eDNA laboratory">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://edna-lab.netlify.app">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
@@ -354,8 +358,32 @@ nav {
   background:var(--surface); border:1px solid var(--border);
   border-radius:var(--radius); overflow:hidden;
   transition:border-color 0.25s, transform 0.25s;
+  display:flex; flex-direction:column;
 }
 .workshop-card:hover { transform:translateY(-3px); }
+.wc-cover { width:100%; height:150px; overflow:hidden; cursor:pointer; position:relative; }
+.wc-cover img { width:100%; height:100%; object-fit:cover; object-position:top; transition:transform 0.4s; }
+.wc-cover:hover img { transform:scale(1.04); }
+.wc-countdown { display:inline-block; font-size:11px; font-weight:700; color:var(--gold); background:rgba(240,165,0,0.12); border:1px solid rgba(240,165,0,0.25); border-radius:6px; padding:3px 8px; margin-top:6px; letter-spacing:0.03em; }
+/* Profils cibles */
+.target-profiles { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin:32px 0; }
+.tp-card { background:var(--surface); border:1px solid var(--border); border-radius:12px; padding:18px 16px; text-align:center; }
+.tp-icon { font-size:28px; margin-bottom:10px; }
+.tp-title { font-size:13px; font-weight:700; color:var(--text); margin-bottom:4px; }
+.tp-desc { font-size:12px; color:var(--text-muted); line-height:1.5; }
+@media(max-width:600px){ .target-profiles { grid-template-columns:1fr; } }
+/* Sticky CTA mobile */
+.sticky-cta { display:none; }
+@media(max-width:768px){
+  .sticky-cta {
+    display:block; position:fixed; bottom:0; left:0; right:0; z-index:9999;
+    padding:12px 16px; background:var(--teal); text-align:center;
+    box-shadow:0 -4px 20px rgba(0,0,0,0.3);
+  }
+  .sticky-cta a { color:#fff; font-size:14px; font-weight:700; text-decoration:none; letter-spacing:0.03em; }
+  .sticky-cta.hidden { display:none; }
+  body { padding-bottom:56px; }
+}
 .wc-head { padding:22px 22px 16px; border-bottom:1px solid var(--border2); }
 .wc-num { font-size:11px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; margin-bottom:8px; }
 .wc-num-t  { color:var(--teal2); }
@@ -951,14 +979,37 @@ footer {
       <p class="s-sub" data-i18n="form_sub">En partenariat avec LearnerWorld — 3 modules intensifs sur données réelles d'articles publiés, avec double certification.</p>
     </div>
 
+    <!-- Profils cibles -->
+    <div class="target-profiles reveal">
+      <div class="tp-card">
+        <div class="tp-icon">🎓</div>
+        <div class="tp-title" data-i18n="tp1_title">Étudiants Master / Doctorat</div>
+        <div class="tp-desc" data-i18n="tp1_desc">Biologie, écologie, génomique — acquiers des compétences bioinformatiques concrètes sur pipeline Nextflow.</div>
+      </div>
+      <div class="tp-card">
+        <div class="tp-icon">🔬</div>
+        <div class="tp-title" data-i18n="tp2_title">Chercheurs & Enseignants</div>
+        <div class="tp-desc" data-i18n="tp2_desc">Analyse tes propres données NGS, maîtrise les pipelines nf-core et obtiens une certification internationale.</div>
+      </div>
+      <div class="tp-card">
+        <div class="tp-icon">🏢</div>
+        <div class="tp-title" data-i18n="tp3_title">Professionnels & Ingénieurs</div>
+        <div class="tp-desc" data-i18n="tp3_desc">Santé publique, environnement, agroalimentaire — prise en charge FDFP possible pour les professionnels ivoiriens.</div>
+      </div>
+    </div>
+
     <!-- Workshops -->
     <div class="workshops-grid">
       <div class="workshop-card reveal">
+        <div class="wc-cover">
+          <img src="assets/affiches/Amplicon 16S ARNr-p.png" alt="Affiche Atelier 1 — Amplicon 16S">
+        </div>
         <div class="wc-head">
           <div class="wc-num wc-num-t" data-i18n="wk1_num">Atelier 1</div>
           <div class="wc-title" data-i18n="wk1_title">Amplicon 16S ARNr</div>
           <div class="wc-date">📅 25–26 <span data-i18n="june">Juin</span> 2026</div>
           <div class="wc-pipe">nf-core/ampliseq · DADA2 · SILVA 138</div>
+          <div class="wc-countdown" id="cd-wk1"></div>
         </div>
         <div class="wc-body">
           <p data-i18n="wk1_desc">Microbiome bactérien du cacao fermenté en Côte d'Ivoire. Diversité alpha & bêta, ordination PCoA.</p>
@@ -975,11 +1026,15 @@ footer {
         </div>
       </div>
       <div class="workshop-card reveal reveal-delay-1">
+        <div class="wc-cover">
+          <img src="assets/affiches/ARN-seq Transcriptomique-p.png" alt="Affiche Atelier 2 — ARN-seq">
+        </div>
         <div class="wc-head">
           <div class="wc-num wc-num-a" data-i18n="wk2_num">Atelier 2</div>
           <div class="wc-title" data-i18n="wk2_title">ARN-seq Transcriptomique</div>
           <div class="wc-date">📅 30–31 <span data-i18n="july">Juillet</span> 2026</div>
           <div class="wc-pipe">nf-core/rnaseq · DESeq2 · GO/KEGG</div>
+          <div class="wc-countdown" id="cd-wk2"></div>
         </div>
         <div class="wc-body">
           <p data-i18n="wk2_desc">Réponse immunitaire humaine au paludisme sévère à P. falciparum. Expression différentielle DESeq2.</p>
@@ -996,11 +1051,15 @@ footer {
         </div>
       </div>
       <div class="workshop-card reveal reveal-delay-2">
+        <div class="wc-cover">
+          <img src="assets/affiches/Métagénomique MAG-p.png" alt="Affiche Atelier 3 — MAG">
+        </div>
         <div class="wc-head">
           <div class="wc-num wc-num-p" data-i18n="wk3_num">Atelier 3</div>
           <div class="wc-title" data-i18n="wk3_title">Métagénomique MAG</div>
           <div class="wc-date">📅 27–28 <span data-i18n="august">Août</span> 2026</div>
           <div class="wc-pipe">nf-core/mag · GTDB-Tk · CheckM</div>
+          <div class="wc-countdown" id="cd-wk3"></div>
         </div>
         <div class="wc-body">
           <p data-i18n="wk3_desc">Génomes assemblés & dégradeurs de plastique · Lagune Ébrié, Côte d'Ivoire.</p>
@@ -1472,7 +1531,10 @@ const T = {
     cert2_desc:'Via cabinet partenaire agréé · Prise en charge employeur possible · Reconnaissance nationale.',
     form_cta:'Voir le programme complet',
     reg_cta:'S\'inscrire à un atelier',
-    urgency:'Maximum 15 places par atelier',
+    urgency:'Maximum 15 places par atelier', urgency_short:'Places limitées',
+    tp1_title:'Étudiants Master / Doctorat', tp1_desc:'Biologie, écologie, génomique — acquiers des compétences bioinformatiques concrètes sur pipeline Nextflow.',
+    tp2_title:'Chercheurs & Enseignants', tp2_desc:'Analyse tes propres données NGS, maîtrise les pipelines nf-core et obtiens une certification internationale.',
+    tp3_title:'Professionnels & Ingénieurs', tp3_desc:'Santé publique, environnement, agroalimentaire — prise en charge FDFP possible pour les professionnels ivoiriens.',
     gallery_label:'Nos ateliers en images',
     team_tag:'Les chercheurs', team_title:'Notre équipe',
     team_sub:'Une équipe pluridisciplinaire couvrant le terrain, le laboratoire et la bioinformatique à l\'Université Nangui-Abrogoua.',
@@ -1549,7 +1611,10 @@ const T = {
     cert2_name:'FDFP Certification — Côte d\'Ivoire',
     cert2_desc:'Through accredited partner organization · Employer reimbursement possible · National recognition.',
     form_cta:'View full program',
-    reg_cta:'Register for a workshop',
+    reg_cta:'Register for a workshop', urgency_short:'Limited spots',
+    tp1_title:'Master / PhD Students', tp1_desc:'Biology, ecology, genomics — gain hands-on bioinformatics skills on Nextflow pipelines.',
+    tp2_title:'Researchers & Lecturers', tp2_desc:'Analyse your own NGS data, master nf-core pipelines and earn an international certification.',
+    tp3_title:'Professionals & Engineers', tp3_desc:'Public health, environment, agri-food — FDFP reimbursement available for Ivorian professionals.',
     urgency:'Maximum 15 seats per workshop',
     gallery_label:'Our workshops in pictures',
     team_tag:'Our researchers', team_title:'Our team',
@@ -1692,9 +1757,41 @@ function handleForm(e) {
   }, 3000);
 }
 
+/* ── COUNTDOWN ─────────────────────────────────── */
+(function() {
+  const workshops = [
+    { id:'cd-wk1', date:'2026-06-25' },
+    { id:'cd-wk2', date:'2026-07-30' },
+    { id:'cd-wk3', date:'2026-08-27' }
+  ];
+  const now = new Date();
+  workshops.forEach(w => {
+    const el = document.getElementById(w.id);
+    if (!el) return;
+    const diff = Math.ceil((new Date(w.date) - now) / 86400000);
+    if (diff > 0) el.textContent = '⏳ J−' + diff;
+    else if (diff === 0) el.textContent = '🔴 Aujourd\'hui !';
+    else el.style.display = 'none';
+  });
+})();
+
+/* ── STICKY CTA ────────────────────────────────── */
+(function() {
+  const bar = document.getElementById('sticky-cta');
+  if (!bar) return;
+  const contact = document.getElementById('contact');
+  const obs = new IntersectionObserver(entries => {
+    bar.classList.toggle('hidden', entries[0].isIntersecting);
+  }, { threshold: 0.1 });
+  if (contact) obs.observe(contact);
+})();
+
 /* ── INIT ──────────────────────────────────────── */
 applyTheme(currentTheme);
 applyLang(currentLang);
 </script>
+<div class="sticky-cta" id="sticky-cta">
+  <a href="https://forms.gle/kicBrsVH9sR7fkA17" target="_blank" rel="noopener">✍ <span data-i18n="reg_cta">S'inscrire à un atelier</span> — <span data-i18n="urgency_short">Places limitées</span></a>
+</div>
 </body>
 </html>

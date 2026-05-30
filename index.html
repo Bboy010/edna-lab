@@ -203,6 +203,19 @@ nav {
   border:1px solid var(--border); cursor:pointer; transition:all 0.25s;
 }
 .btn-outline:hover { border-color:rgba(10,175,160,0.5); color:var(--teal2); }
+/* Hero countdown */
+.hero-countdown {
+  display:inline-flex; align-items:center; gap:14px; flex-wrap:wrap;
+  background:rgba(240,165,0,0.07); border:1px solid rgba(240,165,0,0.28);
+  border-radius:12px; padding:11px 18px; margin-bottom:32px;
+}
+.hcd-label { font-size:11px; font-weight:700; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.06em; white-space:nowrap; }
+.hcd-timer { display:flex; gap:6px; align-items:center; }
+.hcd-unit  { display:flex; flex-direction:column; align-items:center; background:rgba(240,165,0,0.12); border-radius:8px; padding:6px 10px; min-width:46px; }
+.hcd-num   { font-size:22px; font-weight:800; color:var(--gold); line-height:1; font-variant-numeric:tabular-nums; }
+.hcd-name  { font-size:9px; text-transform:uppercase; letter-spacing:0.07em; color:var(--text-muted); margin-top:2px; }
+.hcd-sep   { font-size:18px; font-weight:700; color:var(--gold2); line-height:1; }
+.hcd-event { font-size:11px; color:var(--text-dim); white-space:nowrap; }
 .hero-stats {
   display:flex; gap:36px; padding-top:32px; border-top:1px solid var(--border2);
 }
@@ -353,18 +366,68 @@ nav {
 /* ═══════════════════════════════════════════════════
    8. FORMATIONS
 ═══════════════════════════════════════════════════ */
-.workshops-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:20px; margin-bottom:40px; }
+.workshops-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:24px; margin-bottom:40px; align-items:start; }
+/* ── FLIP CARD ─────────────────────────────────── */
 .workshop-card {
-  background:var(--surface); border:1px solid var(--border);
-  border-radius:var(--radius); overflow:hidden;
-  transition:border-color 0.25s, transform 0.25s;
-  display:flex; flex-direction:column;
+  height:480px; perspective:1200px;
+  background:transparent; border:none;
+  cursor:pointer;
 }
-.workshop-card:hover { transform:translateY(-3px); }
-.wc-cover { width:100%; height:150px; overflow:hidden; cursor:pointer; position:relative; }
-.wc-cover img { width:100%; height:100%; object-fit:cover; object-position:top; transition:transform 0.4s; }
-.wc-cover:hover img { transform:scale(1.04); }
-.wc-countdown { display:inline-block; font-size:11px; font-weight:700; color:var(--gold); background:rgba(240,165,0,0.12); border:1px solid rgba(240,165,0,0.25); border-radius:6px; padding:3px 8px; margin-top:6px; letter-spacing:0.03em; }
+.wc-flip {
+  width:100%; height:100%; position:relative;
+  transition:transform 0.65s cubic-bezier(0.4,0,0.2,1);
+  transform-style:preserve-3d;
+}
+@media(hover:hover){
+  .workshop-card:hover .wc-flip { transform:rotateY(180deg); }
+}
+.workshop-card.flipped .wc-flip { transform:rotateY(180deg); }
+.wc-front, .wc-back {
+  position:absolute; inset:0;
+  backface-visibility:hidden; -webkit-backface-visibility:hidden;
+  border-radius:var(--radius); overflow:hidden;
+}
+.wc-front { background:var(--bg2); border:1px solid var(--border); }
+.wc-front img { width:100%; height:100%; object-fit:cover; object-position:top; display:block; }
+.wc-front-footer {
+  position:absolute; bottom:0; left:0; right:0; padding:14px 14px 12px;
+  background:linear-gradient(to top, rgba(13,27,42,0.92) 55%, transparent);
+  display:flex; flex-direction:column; align-items:center; gap:6px;
+}
+.wc-front-hint { font-size:11px; color:rgba(255,255,255,0.65); letter-spacing:0.04em; font-weight:500; }
+.hint-mobile { display:none; }
+@media(hover:none){ .hint-desktop { display:none; } .hint-mobile { display:inline; } }
+.wc-back {
+  transform:rotateY(180deg);
+  background:var(--bg2); border:1px solid var(--border);
+  padding:22px 20px; position:relative;
+  display:flex; flex-direction:column; gap:8px;
+}
+.wc-reg-btn {
+  display:block; padding:12px; margin-top:auto;
+  background:var(--teal2); color:#fff;
+  border-radius:10px; text-align:center; font-weight:700; font-size:14px;
+  transition:background 0.2s;
+}
+.wc-reg-btn:hover { background:var(--teal3); color:#fff; }
+.wc-close-btn {
+  display:none; position:absolute; top:10px; right:10px;
+  background:rgba(255,255,255,0.08); border:1px solid var(--border);
+  color:var(--text-muted); font-size:14px; line-height:1;
+  width:26px; height:26px; border-radius:50%; cursor:pointer;
+  align-items:center; justify-content:center;
+}
+@media(max-width:768px){ .wc-close-btn { display:flex; } }
+.wc-countdown { display:inline-block; font-size:11px; font-weight:700; color:var(--gold); background:rgba(240,165,0,0.15); border:1px solid rgba(240,165,0,0.3); border-radius:6px; padding:3px 8px; letter-spacing:0.03em; }
+/* Countdown agrandi sur la face avant */
+.wc-front-footer .wc-countdown {
+  font-size:17px; padding:5px 14px; border-radius:8px;
+  background:rgba(240,165,0,0.22); border-color:rgba(240,165,0,0.55);
+  text-shadow:0 1px 4px rgba(0,0,0,0.6);
+  letter-spacing:0.04em;
+}
+@media(max-width:900px){ .workshops-grid { grid-template-columns:1fr 1fr; } .workshop-card { height:440px; } }
+@media(max-width:600px){ .workshops-grid { grid-template-columns:1fr; } .workshop-card { height:500px; } }
 /* Profils cibles */
 .target-profiles { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin:32px 0; }
 .tp-card { background:var(--surface); border:1px solid var(--border); border-radius:12px; padding:18px 16px; text-align:center; }
@@ -384,29 +447,20 @@ nav {
   .sticky-cta.hidden { display:none; }
   body { padding-bottom:56px; }
 }
-.wc-head { padding:22px 22px 16px; border-bottom:1px solid var(--border2); }
-.wc-num { font-size:11px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; margin-bottom:8px; }
+/* Card back — typographie */
+.wc-num { font-size:11px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; }
 .wc-num-t  { color:var(--teal2); }
 .wc-num-a  { color:var(--gold2); }
 .wc-num-p  { color:#C4B5FD; }
-.wc-title  { font-size:17px; font-weight:700; color:var(--text); margin-bottom:4px; }
-.wc-date   { font-size:12px; color:var(--text-muted); margin-bottom:10px; }
+.wc-title  { font-size:16px; font-weight:700; color:var(--text); }
+.wc-date   { font-size:12px; color:var(--text-muted); }
 .wc-pipe   { font-family:monospace; font-size:11px; color:var(--text-dim); }
-.wc-body { padding:16px 22px 20px; }
-.wc-body p { font-size:13px; color:var(--text-muted); line-height:1.6; margin-bottom:12px; }
-.wc-price {
-  display:flex; align-items:stretch; gap:1px;
-  border-radius:8px; overflow:hidden;
-  border:1px solid var(--border2);
-}
-.wc-price-col {
-  flex:1; display:flex; flex-direction:column; align-items:center;
-  justify-content:center; gap:2px; padding:10px 8px;
-  background:var(--surface2); text-align:center;
-}
+.wc-desc   { font-size:12px; color:var(--text-muted); line-height:1.6; flex:1; }
+.wc-price { display:flex; align-items:stretch; gap:1px; border-radius:8px; overflow:hidden; border:1px solid var(--border2); }
+.wc-price-col { flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:2px; padding:9px 6px; background:var(--surface2); text-align:center; }
 .wc-price-col + .wc-price-col { border-left:1px solid var(--border2); }
 .wp-label  { font-size:10px; font-weight:600; text-transform:uppercase; letter-spacing:0.05em; color:var(--text-muted); }
-.wp-amount { font-size:14px; font-weight:700; color:var(--teal2); }
+.wp-amount { font-size:13px; font-weight:700; color:var(--teal2); }
 /* Pricing table */
 .pricing-block {
   background:var(--surface); border:1px solid var(--border);
@@ -448,7 +502,8 @@ nav {
 }
 .certif-card.nf  { background:rgba(10,175,160,0.08); border:1px solid rgba(10,175,160,0.2); }
 .certif-card.fdfp{ background:rgba(240,165,0,0.08);  border:1px solid rgba(240,165,0,0.2); }
-.certif-icon { font-size:28px; }
+.certif-icon { font-size:28px; flex-shrink:0; }
+.certif-icon img { width:60px; height:auto; max-height:50px; object-fit:contain; display:block; border-radius:6px; }
 .certif-name { font-size:15px; font-weight:700; color:var(--text); margin-bottom:6px; }
 .certif-desc { font-size:13px; color:var(--text-muted); line-height:1.65; }
 /* Formations CTA */
@@ -796,6 +851,20 @@ footer {
         <a href="#services"   class="btn-primary" ><span data-i18n="hero_cta1">Nos services</span> →</a>
         <a href="#formations" class="btn-outline"  ><span data-i18n="hero_cta2">Voir les formations</span></a>
       </div>
+      <!-- Compte à rebours hero -->
+      <div class="hero-countdown" id="hero-cd-wrap">
+        <span class="hcd-label">⏳ <span data-i18n="hcd_label">Prochain atelier dans</span></span>
+        <div class="hcd-timer">
+          <div class="hcd-unit"><span class="hcd-num" id="hcd-d">--</span><span class="hcd-name" data-i18n="hcd_days">Jours</span></div>
+          <span class="hcd-sep">:</span>
+          <div class="hcd-unit"><span class="hcd-num" id="hcd-h">--</span><span class="hcd-name" data-i18n="hcd_hrs">Heures</span></div>
+          <span class="hcd-sep">:</span>
+          <div class="hcd-unit"><span class="hcd-num" id="hcd-m">--</span><span class="hcd-name" data-i18n="hcd_min">Min</span></div>
+          <span class="hcd-sep">:</span>
+          <div class="hcd-unit"><span class="hcd-num" id="hcd-s">--</span><span class="hcd-name" data-i18n="hcd_sec">Sec</span></div>
+        </div>
+        <span class="hcd-event">Atelier 1 — Amplicon 16S</span>
+      </div>
       <div class="hero-stats">
         <div class="stat">
           <div class="stat-num" data-count="3">0</div>
@@ -1000,78 +1069,105 @@ footer {
 
     <!-- Workshops -->
     <div class="workshops-grid">
+      <!-- Card 1 — Amplicon 16S -->
       <div class="workshop-card reveal">
-        <div class="wc-cover">
-          <img src="assets/affiches/Amplicon 16S ARNr-p.png" alt="Affiche Atelier 1 — Amplicon 16S">
-        </div>
-        <div class="wc-head">
-          <div class="wc-num wc-num-t" data-i18n="wk1_num">Atelier 1</div>
-          <div class="wc-title" data-i18n="wk1_title">Amplicon 16S ARNr</div>
-          <div class="wc-date">📅 25–26 <span data-i18n="june">Juin</span> 2026</div>
-          <div class="wc-pipe">nf-core/ampliseq · DADA2 · SILVA 138</div>
-          <div class="wc-countdown" id="cd-wk1"></div>
-        </div>
-        <div class="wc-body">
-          <p data-i18n="wk1_desc">Microbiome bactérien du cacao fermenté en Côte d'Ivoire. Diversité alpha & bêta, ordination PCoA.</p>
-          <div class="wc-price">
-            <div class="wc-price-col">
-              <div class="wp-label" data-i18n="student">Étudiant</div>
-              <div class="wp-amount">50 000 FCFA</div>
+        <div class="wc-flip">
+          <div class="wc-front">
+            <img src="assets/affiches/Amplicon 16S ARNr-p.png" alt="Affiche Atelier 1 — Amplicon 16S ARNr">
+            <div class="wc-front-footer">
+              <div class="wc-countdown" id="cd-wk1"></div>
+              <div class="wc-front-hint">
+                <span class="hint-desktop">Survoler pour s'inscrire →</span>
+                <span class="hint-mobile">Appuyer pour les détails →</span>
+              </div>
             </div>
-            <div class="wc-price-col">
-              <div class="wp-label" data-i18n="pro">Professionnel</div>
-              <div class="wp-amount">100 000 FCFA</div>
+          </div>
+          <div class="wc-back">
+            <button class="wc-close-btn" aria-label="Fermer">✕</button>
+            <div class="wc-num wc-num-t" data-i18n="wk1_num">Atelier 1</div>
+            <div class="wc-title" data-i18n="wk1_title">Amplicon 16S ARNr</div>
+            <div class="wc-date">📅 25–26 <span data-i18n="june">Juin</span> 2026</div>
+            <div class="wc-pipe">nf-core/ampliseq · DADA2 · SILVA 138</div>
+            <p class="wc-desc" data-i18n="wk1_desc">Microbiome bactérien du cacao fermenté en Côte d'Ivoire. Diversité alpha &amp; bêta, ordination PCoA.</p>
+            <div class="wc-price">
+              <div class="wc-price-col">
+                <div class="wp-label" data-i18n="student">Étudiant</div>
+                <div class="wp-amount">50 000 FCFA</div>
+              </div>
+              <div class="wc-price-col">
+                <div class="wp-label" data-i18n="pro">Professionnel</div>
+                <div class="wp-amount">100 000 FCFA</div>
+              </div>
             </div>
+            <a href="https://forms.gle/kicBrsVH9sR7fkA17" target="_blank" rel="noopener" class="wc-reg-btn">✍ <span data-i18n="reg_cta">S'inscrire</span></a>
           </div>
         </div>
       </div>
+      <!-- Card 2 — ARN-seq -->
       <div class="workshop-card reveal reveal-delay-1">
-        <div class="wc-cover">
-          <img src="assets/affiches/ARN-seq Transcriptomique-p.png" alt="Affiche Atelier 2 — ARN-seq">
-        </div>
-        <div class="wc-head">
-          <div class="wc-num wc-num-a" data-i18n="wk2_num">Atelier 2</div>
-          <div class="wc-title" data-i18n="wk2_title">ARN-seq Transcriptomique</div>
-          <div class="wc-date">📅 30–31 <span data-i18n="july">Juillet</span> 2026</div>
-          <div class="wc-pipe">nf-core/rnaseq · DESeq2 · GO/KEGG</div>
-          <div class="wc-countdown" id="cd-wk2"></div>
-        </div>
-        <div class="wc-body">
-          <p data-i18n="wk2_desc">Réponse immunitaire humaine au paludisme sévère à P. falciparum. Expression différentielle DESeq2.</p>
-          <div class="wc-price">
-            <div class="wc-price-col">
-              <div class="wp-label" data-i18n="student">Étudiant</div>
-              <div class="wp-amount">50 000 FCFA</div>
+        <div class="wc-flip">
+          <div class="wc-front">
+            <img src="assets/affiches/ARN-seq Transcriptomique-p.png" alt="Affiche Atelier 2 — ARN-seq Transcriptomique">
+            <div class="wc-front-footer">
+              <div class="wc-countdown" id="cd-wk2"></div>
+              <div class="wc-front-hint">
+                <span class="hint-desktop">Survoler pour s'inscrire →</span>
+                <span class="hint-mobile">Appuyer pour les détails →</span>
+              </div>
             </div>
-            <div class="wc-price-col">
-              <div class="wp-label" data-i18n="pro">Professionnel</div>
-              <div class="wp-amount">100 000 FCFA</div>
+          </div>
+          <div class="wc-back">
+            <button class="wc-close-btn" aria-label="Fermer">✕</button>
+            <div class="wc-num wc-num-a" data-i18n="wk2_num">Atelier 2</div>
+            <div class="wc-title" data-i18n="wk2_title">ARN-seq Transcriptomique</div>
+            <div class="wc-date">📅 30–31 <span data-i18n="july">Juillet</span> 2026</div>
+            <div class="wc-pipe">nf-core/rnaseq · DESeq2 · GO/KEGG</div>
+            <p class="wc-desc" data-i18n="wk2_desc">Réponse immunitaire humaine au paludisme sévère à P. falciparum. Expression différentielle DESeq2.</p>
+            <div class="wc-price">
+              <div class="wc-price-col">
+                <div class="wp-label" data-i18n="student">Étudiant</div>
+                <div class="wp-amount">50 000 FCFA</div>
+              </div>
+              <div class="wc-price-col">
+                <div class="wp-label" data-i18n="pro">Professionnel</div>
+                <div class="wp-amount">100 000 FCFA</div>
+              </div>
             </div>
+            <a href="https://forms.gle/kicBrsVH9sR7fkA17" target="_blank" rel="noopener" class="wc-reg-btn">✍ <span data-i18n="reg_cta">S'inscrire</span></a>
           </div>
         </div>
       </div>
+      <!-- Card 3 — MAG -->
       <div class="workshop-card reveal reveal-delay-2">
-        <div class="wc-cover">
-          <img src="assets/affiches/Métagénomique MAG-p.png" alt="Affiche Atelier 3 — MAG">
-        </div>
-        <div class="wc-head">
-          <div class="wc-num wc-num-p" data-i18n="wk3_num">Atelier 3</div>
-          <div class="wc-title" data-i18n="wk3_title">Métagénomique MAG</div>
-          <div class="wc-date">📅 27–28 <span data-i18n="august">Août</span> 2026</div>
-          <div class="wc-pipe">nf-core/mag · GTDB-Tk · CheckM</div>
-          <div class="wc-countdown" id="cd-wk3"></div>
-        </div>
-        <div class="wc-body">
-          <p data-i18n="wk3_desc">Génomes assemblés & dégradeurs de plastique · Lagune Ébrié, Côte d'Ivoire.</p>
-          <div class="wc-price">
-            <div class="wc-price-col">
-              <div class="wp-label" data-i18n="student">Étudiant</div>
-              <div class="wp-amount">50 000 FCFA</div>
+        <div class="wc-flip">
+          <div class="wc-front">
+            <img src="assets/affiches/Métagénomique MAG-p.png" alt="Affiche Atelier 3 — Métagénomique MAG">
+            <div class="wc-front-footer">
+              <div class="wc-countdown" id="cd-wk3"></div>
+              <div class="wc-front-hint">
+                <span class="hint-desktop">Survoler pour s'inscrire →</span>
+                <span class="hint-mobile">Appuyer pour les détails →</span>
+              </div>
             </div>
-            <div class="wc-price-col">
-              <div class="wp-label" data-i18n="pro">Professionnel</div>
-              <div class="wp-amount">100 000 FCFA</div>
+          </div>
+          <div class="wc-back">
+            <button class="wc-close-btn" aria-label="Fermer">✕</button>
+            <div class="wc-num wc-num-p" data-i18n="wk3_num">Atelier 3</div>
+            <div class="wc-title" data-i18n="wk3_title">Métagénomique MAG</div>
+            <div class="wc-date">📅 27–28 <span data-i18n="august">Août</span> 2026</div>
+            <div class="wc-pipe">nf-core/mag · GTDB-Tk · CheckM</div>
+            <p class="wc-desc" data-i18n="wk3_desc">Génomes assemblés &amp; dégradeurs de plastique · Lagune Ébrié, Côte d'Ivoire.</p>
+            <div class="wc-price">
+              <div class="wc-price-col">
+                <div class="wp-label" data-i18n="student">Étudiant</div>
+                <div class="wp-amount">50 000 FCFA</div>
+              </div>
+              <div class="wc-price-col">
+                <div class="wp-label" data-i18n="pro">Professionnel</div>
+                <div class="wp-amount">100 000 FCFA</div>
+              </div>
             </div>
+            <a href="https://forms.gle/kicBrsVH9sR7fkA17" target="_blank" rel="noopener" class="wc-reg-btn">✍ <span data-i18n="reg_cta">S'inscrire</span></a>
           </div>
         </div>
       </div>
@@ -1113,14 +1209,14 @@ footer {
     <!-- Certifications -->
     <div class="certif-row">
       <div class="certif-card nf reveal">
-        <div class="certif-icon">🌐</div>
+        <div class="certif-icon"><img src="collaborations/nf-core.png" alt="nf-core"></div>
         <div>
           <div class="certif-name" data-i18n="cert1_name">Certification Nextflow Community</div>
           <div class="certif-desc" data-i18n="cert1_desc">Reconnue à l'international · Badge numérique LinkedIn · Forte valeur ajoutée pour postes bioinformatique.</div>
         </div>
       </div>
       <div class="certif-card fdfp reveal reveal-delay-1">
-        <div class="certif-icon">🏛️</div>
+        <div class="certif-icon"><img src="collaborations/fdfp.jpg" alt="FDFP"></div>
         <div>
           <div class="certif-name" data-i18n="cert2_name">Certification FDFP — Côte d'Ivoire</div>
           <div class="certif-desc" data-i18n="cert2_desc">Via cabinet partenaire agréé · Prise en charge employeur possible · Reconnaissance nationale.</div>
@@ -1532,6 +1628,7 @@ const T = {
     form_cta:'Voir le programme complet',
     reg_cta:'S\'inscrire à un atelier',
     urgency:'Maximum 15 places par atelier', urgency_short:'Places limitées',
+    hcd_label:'Prochain atelier dans', hcd_days:'Jours', hcd_hrs:'Heures', hcd_min:'Min', hcd_sec:'Sec',
     tp1_title:'Étudiants Master / Doctorat', tp1_desc:'Biologie, écologie, génomique — acquiers des compétences bioinformatiques concrètes sur pipeline Nextflow.',
     tp2_title:'Chercheurs & Enseignants', tp2_desc:'Analyse tes propres données NGS, maîtrise les pipelines nf-core et obtiens une certification internationale.',
     tp3_title:'Professionnels & Ingénieurs', tp3_desc:'Santé publique, environnement, agroalimentaire — prise en charge FDFP possible pour les professionnels ivoiriens.',
@@ -1612,6 +1709,7 @@ const T = {
     cert2_desc:'Through accredited partner organization · Employer reimbursement possible · National recognition.',
     form_cta:'View full program',
     reg_cta:'Register for a workshop', urgency_short:'Limited spots',
+    hcd_label:'Next workshop in', hcd_days:'Days', hcd_hrs:'Hours', hcd_min:'Min', hcd_sec:'Sec',
     tp1_title:'Master / PhD Students', tp1_desc:'Biology, ecology, genomics — gain hands-on bioinformatics skills on Nextflow pipelines.',
     tp2_title:'Researchers & Lecturers', tp2_desc:'Analyse your own NGS data, master nf-core pipelines and earn an international certification.',
     tp3_title:'Professionals & Engineers', tp3_desc:'Public health, environment, agri-food — FDFP reimbursement available for Ivorian professionals.',
@@ -1757,6 +1855,26 @@ function handleForm(e) {
   }, 3000);
 }
 
+/* ── HERO COUNTDOWN (Atelier 1 — 25 juin 2026) ─── */
+(function(){
+  const target = new Date('2026-06-25T08:00:00');
+  const wrap = document.getElementById('hero-cd-wrap');
+  function pad(n){ return String(n).padStart(2,'0'); }
+  function tick(){
+    const diff = target - new Date();
+    if(diff <= 0){ if(wrap) wrap.style.display='none'; return; }
+    const d = Math.floor(diff / 86400000);
+    const h = Math.floor((diff % 86400000) / 3600000);
+    const m = Math.floor((diff % 3600000) / 60000);
+    const s = Math.floor((diff % 60000) / 1000);
+    document.getElementById('hcd-d').textContent = pad(d);
+    document.getElementById('hcd-h').textContent = pad(h);
+    document.getElementById('hcd-m').textContent = pad(m);
+    document.getElementById('hcd-s').textContent = pad(s);
+  }
+  tick(); setInterval(tick, 1000);
+})();
+
 /* ── COUNTDOWN ─────────────────────────────────── */
 (function() {
   const workshops = [
@@ -1772,6 +1890,24 @@ function handleForm(e) {
     if (diff > 0) el.textContent = '⏳ J−' + diff;
     else if (diff === 0) el.textContent = '🔴 Aujourd\'hui !';
     else el.style.display = 'none';
+  });
+})();
+
+/* ── FLIP CARD MOBILE TAP ──────────────────────── */
+(function() {
+  document.querySelectorAll('.workshop-card').forEach(card => {
+    card.addEventListener('click', function(e) {
+      if (e.target.closest('.wc-reg-btn')) return;
+      if (e.target.closest('.wc-close-btn')) {
+        card.classList.remove('flipped'); return;
+      }
+      /* Touch devices : toggle flip ; desktop hover gère seul */
+      if (window.matchMedia('(hover:none)').matches) {
+        const isFlipped = card.classList.contains('flipped');
+        document.querySelectorAll('.workshop-card.flipped').forEach(c => c.classList.remove('flipped'));
+        if (!isFlipped) card.classList.add('flipped');
+      }
+    });
   });
 })();
 

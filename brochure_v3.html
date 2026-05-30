@@ -157,12 +157,22 @@
 
   /* ── CERTIFICATIONS ───────────────────────────── */
   .certif-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-  .ccard { border-radius: 14px; padding: 24px; border: 1px solid rgba(255,255,255,0.1); }
+  .ccard { border-radius: 14px; padding: 24px; border: 1px solid rgba(255,255,255,0.1); display:flex; gap:16px; align-items:flex-start; }
   .ccard.nextflow { background: linear-gradient(135deg, rgba(14,124,123,0.2), rgba(14,124,123,0.04)); border-color: rgba(14,175,160,0.3); }
   .ccard.fdfp     { background: linear-gradient(135deg, rgba(240,165,0,0.18), rgba(240,165,0,0.04)); border-color: rgba(240,165,0,0.3); }
-  .cicon { font-size: 32px; margin-bottom: 10px; }
+  .cicon { font-size: 32px; flex-shrink:0; }
+  .cicon img { width:58px; height:auto; max-height:48px; object-fit:contain; display:block; border-radius:6px; }
   .cname { font-size: 15px; font-weight: 700; color: var(--white); margin-bottom: 8px; }
   .cdesc { font-size: 13px; color: rgba(255,255,255,0.58); line-height: 1.55; }
+  /* ── COUNTDOWN ─── */
+  .cd-badge { display:inline-block; font-size:12px; font-weight:700; color:#F0A500; background:rgba(240,165,0,0.15); border:1px solid rgba(240,165,0,0.3); border-radius:6px; padding:3px 9px; margin-top:6px; }
+  /* ── TARGET PROFILES ─── */
+  .tp-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin:24px 0; }
+  .tp-card { background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.09); border-radius:12px; padding:16px 14px; text-align:center; }
+  .tp-icon { font-size:26px; margin-bottom:8px; }
+  .tp-title { font-size:13px; font-weight:700; color:#fff; margin-bottom:4px; }
+  .tp-desc  { font-size:11px; color:rgba(255,255,255,0.5); line-height:1.5; }
+  @media(max-width:640px){ .certif-grid, .modele-grid, .tp-grid { grid-template-columns:1fr; } }
 
   /* ── FOOTER ───────────────────────────────────── */
   .footer { background: rgba(0,0,0,0.3); border-top: 1px solid rgba(255,255,255,0.08); padding: 40px 40px 30px; text-align: center; }
@@ -204,6 +214,24 @@
     <span class="badge">🏆 Double certification</span>
     <span class="badge">📊 Données réelles d'articles publiés</span>
   </div>
+  <!-- Profils cibles -->
+  <div class="tp-grid">
+    <div class="tp-card">
+      <div class="tp-icon">🎓</div>
+      <div class="tp-title">Étudiants Master / Doctorat</div>
+      <div class="tp-desc">Biologie, écologie, génomique — acquiers des compétences bioinformatiques concrètes sur Nextflow.</div>
+    </div>
+    <div class="tp-card">
+      <div class="tp-icon">🔬</div>
+      <div class="tp-title">Chercheurs & Enseignants</div>
+      <div class="tp-desc">Analyse tes propres données NGS, maîtrise les pipelines nf-core et obtiens une certification internationale.</div>
+    </div>
+    <div class="tp-card">
+      <div class="tp-icon">🏢</div>
+      <div class="tp-title">Professionnels & Ingénieurs</div>
+      <div class="tp-desc">Santé publique, environnement, agroalimentaire — prise en charge FDFP possible pour les professionnels ivoiriens.</div>
+    </div>
+  </div>
   <div class="price-row">
     <div class="price-card">
       <div class="plabel">Étudiant · par atelier</div>
@@ -228,23 +256,35 @@
   <p class="section-label">Session 2026</p>
   <h2 class="section-heading">Calendrier des ateliers</h2>
   <div class="cal-grid">
-    <div class="cal-card cal-amp">
-      <div class="cal-num cal-num-t">Atelier 1</div>
-      <div class="cal-title">Amplicon 16S ARNr</div>
-      <div class="cal-date">📅 25–26 Juin 2026</div>
-      <div class="cal-info">Microbiome bactérien du cacao fermenté en Côte d'Ivoire<br><span class="cal-pipe">nf-core/ampliseq · Base SILVA 138</span></div>
+    <div class="cal-card cal-amp" style="display:flex;gap:16px;align-items:flex-start;">
+      <img src="assets/affiches/Amplicon 16S ARNr-p.png" alt="Affiche Atelier 1" style="width:80px;flex-shrink:0;border-radius:8px;object-fit:cover;">
+      <div>
+        <div class="cal-num cal-num-t">Atelier 1</div>
+        <div class="cal-title">Amplicon 16S ARNr</div>
+        <div class="cal-date">📅 25–26 Juin 2026</div>
+        <div class="cal-info">Microbiome bactérien du cacao fermenté en Côte d'Ivoire<br><span class="cal-pipe">nf-core/ampliseq · Base SILVA 138</span></div>
+        <div class="cd-badge" id="br-cd1"></div>
+      </div>
     </div>
-    <div class="cal-card cal-rna">
-      <div class="cal-num cal-num-a">Atelier 2</div>
-      <div class="cal-title">ARN-seq Transcriptomique</div>
-      <div class="cal-date">📅 30–31 Juillet 2026</div>
-      <div class="cal-info">Réponse immunitaire humaine au paludisme sévère<br><span class="cal-pipe">nf-core/rnaseq · DESeq2</span></div>
+    <div class="cal-card cal-rna" style="display:flex;gap:16px;align-items:flex-start;">
+      <img src="assets/affiches/ARN-seq Transcriptomique-p.png" alt="Affiche Atelier 2" style="width:80px;flex-shrink:0;border-radius:8px;object-fit:cover;">
+      <div>
+        <div class="cal-num cal-num-a">Atelier 2</div>
+        <div class="cal-title">ARN-seq Transcriptomique</div>
+        <div class="cal-date">📅 30–31 Juillet 2026</div>
+        <div class="cal-info">Réponse immunitaire humaine au paludisme sévère<br><span class="cal-pipe">nf-core/rnaseq · DESeq2</span></div>
+        <div class="cd-badge" id="br-cd2"></div>
+      </div>
     </div>
-    <div class="cal-card cal-mag">
-      <div class="cal-num cal-num-p">Atelier 3</div>
-      <div class="cal-title">Métagénomique MAG</div>
-      <div class="cal-date">📅 27–28 Août 2026</div>
-      <div class="cal-info">Génomes assemblés & dégradeurs de plastique · Lagune Ébrié<br><span class="cal-pipe">nf-core/mag · GTDB-Tk</span></div>
+    <div class="cal-card cal-mag" style="display:flex;gap:16px;align-items:flex-start;">
+      <img src="assets/affiches/Métagénomique MAG-p.png" alt="Affiche Atelier 3" style="width:80px;flex-shrink:0;border-radius:8px;object-fit:cover;">
+      <div>
+        <div class="cal-num cal-num-p">Atelier 3</div>
+        <div class="cal-title">Métagénomique MAG</div>
+        <div class="cal-date">📅 27–28 Août 2026</div>
+        <div class="cal-info">Génomes assemblés & dégradeurs de plastique · Lagune Ébrié<br><span class="cal-pipe">nf-core/mag · GTDB-Tk</span></div>
+        <div class="cd-badge" id="br-cd3"></div>
+      </div>
     </div>
   </div>
 </section>
@@ -451,14 +491,18 @@
   <h2 class="section-heading">Double certification</h2>
   <div class="certif-grid">
     <div class="ccard nextflow">
-      <div class="cicon">🌐</div>
-      <div class="cname">Certification Nextflow Community</div>
-      <div class="cdesc">Reconnue à l'international · Badge numérique partageable sur LinkedIn · Valeur ajoutée forte pour les postes en bioinformatique à l'échelle mondiale</div>
+      <div class="cicon"><img src="collaborations/nf-core.png" alt="nf-core"></div>
+      <div>
+        <div class="cname">Certification Nextflow Community</div>
+        <div class="cdesc">Reconnue à l'international · Badge numérique partageable sur LinkedIn · Valeur ajoutée forte pour les postes en bioinformatique à l'échelle mondiale</div>
+      </div>
     </div>
     <div class="ccard fdfp">
-      <div class="cicon">🏛️</div>
-      <div class="cname">Certification FDFP — Côte d'Ivoire</div>
-      <div class="cdesc">Délivrée via un cabinet partenaire agréé · Prise en charge employeur possible · Reconnaissance nationale en Côte d'Ivoire</div>
+      <div class="cicon"><img src="collaborations/fdfp.jpg" alt="FDFP"></div>
+      <div>
+        <div class="cname">Certification FDFP — Côte d'Ivoire</div>
+        <div class="cdesc">Délivrée via un cabinet partenaire agréé · Prise en charge employeur possible · Reconnaissance nationale en Côte d'Ivoire</div>
+      </div>
     </div>
   </div>
 </section>
@@ -514,6 +558,7 @@
   <div class="footer-tagline">La bioinformatique, accessible à l'Afrique francophone.</div>
   <div class="footer-contact">
     <span><img class="ficon" src="assets/icones/google.png" alt="email"><a href="mailto:learnerworld22@gmail.com">learnerworld22@gmail.com</a></span>
+    <span><img class="ficon" src="assets/icones/whatsapp.png" alt="tel"><a href="tel:+2250748915342">+225 07 48 91 53 42</a></span>
     <span>🤝<a href="https://www.learner-world.com" target="_blank">www.learner-world.com</a></span>
     <span><img class="ficon" src="assets/icones/carte.png" alt="localisation">Abidjan, Côte d'Ivoire</span>
   </div>
@@ -532,5 +577,19 @@
   </div>
 </footer>
 
+<script>
+(function(){
+  const ws=[{id:'br-cd1',date:'2026-06-25'},{id:'br-cd2',date:'2026-07-30'},{id:'br-cd3',date:'2026-08-27'}];
+  const now=new Date();
+  ws.forEach(w=>{
+    const el=document.getElementById(w.id);
+    if(!el)return;
+    const diff=Math.ceil((new Date(w.date)-now)/86400000);
+    if(diff>0)el.textContent='⏳ J−'+diff;
+    else if(diff===0)el.textContent='🔴 Aujourd\'hui !';
+    else el.style.display='none';
+  });
+})();
+</script>
 </body>
 </html>

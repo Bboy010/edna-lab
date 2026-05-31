@@ -13,6 +13,49 @@
 <meta name="keywords" content="NGS Afrique, bioinformatique Côte d'Ivoire, formation Nextflow, barcoding moléculaire, metabarcoding, séquençage UNA Abidjan, eDNA laboratory">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://edna-lab.netlify.app">
+<script type="application/ld+json">
+[
+  {
+    "@context":"https://schema.org",
+    "@type":"EducationEvent",
+    "name":"Atelier 1 — Amplicon 16S ARNr : Analyse du Microbiome Bactérien",
+    "startDate":"2026-06-25",
+    "endDate":"2026-06-26",
+    "eventStatus":"https://schema.org/EventScheduled",
+    "eventAttendanceMode":"https://schema.org/OfflineEventAttendanceMode",
+    "location":{"@type":"Place","name":"Université Nangui-Abrogoua","address":{"@type":"PostalAddress","addressLocality":"Abidjan","addressCountry":"CI"}},
+    "organizer":{"@type":"Organization","name":"eDNA Laboratory UNA","url":"https://edna-lab.netlify.app"},
+    "offers":{"@type":"Offer","price":"100000","priceCurrency":"XOF","availability":"https://schema.org/LimitedAvailability","url":"https://forms.gle/kicBrsVH9sR7fkA17"},
+    "description":"Formation intensive sur l'analyse du microbiome bactérien via le pipeline nf-core/ampliseq. Certification double FDFP + Nextflow Community."
+  },
+  {
+    "@context":"https://schema.org",
+    "@type":"EducationEvent",
+    "name":"Atelier 2 — ARN-seq Transcriptomique : Paludisme et Transcriptomique Clinique",
+    "startDate":"2026-07-30",
+    "endDate":"2026-07-31",
+    "eventStatus":"https://schema.org/EventScheduled",
+    "eventAttendanceMode":"https://schema.org/OfflineEventAttendanceMode",
+    "location":{"@type":"Place","name":"Université Nangui-Abrogoua","address":{"@type":"PostalAddress","addressLocality":"Abidjan","addressCountry":"CI"}},
+    "organizer":{"@type":"Organization","name":"eDNA Laboratory UNA","url":"https://edna-lab.netlify.app"},
+    "offers":{"@type":"Offer","price":"100000","priceCurrency":"XOF","availability":"https://schema.org/LimitedAvailability","url":"https://forms.gle/F4jgt"},
+    "description":"Formation NGS sur l'analyse différentielle de l'expression génique via nf-core/rnaseq. Application au paludisme et à la transcriptomique clinique."
+  },
+  {
+    "@context":"https://schema.org",
+    "@type":"EducationEvent",
+    "name":"Atelier 3 — Métagénomique MAG : Reconstruction de Génomes dans la Lagune Ébrié",
+    "startDate":"2026-08-27",
+    "endDate":"2026-08-28",
+    "eventStatus":"https://schema.org/EventScheduled",
+    "eventAttendanceMode":"https://schema.org/OfflineEventAttendanceMode",
+    "location":{"@type":"Place","name":"Université Nangui-Abrogoua","address":{"@type":"PostalAddress","addressLocality":"Abidjan","addressCountry":"CI"}},
+    "organizer":{"@type":"Organization","name":"eDNA Laboratory UNA","url":"https://edna-lab.netlify.app"},
+    "offers":{"@type":"Offer","price":"100000","priceCurrency":"XOF","availability":"https://schema.org/LimitedAvailability"},
+    "description":"Formation métagénomique sur l'assemblage et la reconstruction de génomes (MAGs) via nf-core/ampliseq. Application à l'écologie microbienne de la Lagune Ébrié."
+  }
+]
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
@@ -267,12 +310,13 @@ nav {
 }
 .scroller-section:hover .scroller-inner { animation-play-state:paused; }
 .scroller-logo {
-  height:40px; width:auto; object-fit:contain;
-  opacity:0.65; filter:grayscale(0.2);
-  transition:opacity 0.2s, filter 0.2s; flex-shrink:0;
+  height:38px; width:auto; object-fit:contain;
+  opacity:0.82; filter:none;
+  background:rgba(255,255,255,0.07); border-radius:6px; padding:4px 10px;
+  transition:opacity 0.2s, background 0.2s; flex-shrink:0;
 }
-[data-theme="light"] .scroller-logo { opacity:0.55; }
-.scroller-logo:hover { opacity:1; filter:none; }
+[data-theme="light"] .scroller-logo { opacity:0.7; background:rgba(0,0,0,0.04); }
+.scroller-logo:hover { opacity:1; background:rgba(255,255,255,0.14); }
 /* Mask edges for fade effect */
 .scroller-wrap {
   overflow:hidden;
@@ -396,7 +440,7 @@ nav {
 }
 .wc-front-hint { font-size:11px; color:rgba(255,255,255,0.65); letter-spacing:0.04em; font-weight:500; }
 .hint-mobile { display:none; }
-@media(hover:none){ .hint-desktop { display:none; } .hint-mobile { display:inline; } }
+@media(max-width:768px){ .hint-desktop { display:none; } .hint-mobile { display:inline; } }
 .wc-back {
   transform:rotateY(180deg);
   background:var(--bg2); border:1px solid var(--border);
@@ -503,7 +547,7 @@ nav {
 .certif-card.nf  { background:rgba(10,175,160,0.08); border:1px solid rgba(10,175,160,0.2); }
 .certif-card.fdfp{ background:rgba(240,165,0,0.08);  border:1px solid rgba(240,165,0,0.2); }
 .certif-icon { font-size:28px; flex-shrink:0; }
-.certif-icon img { width:60px; height:auto; max-height:50px; object-fit:contain; display:block; border-radius:6px; }
+.certif-icon img { width:80px; height:auto; max-height:64px; object-fit:contain; display:block; border-radius:6px; }
 .certif-name { font-size:15px; font-weight:700; color:var(--text); margin-bottom:6px; }
 .certif-desc { font-size:13px; color:var(--text-muted); line-height:1.65; }
 /* Formations CTA */
@@ -518,9 +562,9 @@ nav {
 .btn-gold:hover { background:var(--gold2); transform:translateY(-2px); box-shadow:0 8px 24px rgba(240,165,0,0.25); }
 .urgency-badge {
   display:inline-flex; align-items:center; gap:6px;
-  background:rgba(240,165,0,0.1); border:1px solid rgba(240,165,0,0.2);
+  background:rgba(220,38,38,0.12); border:1px solid rgba(220,38,38,0.35);
   border-radius:8px; padding:8px 14px;
-  font-size:12px; font-weight:600; color:var(--gold2);
+  font-size:13px; font-weight:700; color:#EF4444;
 }
 /* Gallery */
 .gallery-section { margin-top:40px; }
@@ -534,6 +578,12 @@ nav {
   border:1px solid var(--border);
 }
 .gallery-img:hover { transform:scale(1.02); opacity:0.9; }
+/* Lightbox */
+.lightbox { position:fixed; inset:0; z-index:900; background:rgba(0,0,0,0.88); display:flex; align-items:center; justify-content:center; opacity:0; pointer-events:none; transition:opacity 0.25s; }
+.lightbox.open { opacity:1; pointer-events:all; }
+.lightbox img { max-width:90vw; max-height:85vh; object-fit:contain; border-radius:10px; box-shadow:0 0 60px rgba(0,0,0,0.5); }
+.lb-close { position:absolute; top:18px; right:22px; font-size:30px; color:#fff; cursor:pointer; background:none; border:none; font-family:'Space Grotesk',sans-serif; line-height:1; opacity:0.75; transition:opacity 0.15s; }
+.lb-close:hover { opacity:1; }
 
 /* ═══════════════════════════════════════════════════
    9. TEAM
@@ -772,7 +822,7 @@ footer {
 @media (max-width:480px) {
   .pricing-grid { grid-template-columns:1fr; }
   .gallery-grid { grid-template-columns:1fr; }
-  .hero-badges .hero-badge:nth-child(n+3) { display:none; }
+  .hero-badge { font-size:11px; padding:5px 10px; gap:5px; }
 }
 </style>
 </head>
@@ -1452,20 +1502,21 @@ footer {
       </div>
 
       <!-- Form -->
-      <form class="contact-form reveal reveal-delay-1" onsubmit="handleForm(event)">
+      <form class="contact-form reveal reveal-delay-1" name="contact" netlify data-netlify="true" onsubmit="handleForm(event)">
+        <input type="hidden" name="form-name" value="contact">
         <div class="form-row">
           <div class="form-group">
             <label data-i18n="f_name">Nom</label>
-            <input id="f-name" type="text" data-i18n-placeholder="f_name_ph" placeholder="Votre nom" required>
+            <input id="f-name" name="name" type="text" data-i18n-placeholder="f_name_ph" placeholder="Votre nom" required>
           </div>
           <div class="form-group">
             <label>Email</label>
-            <input id="f-email" type="email" data-i18n-placeholder="f_email_ph" placeholder="votre@email.com" required>
+            <input id="f-email" name="email" type="email" data-i18n-placeholder="f_email_ph" placeholder="votre@email.com" required>
           </div>
         </div>
         <div class="form-group">
           <label data-i18n="f_subject">Objet</label>
-          <select id="f-subject">
+          <select id="f-subject" name="subject">
             <option value="" data-i18n="f_select">Sélectionner...</option>
             <option data-i18n="f_opt1">Service de séquençage</option>
             <option data-i18n="f_opt2">Analyse bioinformatique</option>
@@ -1476,7 +1527,7 @@ footer {
         </div>
         <div class="form-group">
           <label>Message</label>
-          <textarea id="f-message" data-i18n-placeholder="f_msg_ph" placeholder="Décrivez votre projet ou votre demande..."></textarea>
+          <textarea id="f-message" name="message" data-i18n-placeholder="f_msg_ph" placeholder="Décrivez votre projet ou votre demande..."></textarea>
         </div>
         <button type="submit" class="btn-submit" id="submit-btn">
           <span data-i18n="f_send">Envoyer</span> →
@@ -1503,6 +1554,8 @@ footer {
         <div class="partner-card"><img src="collaborations/zmt_academy.jpg" alt="ZMT Academy" loading="lazy"></div>
         <div class="partner-card"><img src="collaborations/minipcr_bio.png" alt="miniPCR BIO" loading="lazy"></div>
         <div class="partner-card"><img src="collaborations/cabinet-lewis.jpg" alt="Cabinet Lewis" loading="lazy"></div>
+        <div class="partner-card"><img src="collaborations/nf-core.png" alt="nf-core" loading="lazy"></div>
+        <div class="partner-card"><img src="collaborations/nextflow.jpg" alt="Nextflow" loading="lazy"></div>
       </div>
     </div>
   </div>
@@ -1828,13 +1881,19 @@ function handleForm(e) {
   e.preventDefault();
   const name    = document.getElementById('f-name').value.trim();
   const email   = document.getElementById('f-email').value.trim();
-  const subject = document.getElementById('f-subject').value || (currentLang === 'fr' ? 'Contact eDNA Laboratory' : 'Contact eDNA Laboratory');
+  const subject = document.getElementById('f-subject').value || 'Contact eDNA Laboratory';
   const message = document.getElementById('f-message').value.trim();
-  const body    = (currentLang === 'fr'
+  /* Submit to Netlify Forms */
+  fetch('/', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    body: new URLSearchParams({ 'form-name': 'contact', name, email, subject, message }).toString()
+  }).catch(() => {});
+  /* Open mail client as fallback */
+  const body = (currentLang === 'fr'
     ? `Nom : ${name}\nEmail : ${email}\n\n${message}`
     : `Name: ${name}\nEmail: ${email}\n\n${message}`);
-  const mailto = `mailto:learnerworld22@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-  window.location.href = mailto;
+  window.location.href = `mailto:learnerworld22@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
   const btn  = document.getElementById('submit-btn');
   const span = btn.querySelector('span');
   btn.style.background = 'var(--teal2)';
@@ -1917,8 +1976,29 @@ function handleForm(e) {
 applyTheme(currentTheme);
 applyLang(currentLang);
 </script>
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true">
+  <button class="lb-close" id="lb-close" aria-label="Fermer">✕</button>
+  <img id="lb-img" src="" alt="">
+</div>
+
 <div class="sticky-cta" id="sticky-cta">
   <a href="https://forms.gle/kicBrsVH9sR7fkA17" target="_blank" rel="noopener">✍ <span data-i18n="reg_cta">S'inscrire à un atelier</span> — <span data-i18n="urgency_short">Places limitées</span></a>
 </div>
+
+<script>
+/* ── LIGHTBOX ───────────────────────────────────── */
+(function(){
+  const lb    = document.getElementById('lightbox');
+  const lbImg = document.getElementById('lb-img');
+  const lbClose = document.getElementById('lb-close');
+  function open(src, alt){ lbImg.src = src; lbImg.alt = alt || ''; lb.classList.add('open'); document.body.style.overflow = 'hidden'; }
+  function close(){ lb.classList.remove('open'); document.body.style.overflow = ''; lbImg.src = ''; }
+  document.querySelectorAll('.gallery-img').forEach(img => img.addEventListener('click', () => open(img.src, img.alt)));
+  lbClose.addEventListener('click', close);
+  lb.addEventListener('click', e => { if(e.target === lb) close(); });
+  document.addEventListener('keydown', e => { if(e.key === 'Escape') close(); });
+})();
+</script>
 </body>
 </html>

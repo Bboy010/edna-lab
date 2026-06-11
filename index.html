@@ -438,11 +438,36 @@ nav {
   background:var(--teal2); color:#0D1B2A; font-size:14px; font-weight:800;
   display:flex; align-items:center; justify-content:center;
 }
-.ps-icon { font-size:30px; margin-bottom:12px; }
+.ps-icon { margin-bottom:12px; display:flex; justify-content:center; }
+.ps-icon svg { width:34px; height:34px; color:var(--teal2); }
 .ps-title { font-size:15px; font-weight:700; color:var(--text); margin-bottom:6px; }
 .ps-desc { font-size:12.5px; color:var(--text-muted); line-height:1.6; }
-@media(max-width:768px){ .process-grid { grid-template-columns:1fr 1fr; gap:28px 18px; } }
+/* Flèches de liaison entre étapes (desktop) */
+.process-step:not(:last-child)::after {
+  content:'→'; position:absolute; top:50%; right:-14px; transform:translateY(-50%);
+  font-size:20px; color:var(--teal2); opacity:0.6; z-index:2;
+}
+@media(max-width:768px){ .process-grid { grid-template-columns:1fr 1fr; gap:28px 18px; } .process-step::after { display:none; } }
 @media(max-width:480px){ .process-grid { grid-template-columns:1fr; } }
+/* Icônes SVG des services */
+.sc-icon svg { width:26px; height:26px; }
+.sc-icon.ic-teal   svg { color:var(--teal2); }
+.sc-icon.ic-amber  svg { color:var(--gold); }
+.sc-icon.ic-purple svg { color:#A78BFA; }
+/* Le labo en action — vidéos */
+.labo-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:18px; margin-top:36px; }
+.labo-clip { position:relative; border-radius:var(--radius); overflow:hidden; border:1px solid var(--border); margin:0; }
+.labo-clip video { width:100%; height:240px; object-fit:cover; display:block; background:#000; }
+.labo-clip figcaption {
+  position:absolute; left:0; right:0; bottom:0; padding:16px 16px 12px;
+  background:linear-gradient(to top, rgba(13,27,42,0.92), transparent);
+  font-size:13px; font-weight:600; color:#fff;
+}
+@media(max-width:768px){ .labo-grid { grid-template-columns:1fr; } .labo-clip video { height:220px; } }
+/* Bandeau photo d'équipe */
+.team-banner { border-radius:var(--radius); overflow:hidden; border:1px solid var(--border); margin-bottom:36px; }
+.team-banner img { width:100%; height:300px; object-fit:cover; object-position:center 30%; display:block; }
+@media(max-width:768px){ .team-banner img { height:200px; } }
 /* Réalisations / Projets */
 .projects-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:18px; margin-top:40px; }
 .project-card {
@@ -656,6 +681,16 @@ nav {
   transition:background 0.2s; text-decoration:none;
 }
 .wc-front-cta:hover { background:var(--teal2); }
+/* Bouton agrandir l'affiche (lightbox HD) */
+.affiche-zoom {
+  position:absolute; top:10px; right:10px; z-index:3;
+  width:34px; height:34px; border-radius:8px; border:none; cursor:pointer;
+  background:rgba(13,27,42,0.72); color:#fff;
+  display:flex; align-items:center; justify-content:center;
+  -webkit-backdrop-filter:blur(4px); backdrop-filter:blur(4px); transition:background 0.2s;
+}
+.affiche-zoom:hover { background:rgba(10,175,160,0.92); }
+.affiche-zoom svg { width:18px; height:18px; }
 /* Pricing card — bouton CTA */
 .pc-btn {
   display:block; width:100%; margin-top:14px; padding:10px 12px;
@@ -924,6 +959,15 @@ footer {
 .reveal-delay-3 { transition-delay:0.3s; }
 .reveal-delay-4 { transition-delay:0.4s; }
 
+/* Accessibilité — réduire les animations si l'utilisateur le demande */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior:auto; }
+  .scroller-inner { animation:none; }
+  .reveal { opacity:1 !important; transform:none !important; transition:none !important; }
+  .wc-flip { transition:none !important; }
+  * { animation-duration:0.001ms !important; animation-iteration-count:1 !important; }
+}
+
 /* ═══════════════════════════════════════════════════
    13. RESPONSIVE
 ═══════════════════════════════════════════════════ */
@@ -1150,7 +1194,7 @@ footer {
       <!-- Barcoding -->
       <div class="service-card reveal">
         <div class="sc-top">
-          <div class="sc-icon ic-teal">🔖</div>
+          <div class="sc-icon ic-teal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M6 3c0 5 12 4 12 9S6 16 6 21"/><path d="M18 3c0 5-12 4-12 9s12 4 12 9"/><path d="M8 7h8M8 17h8M9.5 10.5h5M9.5 13.5h5"/></svg></div>
           <h3 data-i18n="svc1_title">Barcoding Moléculaire</h3>
           <p data-i18n="svc1_desc">Identification et phylogénie d'espèces par séquençage de gènes marqueurs (COI, ITS, 16S…)</p>
         </div>
@@ -1171,7 +1215,7 @@ footer {
       <!-- Metabarcoding -->
       <div class="service-card reveal reveal-delay-1">
         <div class="sc-top">
-          <div class="sc-icon ic-amber">🌊</div>
+          <div class="sc-icon ic-amber"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3s6 6.6 6 11a6 6 0 0 1-12 0c0-4.4 6-11 6-11Z"/><path d="M9 14a3 3 0 0 0 3 3"/></svg></div>
           <h3 data-i18n="svc2_title">Metabarcoding eDNA</h3>
           <p data-i18n="svc2_desc">Analyse des communautés biologiques par séquençage d'ADN environnemental et de bulk DNA</p>
         </div>
@@ -1192,7 +1236,7 @@ footer {
       <!-- Métagénomique -->
       <div class="service-card reveal reveal-delay-2">
         <div class="sc-top">
-          <div class="sc-icon ic-purple">🧫</div>
+          <div class="sc-icon ic-purple"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><circle cx="9.5" cy="10" r="1.4"/><circle cx="14.5" cy="9" r="1.1"/><circle cx="13" cy="15" r="1.7"/><circle cx="16" cy="14.5" r="1"/></svg></div>
           <h3 data-i18n="svc3_title">Métagénomique</h3>
           <p data-i18n="svc3_desc">Séquençage et analyse de métagénomes complexes pour la taxonomie et la génomique fonctionnelle</p>
         </div>
@@ -1242,22 +1286,22 @@ footer {
     </div>
     <div class="process-grid">
       <div class="process-step reveal">
-        <div class="ps-icon">📦</div>
+        <div class="ps-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 2h6M10 2v12.5a2 2 0 0 0 4 0V2"/><path d="M10 9.5h4"/><path d="M9 22h6"/></svg></div>
         <div class="ps-title" data-i18n="proc1_t">Échantillon</div>
         <div class="ps-desc" data-i18n="proc1_d">Vous nous envoyez vos échantillons (ADN, eau, sol, tissus) ou vos données brutes de séquençage.</div>
       </div>
       <div class="process-step reveal reveal-delay-1">
-        <div class="ps-icon">🧬</div>
+        <div class="ps-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M6 3c0 5 12 4 12 9S6 16 6 21"/><path d="M18 3c0 5-12 4-12 9s12 4 12 9"/><path d="M8 7h8M8 17h8M9.5 10.5h5M9.5 13.5h5"/></svg></div>
         <div class="ps-title" data-i18n="proc2_t">Séquençage</div>
         <div class="ps-desc" data-i18n="proc2_d">Séquençage sur MinION Nanopore ou Illumina selon le besoin du projet et le type d'échantillon.</div>
       </div>
       <div class="process-step reveal reveal-delay-2">
-        <div class="ps-icon">💻</div>
+        <div class="ps-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="m7 9 3 3-3 3M13 15h4"/></svg></div>
         <div class="ps-title" data-i18n="proc3_t">Analyse bioinfo</div>
         <div class="ps-desc" data-i18n="proc3_d">Pipelines nf-core reproductibles (ampliseq, mag, rnaseq) exécutés et documentés pas à pas.</div>
       </div>
       <div class="process-step reveal reveal-delay-3">
-        <div class="ps-icon">📊</div>
+        <div class="ps-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9Z"/><path d="M14 3v6h6"/><path d="M9 17v-3M12 17v-5M15 17v-2"/></svg></div>
         <div class="ps-title" data-i18n="proc4_t">Rapport & données</div>
         <div class="ps-desc" data-i18n="proc4_d">Rapport interprété, figures publiables et données brutes livrés — vous restez propriétaire des données.</div>
       </div>
@@ -1301,6 +1345,33 @@ footer {
 </section>
 
 <!-- ══════════════════════════════════════════════
+     SECTION 2d — LE LABO EN ACTION (vidéos)
+══════════════════════════════════════════════ -->
+<section id="labo" class="section section-alt">
+  <div class="container">
+    <div class="section-header reveal">
+      <p class="s-tag" data-i18n="labo_tag">Le labo en action</p>
+      <h2 class="s-title" data-i18n="labo_title">Notre savoir-faire, en vidéo</h2>
+      <p class="s-sub" data-i18n="labo_sub">De l'extraction au séquençage — un aperçu réel de nos manipulations au laboratoire.</p>
+    </div>
+    <div class="labo-grid">
+      <figure class="labo-clip reveal">
+        <video muted loop playsinline preload="metadata"><source src="activites/video_atelier3_pipetage.mp4" type="video/mp4"></video>
+        <figcaption data-i18n="labo_c1">Pipetage & préparation des échantillons</figcaption>
+      </figure>
+      <figure class="labo-clip reveal reveal-delay-1">
+        <video muted loop playsinline preload="metadata"><source src="activites/video_atelier2_sequencage.mp4" type="video/mp4"></video>
+        <figcaption data-i18n="labo_c2">Séquençage NGS sur le terrain</figcaption>
+      </figure>
+      <figure class="labo-clip reveal reveal-delay-2">
+        <video muted loop playsinline preload="metadata"><source src="activites/video_atelier5%20-bioinfo.mp4" type="video/mp4"></video>
+        <figcaption data-i18n="labo_c3">Analyse bioinformatique (nf-core)</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════
      SECTION 3 — FORMATIONS
 ══════════════════════════════════════════════ -->
 <section id="formations" class="section section-alt">
@@ -1336,6 +1407,7 @@ footer {
       <div class="workshop-card reveal">
         <div class="wc-flip">
           <div class="wc-front">
+            <button class="affiche-zoom" type="button" data-full="assets/affiches/Amplicon 16S ARNr-l.png" aria-label="Agrandir l'affiche" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></button>
             <img src="assets/affiches/Amplicon 16S ARNr-p.png" alt="Affiche Atelier 1 — Amplicon 16S ARNr">
             <div class="wc-front-footer">
               <div class="wc-countdown" id="cd-wk1"></div>
@@ -1372,6 +1444,7 @@ footer {
       <div class="workshop-card reveal reveal-delay-1">
         <div class="wc-flip">
           <div class="wc-front">
+            <button class="affiche-zoom" type="button" data-full="assets/affiches/ARN-seq Transcriptomique-l.png" aria-label="Agrandir l'affiche" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></button>
             <img src="assets/affiches/ARN-seq Transcriptomique-p.png" alt="Affiche Atelier 2 — ARN-seq Transcriptomique">
             <div class="wc-front-footer">
               <div class="wc-countdown" id="cd-wk2"></div>
@@ -1408,6 +1481,7 @@ footer {
       <div class="workshop-card reveal reveal-delay-2">
         <div class="wc-flip">
           <div class="wc-front">
+            <button class="affiche-zoom" type="button" data-full="assets/affiches/Métagénomique MAG-l.png" aria-label="Agrandir l'affiche" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></button>
             <img src="assets/affiches/Métagénomique MAG-p.png" alt="Affiche Atelier 3 — Métagénomique MAG">
             <div class="wc-front-footer">
               <div class="wc-countdown" id="cd-wk3"></div>
@@ -1556,6 +1630,11 @@ footer {
       <p class="s-tag" data-i18n="team_tag">Les chercheurs</p>
       <h2 class="s-title" data-i18n="team_title">Notre équipe</h2>
       <p class="s-sub" data-i18n="team_sub">Une équipe pluridisciplinaire couvrant le terrain, le laboratoire et la bioinformatique à l'Université Nangui-Abrogoua.</p>
+    </div>
+
+    <!-- Bandeau photo équipe -->
+    <div class="team-banner reveal">
+      <img src="activites/photo_equipe_eDNA.webp" alt="L'équipe du eDNA Laboratory — UNA Abidjan" loading="lazy">
     </div>
 
     <!-- Head card -->
@@ -1987,6 +2066,9 @@ const T = {
     tp2_title:'Chercheurs & Enseignants', tp2_desc:'Analyse tes propres données NGS, maîtrise les pipelines nf-core et obtiens une certification internationale.',
     tp3_title:'Professionnels & Ingénieurs', tp3_desc:'Santé publique, environnement, agroalimentaire — prise en charge FDFP possible pour les professionnels ivoiriens.',
     gallery_label:'Nos ateliers en images',
+    labo_tag:'Le labo en action', labo_title:'Notre savoir-faire, en vidéo',
+    labo_sub:'De l\'extraction au séquençage — un aperçu réel de nos manipulations au laboratoire.',
+    labo_c1:'Pipetage & préparation des échantillons', labo_c2:'Séquençage NGS sur le terrain', labo_c3:'Analyse bioinformatique (nf-core)',
     team_tag:'Les chercheurs', team_title:'Notre équipe',
     team_sub:'Une équipe pluridisciplinaire couvrant le terrain, le laboratoire et la bioinformatique à l\'Université Nangui-Abrogoua.',
     head_role:'Head — eDNA Laboratory', head_badge:'Directeur du laboratoire',
@@ -2087,6 +2169,9 @@ const T = {
     tp3_title:'Professionals & Engineers', tp3_desc:'Public health, environment, agri-food — FDFP reimbursement available for Ivorian professionals.',
     urgency:'Maximum 15 seats per workshop',
     gallery_label:'Our workshops in pictures',
+    labo_tag:'The lab in action', labo_title:'Our expertise, on video',
+    labo_sub:'From extraction to sequencing — a real glimpse of our laboratory work.',
+    labo_c1:'Pipetting & sample preparation', labo_c2:'NGS sequencing in the field', labo_c3:'Bioinformatics analysis (nf-core)',
     team_tag:'Our researchers', team_title:'Our team',
     team_sub:'A multidisciplinary team covering fieldwork, laboratory and bioinformatics at Université Nangui-Abrogoua.',
     head_role:'Head — eDNA Laboratory', head_badge:'Laboratory Director',
@@ -2314,6 +2399,19 @@ function prefillQuote(service) {
   if (contact) obs.observe(contact);
 })();
 
+/* ── VIDÉOS "LE LABO EN ACTION" (play au scroll) ── */
+(function(){
+  const vids = document.querySelectorAll('.labo-clip video');
+  if (!vids.length) return;
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduce) { vids.forEach(v => v.setAttribute('controls', '')); return; }
+  const io = new IntersectionObserver(entries => entries.forEach(e => {
+    if (e.isIntersecting) e.target.play().catch(() => {});
+    else e.target.pause();
+  }), { threshold: 0.4 });
+  vids.forEach(v => io.observe(v));
+})();
+
 /* ── INIT ──────────────────────────────────────── */
 applyTheme(currentTheme);
 applyLang(currentLang);
@@ -2344,6 +2442,11 @@ applyLang(currentLang);
   function open(src, alt){ lbImg.src = src; lbImg.alt = alt || ''; lb.classList.add('open'); document.body.style.overflow = 'hidden'; }
   function close(){ lb.classList.remove('open'); document.body.style.overflow = ''; lbImg.src = ''; }
   document.querySelectorAll('.gallery-img').forEach(img => img.addEventListener('click', () => open(img.src, img.alt)));
+  /* Affiches HD (version paysage) via le bouton agrandir */
+  document.querySelectorAll('.affiche-zoom').forEach(btn => btn.addEventListener('click', e => {
+    e.stopPropagation();
+    open(btn.dataset.full, btn.getAttribute('aria-label'));
+  }));
   lbClose.addEventListener('click', close);
   lb.addEventListener('click', e => { if(e.target === lb) close(); });
   document.addEventListener('keydown', e => { if(e.key === 'Escape') close(); });

@@ -406,6 +406,60 @@ nav {
 }
 .consulting-card h4 { font-size:15px; font-weight:700; margin-bottom:6px; color:var(--text); }
 .consulting-card p  { font-size:13px; color:var(--text-muted); line-height:1.65; }
+/* Service card — flex pour aligner le bouton devis en bas */
+.service-card { display:flex; flex-direction:column; }
+.sc-body { display:flex; flex-direction:column; flex:1; }
+.sc-deliver {
+  margin-top:12px; padding:10px 12px; border-radius:8px;
+  background:rgba(255,255,255,0.03); border:1px dashed var(--border);
+  font-size:12px; color:var(--text-muted); line-height:1.55;
+}
+.sc-deliver strong { color:var(--gold2); }
+.sc-quote-btn { margin-top:auto; padding-top:16px; }
+.sc-quote-btn a {
+  display:block; width:100%; padding:11px; text-align:center;
+  background:var(--teal); color:#fff !important;
+  border-radius:10px; font-size:13px; font-weight:700;
+  transition:background 0.2s; text-decoration:none;
+}
+.sc-quote-btn a:hover { background:var(--teal2); }
+/* Comment ça marche — workflow */
+.process-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:18px; margin-top:40px; counter-reset:step; }
+.process-step {
+  position:relative; background:var(--surface); border:1px solid var(--border);
+  border-radius:var(--radius); padding:30px 22px 24px; text-align:center;
+  transition:border-color 0.2s, transform 0.2s;
+}
+.process-step:hover { border-color:rgba(10,175,160,0.35); transform:translateY(-3px); }
+.process-step::before {
+  counter-increment:step; content:counter(step);
+  position:absolute; top:-15px; left:50%; transform:translateX(-50%);
+  width:30px; height:30px; border-radius:50%;
+  background:var(--teal2); color:#0D1B2A; font-size:14px; font-weight:800;
+  display:flex; align-items:center; justify-content:center;
+}
+.ps-icon { font-size:30px; margin-bottom:12px; }
+.ps-title { font-size:15px; font-weight:700; color:var(--text); margin-bottom:6px; }
+.ps-desc { font-size:12.5px; color:var(--text-muted); line-height:1.6; }
+@media(max-width:768px){ .process-grid { grid-template-columns:1fr 1fr; gap:28px 18px; } }
+@media(max-width:480px){ .process-grid { grid-template-columns:1fr; } }
+/* Réalisations / Projets */
+.projects-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:18px; margin-top:40px; }
+.project-card {
+  background:var(--surface); border:1px solid var(--border);
+  border-radius:var(--radius); padding:24px 20px;
+  transition:border-color 0.2s, transform 0.2s;
+}
+.project-card:hover { border-color:rgba(10,175,160,0.35); transform:translateY(-3px); }
+.pj-badge {
+  display:inline-block; font-size:10px; font-weight:700; letter-spacing:0.06em;
+  text-transform:uppercase; padding:3px 9px; border-radius:6px;
+  background:rgba(10,175,160,0.15); color:var(--teal2); margin-bottom:12px;
+}
+.pj-name { font-size:16px; font-weight:700; color:var(--text); margin-bottom:6px; }
+.pj-desc { font-size:13px; color:var(--text-muted); line-height:1.6; }
+@media(max-width:768px){ .projects-grid { grid-template-columns:1fr 1fr; } }
+@media(max-width:480px){ .projects-grid { grid-template-columns:1fr; } }
 
 /* ═══════════════════════════════════════════════════
    8. FORMATIONS
@@ -1109,6 +1163,8 @@ footer {
             <li data-i18n="svc1_l4">Comparaisons bases de données BLAST</li>
           </ul>
           <div class="sc-outcome"><strong data-i18n="svc_app">Application :</strong> <span data-i18n="svc1_out">Écologie, Conservation et Biodiversité</span></div>
+          <div class="sc-deliver" data-i18n-html="svc1_deliver"><strong>Livrable :</strong> Séquences validées · arbre phylogénétique · rapport BLAST — délai 2–3 semaines</div>
+          <div class="sc-quote-btn"><a href="#contact" onclick="prefillQuote('Barcoding Moléculaire')" data-i18n="quote_cta">Demander un devis →</a></div>
         </div>
       </div>
 
@@ -1128,6 +1184,8 @@ footer {
             <li data-i18n="svc2_l4">Diversité alpha & bêta, ordination PCoA</li>
           </ul>
           <div class="sc-outcome"><strong data-i18n="svc_app">Application :</strong> <span data-i18n="svc2_out">Inventaires biodiversité, surveillance écologique</span></div>
+          <div class="sc-deliver" data-i18n-html="svc2_deliver"><strong>Livrable :</strong> Tables d'abondance (ASV/OTU) · indices de diversité · rapport — délai 3–4 semaines</div>
+          <div class="sc-quote-btn"><a href="#contact" onclick="prefillQuote('Metabarcoding eDNA')" data-i18n="quote_cta">Demander un devis →</a></div>
         </div>
       </div>
 
@@ -1147,6 +1205,8 @@ footer {
             <li data-i18n="svc3_l4">Classification GTDB-Tk · Annotation Prokka</li>
           </ul>
           <div class="sc-outcome"><strong data-i18n="svc_app">Application :</strong> <span data-i18n="svc3_out">Biotechnologie, découverte de gènes d'intérêt</span></div>
+          <div class="sc-deliver" data-i18n-html="svc3_deliver"><strong>Livrable :</strong> MAGs assemblés · annotation fonctionnelle · rapport — délai 4–6 semaines</div>
+          <div class="sc-quote-btn"><a href="#contact" onclick="prefillQuote('Métagénomique')" data-i18n="quote_cta">Demander un devis →</a></div>
         </div>
       </div>
     </div>
@@ -1165,6 +1225,76 @@ footer {
           <h4 data-i18n="cons2_title">Consulting & Analyse de données</h4>
           <p data-i18n="cons2_desc">Accompagnement personnalisé : conception d'étude, analyse bioinformatique, interprétation des résultats et rédaction scientifique.</p>
         </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════
+     SECTION 2b — COMMENT ÇA MARCHE
+══════════════════════════════════════════════ -->
+<section id="process" class="section section-alt">
+  <div class="container">
+    <div class="section-header reveal">
+      <p class="s-tag" data-i18n="proc_tag">Notre méthode</p>
+      <h2 class="s-title" data-i18n="proc_title">Comment ça marche</h2>
+      <p class="s-sub" data-i18n="proc_sub">De l'échantillon au rapport publiable — un workflow transparent et reproductible pour votre projet.</p>
+    </div>
+    <div class="process-grid">
+      <div class="process-step reveal">
+        <div class="ps-icon">📦</div>
+        <div class="ps-title" data-i18n="proc1_t">Échantillon</div>
+        <div class="ps-desc" data-i18n="proc1_d">Vous nous envoyez vos échantillons (ADN, eau, sol, tissus) ou vos données brutes de séquençage.</div>
+      </div>
+      <div class="process-step reveal reveal-delay-1">
+        <div class="ps-icon">🧬</div>
+        <div class="ps-title" data-i18n="proc2_t">Séquençage</div>
+        <div class="ps-desc" data-i18n="proc2_d">Séquençage sur MinION Nanopore ou Illumina selon le besoin du projet et le type d'échantillon.</div>
+      </div>
+      <div class="process-step reveal reveal-delay-2">
+        <div class="ps-icon">💻</div>
+        <div class="ps-title" data-i18n="proc3_t">Analyse bioinfo</div>
+        <div class="ps-desc" data-i18n="proc3_d">Pipelines nf-core reproductibles (ampliseq, mag, rnaseq) exécutés et documentés pas à pas.</div>
+      </div>
+      <div class="process-step reveal reveal-delay-3">
+        <div class="ps-icon">📊</div>
+        <div class="ps-title" data-i18n="proc4_t">Rapport & données</div>
+        <div class="ps-desc" data-i18n="proc4_d">Rapport interprété, figures publiables et données brutes livrés — vous restez propriétaire des données.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════
+     SECTION 2c — RÉALISATIONS / PROJETS
+══════════════════════════════════════════════ -->
+<section id="realisations" class="section">
+  <div class="container">
+    <div class="section-header reveal">
+      <p class="s-tag" data-i18n="proj_tag">Nos réalisations</p>
+      <h2 class="s-title" data-i18n="proj_title">Projets & collaborations</h2>
+      <p class="s-sub" data-i18n="proj_sub">Des projets financés et des collaborations internationales qui témoignent de notre expertise sur le terrain.</p>
+    </div>
+    <div class="projects-grid">
+      <div class="project-card reveal">
+        <span class="pj-badge" data-i18n="proj_funded">Financé</span>
+        <div class="pj-name">Azagny</div>
+        <div class="pj-desc" data-i18n="proj1_d">ADN environnemental — suivi de la biodiversité aquatique du Parc National d'Azagny.</div>
+      </div>
+      <div class="project-card reveal reveal-delay-1">
+        <span class="pj-badge" data-i18n="proj_funded">Financé</span>
+        <div class="pj-name">FONSTI</div>
+        <div class="pj-desc" data-i18n="proj2_d">Renforcement des capacités génomiques, financé par le Fonds pour la Science, la Technologie et l'Innovation.</div>
+      </div>
+      <div class="project-card reveal reveal-delay-2">
+        <span class="pj-badge" data-i18n="proj_funded">Financé</span>
+        <div class="pj-name">Cocody Bay</div>
+        <div class="pj-desc" data-i18n="proj3_d">Métabarcoding et suivi métagénomique de la baie de Cocody, Abidjan.</div>
+      </div>
+      <div class="project-card reveal reveal-delay-3">
+        <span class="pj-badge" data-i18n="proj_funded">Financé</span>
+        <div class="pj-name">FIRCA</div>
+        <div class="pj-desc" data-i18n="proj4_d">Microbiome agricole & qualité de la filière cacao en Côte d'Ivoire.</div>
       </div>
     </div>
   </div>
@@ -1809,6 +1939,23 @@ const T = {
     svc3_l1:'WGS (Whole Genome Sequencing)', svc3_l2:'Shotgun métagénomique',
     svc3_l3:'Assemblage de génomes (MAGs)', svc3_l4:'Classification GTDB-Tk · Annotation Prokka',
     svc3_out:'Biotechnologie, découverte de gènes d\'intérêt',
+    quote_cta:'Demander un devis →',
+    svc1_deliver:'<strong>Livrable :</strong> Séquences validées · arbre phylogénétique · rapport BLAST — délai 2–3 semaines',
+    svc2_deliver:'<strong>Livrable :</strong> Tables d\'abondance (ASV/OTU) · indices de diversité · rapport — délai 3–4 semaines',
+    svc3_deliver:'<strong>Livrable :</strong> MAGs assemblés · annotation fonctionnelle · rapport — délai 4–6 semaines',
+    proc_tag:'Notre méthode', proc_title:'Comment ça marche',
+    proc_sub:'De l\'échantillon au rapport publiable — un workflow transparent et reproductible pour votre projet.',
+    proc1_t:'Échantillon', proc1_d:'Vous nous envoyez vos échantillons (ADN, eau, sol, tissus) ou vos données brutes de séquençage.',
+    proc2_t:'Séquençage', proc2_d:'Séquençage sur MinION Nanopore ou Illumina selon le besoin du projet et le type d\'échantillon.',
+    proc3_t:'Analyse bioinfo', proc3_d:'Pipelines nf-core reproductibles (ampliseq, mag, rnaseq) exécutés et documentés pas à pas.',
+    proc4_t:'Rapport & données', proc4_d:'Rapport interprété, figures publiables et données brutes livrés — vous restez propriétaire des données.',
+    proj_tag:'Nos réalisations', proj_title:'Projets & collaborations',
+    proj_sub:'Des projets financés et des collaborations internationales qui témoignent de notre expertise sur le terrain.',
+    proj_funded:'Financé',
+    proj1_d:'ADN environnemental — suivi de la biodiversité aquatique du Parc National d\'Azagny.',
+    proj2_d:'Renforcement des capacités génomiques, financé par le Fonds pour la Science, la Technologie et l\'Innovation.',
+    proj3_d:'Métabarcoding et suivi métagénomique de la baie de Cocody, Abidjan.',
+    proj4_d:'Microbiome agricole & qualité de la filière cacao en Côte d\'Ivoire.',
     cons1_title:'Formation & Capacity Building',
     cons1_desc:'Ateliers intensifs Nextflow/nf-core en présentiel à Abidjan. Double certification FDFP + Nextflow Community. Maximum 15 participants.',
     cons2_title:'Consulting & Analyse de données',
@@ -1892,6 +2039,23 @@ const T = {
     svc3_l1:'WGS (Whole Genome Sequencing)', svc3_l2:'Shotgun metagenomics',
     svc3_l3:'Genome assembly (MAGs)', svc3_l4:'GTDB-Tk classification · Prokka annotation',
     svc3_out:'Biotechnology, discovery of genes of interest',
+    quote_cta:'Request a quote →',
+    svc1_deliver:'<strong>Deliverable:</strong> Validated sequences · phylogenetic tree · BLAST report — 2–3 weeks',
+    svc2_deliver:'<strong>Deliverable:</strong> Abundance tables (ASV/OTU) · diversity indices · report — 3–4 weeks',
+    svc3_deliver:'<strong>Deliverable:</strong> Assembled MAGs · functional annotation · report — 4–6 weeks',
+    proc_tag:'Our method', proc_title:'How it works',
+    proc_sub:'From sample to publishable report — a transparent, reproducible workflow for your project.',
+    proc1_t:'Sample', proc1_d:'You send us your samples (DNA, water, soil, tissue) or your raw sequencing data.',
+    proc2_t:'Sequencing', proc2_d:'Sequencing on MinION Nanopore or Illumina depending on project needs and sample type.',
+    proc3_t:'Bioinformatics', proc3_d:'Reproducible nf-core pipelines (ampliseq, mag, rnaseq), executed and documented step by step.',
+    proc4_t:'Report & data', proc4_d:'Interpreted report, publishable figures and raw data delivered — you retain ownership of the data.',
+    proj_tag:'Our track record', proj_title:'Projects & collaborations',
+    proj_sub:'Funded projects and international collaborations that demonstrate our field expertise.',
+    proj_funded:'Funded',
+    proj1_d:'Environmental DNA — monitoring aquatic biodiversity of Azagny National Park.',
+    proj2_d:'Genomic capacity building, funded by the Science, Technology and Innovation Fund.',
+    proj3_d:'Metabarcoding and metagenomic monitoring of Cocody Bay, Abidjan.',
+    proj4_d:'Agricultural microbiome & quality of the cocoa value chain in Côte d\'Ivoire.',
     cons1_title:'Training & Capacity Building',
     cons1_desc:'Intensive Nextflow/nf-core workshops in Abidjan. Dual FDFP + Nextflow Community certification. Maximum 15 participants.',
     cons2_title:'Consulting & Data Analysis',
@@ -2067,6 +2231,20 @@ function handleForm(e) {
     span.dataset.i18n = 'f_send';
     span.textContent = T[currentLang].f_send;
   }, 3000);
+}
+
+/* ── DEMANDE DE DEVIS — pré-remplit le formulaire ── */
+function prefillQuote(service) {
+  const sel = document.getElementById('f-subject');
+  const msg = document.getElementById('f-message');
+  if (sel) sel.selectedIndex = 1; /* "Service de séquençage / Sequencing service" */
+  if (msg) {
+    msg.value = (currentLang === 'fr'
+      ? `Bonjour, je souhaite un devis pour le service : ${service}.\n\nProjet / type d'échantillons :\nNombre d'échantillons :\nDélai souhaité :`
+      : `Hello, I would like a quote for the service: ${service}.\n\nProject / sample type:\nNumber of samples:\nDesired timeline:`);
+  }
+  /* le href #contact gère le scroll ; on focus le nom ensuite */
+  setTimeout(() => { const n = document.getElementById('f-name'); if (n) n.focus(); }, 400);
 }
 
 /* ── HERO COUNTDOWN (Atelier 1 — 29 juin 2026) ─── */

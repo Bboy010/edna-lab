@@ -1287,24 +1287,43 @@ footer {
     <div class="process-grid">
       <div class="process-step reveal">
         <div class="ps-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 2h6M10 2v12.5a2 2 0 0 0 4 0V2"/><path d="M10 9.5h4"/><path d="M9 22h6"/></svg></div>
-        <div class="ps-title" data-i18n="proc1_t">Échantillon</div>
-        <div class="ps-desc" data-i18n="proc1_d">Vous nous envoyez vos échantillons (ADN, eau, sol, tissus) ou vos données brutes de séquençage.</div>
+        <div class="ps-title" data-i18n="proc1_t">① Envoi des échantillons</div>
+        <div class="ps-desc" data-i18n="proc1_d">ADN extrait, eau filtrée, sol, tissus ou données brutes FASTQ. Acceptons les envois locaux et internationaux. Nous vous guidons sur le conditionnement.</div>
+        <div style="margin-top:10px;font-size:11px;font-weight:600;color:var(--teal2);background:rgba(14,175,160,0.1);border-radius:6px;padding:4px 10px;display:inline-block;">Délai réponse : 48h</div>
       </div>
       <div class="process-step reveal reveal-delay-1">
         <div class="ps-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M6 3c0 5 12 4 12 9S6 16 6 21"/><path d="M18 3c0 5-12 4-12 9s12 4 12 9"/><path d="M8 7h8M8 17h8M9.5 10.5h5M9.5 13.5h5"/></svg></div>
-        <div class="ps-title" data-i18n="proc2_t">Séquençage</div>
-        <div class="ps-desc" data-i18n="proc2_d">Séquençage sur MinION Nanopore ou Illumina selon le besoin du projet et le type d'échantillon.</div>
+        <div class="ps-title" data-i18n="proc2_t">② Séquençage au labo</div>
+        <div class="ps-desc" data-i18n="proc2_d">MinION Nanopore (long reads) ou Illumina (short reads) selon votre projet. Extraction si nécessaire. Contrôle qualité systématique avant analyse.</div>
+        <div style="margin-top:10px;font-size:11px;font-weight:600;color:#FCD34D;background:rgba(217,119,6,0.12);border-radius:6px;padding:4px 10px;display:inline-block;">Délai : 3–7 jours ouvrés</div>
       </div>
       <div class="process-step reveal reveal-delay-2">
         <div class="ps-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="m7 9 3 3-3 3M13 15h4"/></svg></div>
-        <div class="ps-title" data-i18n="proc3_t">Analyse bioinfo</div>
-        <div class="ps-desc" data-i18n="proc3_d">Pipelines nf-core reproductibles (ampliseq, mag, rnaseq) exécutés et documentés pas à pas.</div>
+        <div class="ps-title" data-i18n="proc3_t">③ Analyse bioinformatique</div>
+        <div class="ps-desc" data-i18n="proc3_d">Pipelines nf-core reproductibles (ampliseq, mag, rnaseq). Toutes les commandes sont documentées — vous pouvez reproduire l'analyse vous-même.</div>
+        <div style="margin-top:10px;font-size:11px;font-weight:600;color:#C4B5FD;background:rgba(124,58,237,0.12);border-radius:6px;padding:4px 10px;display:inline-block;">Délai : 1–2 semaines</div>
       </div>
       <div class="process-step reveal reveal-delay-3">
         <div class="ps-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9Z"/><path d="M14 3v6h6"/><path d="M9 17v-3M12 17v-5M15 17v-2"/></svg></div>
-        <div class="ps-title" data-i18n="proc4_t">Rapport & données</div>
-        <div class="ps-desc" data-i18n="proc4_d">Rapport interprété, figures publiables et données brutes livrés — vous restez propriétaire des données.</div>
+        <div class="ps-title" data-i18n="proc4_t">④ Rapport & livrables</div>
+        <div class="ps-desc" data-i18n="proc4_d">Rapport PDF interprété, figures publiables (PNG/SVG), données brutes et code. Vous restez propriétaire à 100%. Suivi post-livraison inclus.</div>
+        <div style="margin-top:10px;font-size:11px;font-weight:600;color:var(--teal2);background:rgba(14,175,160,0.1);border-radius:6px;padding:4px 10px;display:inline-block;">Total : 2–4 semaines</div>
       </div>
+    </div>
+
+    <!-- #4 — CTA Consultation gratuite -->
+    <div class="reveal" style="margin-top:40px;background:linear-gradient(135deg,rgba(14,124,123,0.15),rgba(14,124,123,0.05));border:1px solid rgba(14,175,160,0.3);border-radius:16px;padding:28px 32px;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;">
+      <div>
+        <div style="font-size:13px;font-weight:600;color:var(--teal2);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:6px;">Consultation gratuite · 30 min</div>
+        <div style="font-size:19px;font-weight:700;color:#fff;margin-bottom:6px;">Vous avez un projet ? On l'évalue ensemble.</div>
+        <div style="font-size:14px;color:rgba(255,255,255,0.55);">Discutez de faisabilité, de coût et de délai avec notre équipe — sans engagement.</div>
+      </div>
+      <a href="https://wa.me/2250748915342?text=Bonjour%2C+je+souhaite+une+consultation+gratuite+de+30+min+pour+discuter+de+mon+projet+%28s%C3%A9quen%C3%A7age+%2F+bioinformatique%29." target="_blank" rel="noopener"
+         style="display:inline-flex;align-items:center;gap:10px;background:#25D366;color:#fff;padding:14px 26px;border-radius:12px;font-size:15px;font-weight:700;text-decoration:none;white-space:nowrap;flex-shrink:0;transition:opacity 0.2s;"
+         onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'">
+        <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Réserver ma consultation →
+      </a>
     </div>
   </div>
 </section>
@@ -1614,6 +1633,22 @@ footer {
         <details class="faq-item">
           <summary>Que se passe-t-il après la formation ?</summary>
           <div class="faq-answer">Vous bénéficiez de 15 jours d'encadrement pour votre projet personnel, d'un accès à la communauté LearnerWorld pendant 1 mois, et vous recevez votre certificat numérique. Le réseau de diplômés permet aussi d'accéder à des opportunités de collaboration.</div>
+        </details>
+        <details class="faq-item">
+          <summary>Acceptez-vous des échantillons venant d'autres pays ?</summary>
+          <div class="faq-answer">Oui, nous travaillons avec des chercheurs de toute l'Afrique de l'Ouest et au-delà. Nous vous guidons sur le conditionnement et les formalités d'expédition (ADN extrait ou échantillons fixés selon le type). Contactez-nous avant l'envoi pour un protocole adapté.</div>
+        </details>
+        <details class="faq-item">
+          <summary>Quel format d'échantillon acceptez-vous pour le séquençage ?</summary>
+          <div class="faq-answer">Nous acceptons : ADN extrait (concentration ≥ 10 ng/µL), eau filtrée sur membrane (0.2–2 µm), sol ou sédiment (congelé à −20°C), tissus frais ou fixés à l'éthanol, et fichiers FASTQ bruts si vous souhaitez uniquement l'analyse bioinformatique. Un guide de préparation vous est fourni dès la prise de contact.</div>
+        </details>
+        <details class="faq-item">
+          <summary>Puis-je voir un exemple de rapport rendu ?</summary>
+          <div class="faq-answer">Oui. Contactez-nous sur WhatsApp et nous vous partageons un rapport d'exemple anonymisé pour le service qui vous intéresse (barcoding, metabarcoding ou métagénomique). Vous pouvez aussi consulter nos publications liées aux projets Lagune Ébrié et Cocody Bay sur NCBI SRA.</div>
+        </details>
+        <details class="faq-item">
+          <summary>Y a-t-il une liste d'attente si un atelier est complet ?</summary>
+          <div class="faq-answer">Oui. Si un atelier affiche complet, inscrivez votre email dans la section "Rester informé" en bas de page — vous serez notifié en priorité pour la prochaine session ou en cas de désistement. Les places libérées sont d'abord proposées à la liste d'attente.</div>
         </details>
       </div>
     </div>
@@ -1956,6 +1991,31 @@ footer {
 </section>
 
 <!-- ══════════════════════════════════════════════
+     SECTION NEWSLETTER — RESTER INFORMÉ
+══════════════════════════════════════════════ -->
+<section style="background:linear-gradient(135deg,#0D1B2A 0%,#0E2D40 100%);border-top:1px solid rgba(14,175,160,0.2);padding:60px 40px;">
+  <div style="max-width:620px;margin:0 auto;text-align:center;">
+    <div style="display:inline-block;background:rgba(14,175,160,0.12);border:1px solid rgba(14,175,160,0.3);border-radius:100px;padding:5px 14px;font-size:12px;font-weight:600;color:var(--teal2,#0AAFA0);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:16px;">Rester informé</div>
+    <h2 style="font-family:'DM Serif Display',serif;font-size:clamp(22px,3vw,34px);color:#fff;margin-bottom:10px;line-height:1.2;">Ne manquez pas la prochaine session</h2>
+    <p style="font-size:15px;color:rgba(255,255,255,0.55);margin-bottom:32px;line-height:1.7;">Nouveaux ateliers, offres early bird, publications du labo — un email par mois, pas de spam.</p>
+    <form name="newsletter" netlify data-netlify="true" method="POST"
+          style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center;"
+          onsubmit="event.preventDefault();const e=this.querySelector('input[type=email]');if(!e.value)return;fetch('/',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:new URLSearchParams({...Object.fromEntries(new FormData(this)),'form-name':'newsletter'})}).then(()=>{this.innerHTML='<div style=\'color:#0AAFA0;font-weight:600;font-size:15px;\'>✓ Inscription confirmée ! Merci.</div>';}).catch(()=>{});">
+      <input type="hidden" name="form-name" value="newsletter">
+      <input type="email" name="email" placeholder="votre@email.com" required
+             style="flex:1;min-width:220px;max-width:340px;background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.2);border-radius:10px;padding:13px 18px;font-size:15px;color:#fff;outline:none;font-family:'Space Grotesk',sans-serif;"
+             onfocus="this.style.borderColor='#0AAFA0'" onblur="this.style.borderColor='rgba(255,255,255,0.2)'">
+      <button type="submit"
+              style="background:#0E7C7B;color:#fff;border:none;border-radius:10px;padding:13px 24px;font-size:15px;font-weight:700;cursor:pointer;font-family:'Space Grotesk',sans-serif;transition:background 0.2s;white-space:nowrap;"
+              onmouseover="this.style.background='#0AAFA0'" onmouseout="this.style.background='#0E7C7B'">
+        Me notifier →
+      </button>
+    </form>
+    <p style="font-size:12px;color:rgba(255,255,255,0.25);margin-top:14px;">Désinscription en 1 clic · Pas de partage de données</p>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════
      FOOTER
 ══════════════════════════════════════════════ -->
 <footer>
@@ -1998,10 +2058,25 @@ footer {
     </div>
     <div class="footer-bottom">
       <p class="footer-copy">© 2026 eDNA Laboratory · Université Nangui-Abrogoua · Abidjan, Côte d'Ivoire</p>
-      <div class="social-row">
-        <a class="social-btn" href="https://www.linkedin.com/in/koffi-nouho-ouattara-a4496619a/" target="_blank" rel="noopener" title="LinkedIn"><img class="ficon" src="assets/icones/linkedin.png" alt="LinkedIn"></a>
-        <a class="social-btn" href="https://canva.link/56vrowkomdjkwnj" target="_blank" rel="noopener" title="Vidéo labo"><img class="ficon" src="assets/icones/youtube.png" alt="YouTube"></a>
-        <a class="social-btn" href="https://forms.gle/kicBrsVH9sR7fkA17" target="_blank" rel="noopener" title="Inscription">✍</a>
+      <div class="social-row" style="flex-wrap:wrap;gap:10px;">
+        <a class="social-btn" href="https://www.linkedin.com/in/koffi-nouho-ouattara-a4496619a/" target="_blank" rel="noopener"
+           style="display:inline-flex;align-items:center;gap:7px;padding:8px 14px;border-radius:8px;text-decoration:none;background:rgba(10,102,194,0.15);border:1px solid rgba(10,102,194,0.35);color:rgba(255,255,255,0.8);font-size:12px;font-weight:600;transition:border-color 0.2s;"
+           onmouseover="this.style.borderColor='rgba(10,102,194,0.7)'" onmouseout="this.style.borderColor='rgba(10,102,194,0.35)'">
+          <img class="ficon" src="assets/icones/linkedin.png" alt="LinkedIn" style="width:16px;height:16px;">
+          LinkedIn · Dr. Ouattara
+        </a>
+        <a class="social-btn" href="https://wa.me/2250748915342?text=Bonjour%2C+je+souhaite+en+savoir+plus+sur+vos+services+et+formations." target="_blank" rel="noopener"
+           style="display:inline-flex;align-items:center;gap:7px;padding:8px 14px;border-radius:8px;text-decoration:none;background:rgba(37,211,102,0.12);border:1px solid rgba(37,211,102,0.3);color:rgba(255,255,255,0.8);font-size:12px;font-weight:600;transition:border-color 0.2s;"
+           onmouseover="this.style.borderColor='rgba(37,211,102,0.65)'" onmouseout="this.style.borderColor='rgba(37,211,102,0.3)'">
+          <img class="ficon" src="assets/icones/whatsapp.png" alt="WhatsApp" style="width:16px;height:16px;">
+          WhatsApp · Réponse rapide
+        </a>
+        <a class="social-btn" href="https://canva.link/56vrowkomdjkwnj" target="_blank" rel="noopener"
+           style="display:inline-flex;align-items:center;gap:7px;padding:8px 14px;border-radius:8px;text-decoration:none;background:rgba(255,0,0,0.1);border:1px solid rgba(255,80,80,0.25);color:rgba(255,255,255,0.8);font-size:12px;font-weight:600;transition:border-color 0.2s;"
+           onmouseover="this.style.borderColor='rgba(255,80,80,0.55)'" onmouseout="this.style.borderColor='rgba(255,80,80,0.25)'">
+          <img class="ficon" src="assets/icones/youtube.png" alt="Vidéo" style="width:16px;height:16px;">
+          Vidéo du laboratoire
+        </a>
       </div>
     </div>
   </div>

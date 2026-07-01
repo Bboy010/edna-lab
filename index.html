@@ -1005,9 +1005,116 @@ footer {
   .gallery-grid { grid-template-columns:1fr; }
   .hero-badge { font-size:11px; padding:5px 10px; gap:5px; }
 }
+
+/* ═══════════════════════════════════════════════════
+   ★ LATEST WEB DESIGN ADVANCES 2025-2026
+═══════════════════════════════════════════════════ */
+
+/* 1 — SCROLL PROGRESS BAR */
+.scroll-bar {
+  position:fixed; top:0; left:0; height:3px; z-index:2000;
+  background:linear-gradient(90deg, var(--teal2), var(--gold), var(--teal3));
+  background-size:200% 100%;
+  width:0%; transition:width 0.08s linear;
+  animation:bar-shimmer 3s linear infinite;
+  pointer-events:none;
+}
+@keyframes bar-shimmer { to { background-position:-200% 0; } }
+
+/* 2 — CURSOR SPOTLIGHT (desktop only) */
+@media (hover:hover) {
+  body::after {
+    content:''; position:fixed; inset:0; pointer-events:none; z-index:0;
+    background:radial-gradient(600px circle at var(--cx,50%) var(--cy,-100px),
+      rgba(10,175,160,0.07) 0%, transparent 40%);
+    transition:background 0.15s ease;
+  }
+}
+
+/* 3 — AURORA HERO BLOBS */
+@keyframes blob1 {
+  0%,100% { transform:translate(0,0) scale(1); }
+  33%  { transform:translate(70px,-50px) scale(1.1); }
+  66%  { transform:translate(-40px,35px) scale(0.92); }
+}
+@keyframes blob2 {
+  0%,100% { transform:translate(0,0) scale(1); }
+  40%  { transform:translate(-60px,40px) scale(1.08); }
+  70%  { transform:translate(50px,-30px) scale(0.95); }
+}
+@keyframes blob3 {
+  0%,100% { transform:translate(0,0) scale(1); }
+  50%  { transform:translate(40px,55px) scale(1.12); }
+}
+.hero-blob {
+  position:absolute; border-radius:50%;
+  filter:blur(72px); pointer-events:none;
+  will-change:transform;
+}
+.hero-blob-1 {
+  width:520px; height:520px; top:-10%; right:5%;
+  background:radial-gradient(circle, rgba(10,175,160,0.22) 0%, transparent 70%);
+  animation:blob1 16s ease-in-out infinite;
+}
+.hero-blob-2 {
+  width:360px; height:360px; bottom:-5%; left:10%;
+  background:radial-gradient(circle, rgba(240,165,0,0.12) 0%, transparent 70%);
+  animation:blob2 20s ease-in-out infinite;
+}
+.hero-blob-3 {
+  width:260px; height:260px; top:40%; right:35%;
+  background:radial-gradient(circle, rgba(124,58,237,0.1) 0%, transparent 70%);
+  animation:blob3 13s ease-in-out infinite;
+}
+
+
+/* 5 — 3D CARD TILT (appliqué via JS, juste le style de base) */
+@media (hover:hover) {
+  .service-card, .process-step, .team-card {
+    transform-style:preserve-3d;
+    will-change:transform;
+    transition:transform 0.18s ease, border-color 0.25s, box-shadow 0.25s !important;
+  }
+}
+
+/* 6 — GRADIENT TEXT sur titres accent */
+.gradient-title {
+  background:linear-gradient(135deg, var(--teal2) 0%, var(--gold) 100%);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  background-clip:text;
+}
+h1, h2, h3, .s-title, .section-heading { text-wrap:balance; }
+
+/* 7 — GRADIENT BORDER animé sur CTA consultation */
+.consult-cta {
+  position:relative !important;
+  isolation:isolate;
+  background:var(--bg3) !important;
+  border:none !important;
+}
+.consult-cta::before {
+  content:''; position:absolute; inset:-1.5px;
+  border-radius:18px; z-index:-1;
+  background:linear-gradient(135deg, var(--teal2), var(--gold), var(--teal), var(--teal2));
+  background-size:300% 300%;
+  animation:border-spin 5s linear infinite;
+}
+@keyframes border-spin { to { background-position:300% 300%; } }
+
+/* Reduced motion — désactiver tous les nouveaux effets */
+@media (prefers-reduced-motion:reduce) {
+  .scroll-bar, body::after { display:none; }
+  .hero-blob { animation:none !important; }
+  .consult-cta::before { animation:none !important; }
+  .scroll-bar { animation:none !important; }
+}
 </style>
 </head>
 <body>
+
+<!-- Scroll progress bar -->
+<div class="scroll-bar" id="scroll-bar" role="progressbar" aria-hidden="true"></div>
 
 <!-- ══════════════════════════════════════════════
      NAVIGATION
@@ -1058,7 +1165,11 @@ footer {
      SECTION 1 — ACCUEIL / HERO
 ══════════════════════════════════════════════ -->
 <section id="accueil">
-  <div class="hero-glow"></div>
+  <div class="hero-glow">
+    <div class="hero-blob hero-blob-1"></div>
+    <div class="hero-blob hero-blob-2"></div>
+    <div class="hero-blob hero-blob-3"></div>
+  </div>
   <div class="hero-grid container">
 
     <!-- Content -->
@@ -1185,7 +1296,7 @@ footer {
   <div class="container">
     <div class="section-header reveal">
       <p class="s-tag" data-i18n="svc_tag">Ce que nous offrons</p>
-      <h2 class="s-title" data-i18n="svc_title">Services de séquençage &amp; bioinformatique</h2>
+      <h2 class="s-title gradient-title" data-i18n="svc_title">Services de séquençage &amp; bioinformatique</h2>
       <p class="s-sub" data-i18n="svc_sub">Du terrain au rapport d'analyse — nous couvrons l'ensemble du workflow pour votre projet de recherche en biodiversité, écologie ou santé.</p>
     </div>
 
@@ -1397,7 +1508,7 @@ footer {
   <div class="container">
     <div class="section-header reveal">
       <p class="s-tag">Capacity Building</p>
-      <h2 class="s-title" data-i18n="form_title">Ateliers NGS 2026 — Abidjan</h2>
+      <h2 class="s-title gradient-title" data-i18n="form_title">Ateliers NGS 2026 — Abidjan</h2>
       <p class="s-sub" data-i18n="form_sub">En partenariat avec LearnerWorld — 3 modules intensifs sur données réelles d'articles publiés, avec double certification.</p>
     </div>
 
@@ -1574,7 +1685,7 @@ footer {
         <div class="price-card pack">
           <div class="pack-ribbon">⭐ <span data-i18n="save20">−20% Pack 3</span></div>
           <div class="pc-profile" data-i18n="p3_prof">Pack 3 ateliers · Étudiant</div>
-          <div style="font-size:13px;text-decoration:line-through;opacity:0.4;color:#fff;margin-bottom:2px;">120 000</div>
+          <div style="font-size:13px;text-decoration:line-through;opacity:0.4;color:#fff;margin-bottom:2px;">90 000</div>
           <div class="pc-amount">72 000</div>
           <div class="pc-unit">FCFA</div>
           <div class="pc-eco" data-i18n="eco1">Économie : 18 000 FCFA</div>
@@ -1583,7 +1694,7 @@ footer {
         <div class="price-card pack">
           <div class="pack-ribbon">🏛️ FDFP · −20%</div>
           <div class="pc-profile" data-i18n="p4_prof">Pack 3 ateliers · Chercheur</div>
-          <div style="font-size:13px;text-decoration:line-through;opacity:0.4;color:#fff;margin-bottom:2px;">240 000</div>
+          <div style="font-size:13px;text-decoration:line-through;opacity:0.4;color:#fff;margin-bottom:2px;">150 000</div>
           <div class="pc-amount">120 000</div>
           <div class="pc-unit">FCFA</div>
           <div class="pc-eco" data-i18n="eco2">Économie : 30 000 FCFA</div>
@@ -2150,7 +2261,7 @@ const T = {
     p1_prof:'Étudiant (Master / Doctorat)', p2_prof:'Professionnel / Enseignant',
     p3_prof:'Pack 3 ateliers · Étudiant', p4_prof:'Pack 3 ateliers · Professionnel',
     per_ws:'par atelier', save20:'Économisez 20%',
-    eco1:'Économie : 30 000 FCFA', eco2:'Économie : 60 000 FCFA',
+    eco1:'Économie : 18 000 FCFA', eco2:'Économie : 30 000 FCFA',
     price_incl:'<strong>Inclus :</strong> Supports numériques · Encadrement 15 jours · Certificat double Nextflow + FDFP · Accès communauté LearnerWorld 1 mois',
     cert1_name:'Certification Nextflow Community',
     cert1_desc:'Reconnue à l\'international · Badge numérique LinkedIn · Forte valeur ajoutée pour postes bioinformatique.',
@@ -2253,7 +2364,7 @@ const T = {
     p1_prof:'Student (Master / PhD)', p2_prof:'Professional / Lecturer',
     p3_prof:'3-workshop pack · Student', p4_prof:'3-workshop pack · Professional',
     per_ws:'per workshop', save20:'Save 20%',
-    eco1:'Save: 30,000 FCFA', eco2:'Save: 60,000 FCFA',
+    eco1:'Save: 18,000 FCFA', eco2:'Save: 30,000 FCFA',
     price_incl:'<strong>Included:</strong> Digital materials · 15-day mentoring · Dual Nextflow + FDFP certificate · LearnerWorld community access 1 month',
     cert1_name:'Nextflow Community Certification',
     cert1_desc:'Internationally recognized · Shareable LinkedIn digital badge · High value for bioinformatics positions worldwide.',
@@ -2564,6 +2675,48 @@ applyLang(currentLang);
   lbClose.addEventListener('click', close);
   lb.addEventListener('click', e => { if(e.target === lb) close(); });
   document.addEventListener('keydown', e => { if(e.key === 'Escape') close(); });
+})();
+
+/* ── ★ LATEST WEB DESIGN 2025-2026 ────────────────── */
+
+/* 1 — Scroll Progress Bar */
+(function(){
+  const bar = document.getElementById('scroll-bar');
+  if(!bar) return;
+  function update(){
+    const max = document.documentElement.scrollHeight - window.innerHeight;
+    bar.style.width = (max > 0 ? (window.scrollY / max * 100) : 0) + '%';
+  }
+  window.addEventListener('scroll', update, {passive:true});
+  update();
+})();
+
+/* 2 — Cursor Spotlight */
+(function(){
+  if(window.matchMedia('(hover:none)').matches) return;
+  document.addEventListener('mousemove', e => {
+    document.documentElement.style.setProperty('--cx', e.clientX + 'px');
+    document.documentElement.style.setProperty('--cy', e.clientY + 'px');
+  }, {passive:true});
+})();
+
+/* 3 — 3D Card Tilt (desktop only) */
+(function(){
+  if(window.matchMedia('(hover:none)').matches) return;
+  const cards = document.querySelectorAll('.service-card, .process-step, .team-card');
+  cards.forEach(card => {
+    card.addEventListener('mousemove', e => {
+      const r = card.getBoundingClientRect();
+      const x = (e.clientX - r.left) / r.width  - 0.5;
+      const y = (e.clientY - r.top)  / r.height - 0.5;
+      card.style.transform = `perspective(900px) rotateX(${(-y*7).toFixed(2)}deg) rotateY(${(x*7).toFixed(2)}deg) translateZ(6px)`;
+      card.style.boxShadow = `${(-x*12).toFixed(0)}px ${(-y*12).toFixed(0)}px 32px rgba(10,175,160,0.18)`;
+    }, {passive:true});
+    card.addEventListener('mouseleave', () => {
+      card.style.transform = '';
+      card.style.boxShadow = '';
+    });
+  });
 })();
 </script>
 </body>
